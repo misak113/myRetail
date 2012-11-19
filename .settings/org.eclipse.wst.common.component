@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="myRetail">
+        <wb-resource deploy-path="/" source-path="/apps/myRetail/common"/>
+        <wb-resource deploy-path="/" source-path="/apps/myRetail/android"/>
+        <property name="context-root" value="myRetail"/>
+    </wb-module>
+</project-modules>
