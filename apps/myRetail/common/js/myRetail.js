@@ -6,9 +6,9 @@
 angular.module('myRetail', []).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
-			when('/', {templateUrl: 'templates/menu.html',   controller: MenuCtrl}).
+			when('/menu', {templateUrl: 'templates/menu.html',   controller: MenuCtrl}).
 			when('/offer-list', {templateUrl: 'templates/offerList.html', controller: OfferListCtrl}).
-			otherwise({redirectTo: '/'});
+			otherwise({redirectTo: '/menu'});
 	}]);
 
 
