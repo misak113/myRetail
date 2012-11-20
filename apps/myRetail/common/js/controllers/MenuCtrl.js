@@ -6,7 +6,11 @@ function MenuCtrl($scope) {
 	
 	$scope.menuItems = [
 		{
-			name: 'Naèíst úèet'
+			name: 'NaÄÃ­st ÃšÄet'
+		},{
+			name: 'NabÃ­dka'
+		},{
+			name: 'QR code'
 		}
 	];
 }

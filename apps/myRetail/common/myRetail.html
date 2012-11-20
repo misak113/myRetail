@@ -1,9 +1,9 @@
 <!DOCTYPE html>		
-<html ng-app>
+<html ng-app ng-controller="HtmlCtrl">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-		<title data-filter="translate">myRetail</title>
+		<title ng-bind-template="{{title}}">myRetail</title>
 		<!-- Icons -->
 		<link rel="shortcut icon" href="images/favicon.png" />
 		<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
@@ -12,7 +12,9 @@
 		<link rel="stylesheet" href="css/myRetail.css" />
 		
 		<!-- JS Scripts -->
-		<script type="text/javascript" src="js/MenuCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/MenuCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/HtmlCtrl.js"></script>
+		<script type="text/javascript" src="js/models/TitleModel.js"></script>
 	</head>
 	<body id="content"><!-- style="display: none" -->
 		<!-- application UI goes here -->
@@ -21,9 +23,7 @@
 		</header>
 		<section class="container" id="page">
 			<nav class="nav" id="menu" ng-controller="MenuCtrl">
-				<a class="btn btn-large" ng-repeat="menuItems">{{item.name}}</a>
-				<a class="btn btn-large" data-filter="translate">Nabídka</a>
-				<a class="btn btn-large" data-filter="translate">QR code</a>
+				<a class="btn btn-large" ng-repeat="item in menuItems">{{item.name}}</a>
 			</nav>
 		</section>
 		<footer class="footer" id="footer">
