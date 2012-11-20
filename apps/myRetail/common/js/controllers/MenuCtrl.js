@@ -6,11 +6,14 @@ function MenuCtrl($scope) {
 	
 	$scope.menuItems = [
 		{
-			name: 'Načíst Účet'
+			name: 'Načíst Účet',
+			url: '/loadAccount'
 		},{
-			name: 'Nabídka'
+			name: 'Nabídka',
+			url: '/offer-list'
 		},{
-			name: 'QR code'
+			name: 'QR code',
+			url: '/show-qr-code'
 		}
 	];
 }

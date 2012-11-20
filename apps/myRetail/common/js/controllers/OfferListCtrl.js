@@ -1,0 +1,7 @@
+/**
+ * 
+ */
+
+function OfferListCtrl($scope) {
+
+}

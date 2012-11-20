@@ -1,41 +1,42 @@
 <!DOCTYPE html>		
-<html ng-app ng-controller="HtmlCtrl">
+<html ng-app="myRetail" ng-controller="HtmlCtrl">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
 		<title ng-bind-template="{{title}}">myRetail</title>
+		
 		<!-- Icons -->
 		<link rel="shortcut icon" href="images/favicon.png" />
 		<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+		
 		<!-- CSS stylesheet -->
 		<link rel="stylesheet" href="css/bootstrap.css" />
 		<link rel="stylesheet" href="css/myRetail.css" />
 		
-		<!-- JS Scripts -->
-		<script type="text/javascript" src="js/controllers/MenuCtrl.js"></script>
-		<script type="text/javascript" src="js/controllers/HtmlCtrl.js"></script>
-		<script type="text/javascript" src="js/models/TitleModel.js"></script>
 	</head>
 	<body id="content"><!-- style="display: none" -->
-		<!-- application UI goes here -->
-		<header class="header" id="header">
-		
-		</header>
-		<section class="container" id="page">
-			<nav class="nav" id="menu" ng-controller="MenuCtrl">
-				<a class="btn btn-large" ng-repeat="item in menuItems">{{item.name}}</a>
-			</nav>
-		</section>
-		<footer class="footer" id="footer">
-		
-		</footer>
+	
+		<div ng-view></div>
 	
 		<!-- JS Scripts -->
+		<!-- Libraries -->
 		<script type="text/javascript" src="js/libs/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="js/libs/bootstrap.js"></script>
 		<script type="text/javascript" src="js/libs/angular.js"></script>
+		
+		<!-- Configurations -->
 		<script type="text/javascript" src="js/initOptions.js"></script>
-		<script type="text/javascript" src="js/myRetail.js"></script>
 		<script type="text/javascript" src="js/messages.js"></script>
+		
+		<!-- AngularJS Scripts -->
+		<script type="text/javascript" src="js/myRetail.js"></script>
+		
+		<!-- Controllers -->
+		<script type="text/javascript" src="js/controllers/MenuCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/HtmlCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/OfferListCtrl.js"></script>
+		
+		<!-- Models -->
+		<script type="text/javascript" src="js/models/TitleModel.js"></script>
 	</body>
 </html>
