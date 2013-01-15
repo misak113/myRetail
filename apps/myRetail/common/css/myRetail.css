@@ -28,6 +28,10 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 	padding-top: 20px;
 }
 
+h1, h2, h3 {
+	text-align: center;
+}
+
 
 
 /* Large desktop */

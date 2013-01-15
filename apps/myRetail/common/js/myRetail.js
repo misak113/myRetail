@@ -3,11 +3,13 @@
  * AngularJS setup
  * 	Routes
  */
-angular.module('myRetail', []).
+angular.module('myRetail', ['filters']).
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
 			when('/menu', {templateUrl: 'templates/menu.html',   controller: MenuCtrl}).
 			when('/offer-list', {templateUrl: 'templates/offerList.html', controller: OfferListCtrl}).
+			when('/load-account', {templateUrl: 'templates/loadAccount.html', controller: LoadAccountCtrl}).
+			when('/qr-code', {templateUrl: 'templates/qRCode.html', controller: QRCodeCtrl}).
 			otherwise({redirectTo: '/menu'});
 	}]);
 

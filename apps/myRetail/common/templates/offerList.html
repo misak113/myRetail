@@ -1,9 +1,19 @@
 
 <section class="container" id="offerList-container">
 	
-	<ul>
-		<li>
-			<h3>Tomate</h3>
+	<ul class="media-list">
+		<li class="media well" ng-repeat="offer in offers">
+			<a class="pull-left" href="#">
+				<img class="media-object" src="{{offer.image.small}}" />
+			</a>
+			<div class="media-body">
+				<a href="#"><h4 class="media-heading">{{offer.title}}</h4></a>
+				<div class="media">
+					<div><strong>{{'Vaše cena:'|_}}</strong> <span class="badge">{{offer.price | price:offer.currency}}</span></div>
+					<div><strong>{{'sleva:'|_}}</strong> <span class="badge badge-important">{{ offer.price / offer.product.price | salePercentage }}</span></div>
+					<div><strong>{{'zbývá:'|_}}</strong> <span class="badge badge-success">{{offer.date_end | timeLeft}}</span></div>
+				</div>
+			</div>
 		</li>
 	</ul>
 	

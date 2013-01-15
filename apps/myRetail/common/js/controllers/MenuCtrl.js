@@ -3,20 +3,21 @@
  */
 
 function MenuCtrl($scope) {
+	$scope.title = 'Nabídky - myRetail';
 	
 	$scope.menuItems = [
 		{
 			name: 'Načíst Účet',
 			controller: 'LoadAccountCtrl',
-			url: '/loadAccount'
+			url: '/load-account'
 		},{
 			name: 'Nabídka',
 			controller: 'OfferListCtrl',
 			url: '/offer-list'
 		},{
 			name: 'QR code',
-			controller: 'ShowQRCodeCtrl',
-			url: '/show-qr-code'
+			controller: 'QRCodeCtrl',
+			url: '/qr-code'
 		}
 	];
 }
