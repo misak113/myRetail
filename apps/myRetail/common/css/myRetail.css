@@ -7,7 +7,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 /* Worklight container div */
 #content {
 	background-color: #DDDDDD;
-	margin: 0 auto;
+	margin: 0 auto 40px auto;
 }
 
 
@@ -21,7 +21,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 	display: block;
 }
 	
-.container {
+section.container {
 	position: relative;
 	width: 90%;
 	max-width: 760px;
@@ -31,6 +31,49 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 h1, h2, h3 {
 	text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** OfferList */
+#offerList-container .offer .offer-image {
+	width: 100px;
+	height: 100px;
+}
+
+#offer-container .offer .image-wrapper {
+	text-align: center;
+}
+
+#offer-container .offer .offer-image {
+	width: 100%;
+	max-width: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

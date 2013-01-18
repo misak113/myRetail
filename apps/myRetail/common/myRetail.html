@@ -14,27 +14,27 @@
 		<link rel="stylesheet" href="css/myRetail.css" />
 		
 	</head>
-	<body id="content"><!-- style="display: none" -->
-	
-		<div ng-view></div>
+	<body id="content"><!-- style="display: none" -->	
 		
 		<div class="navbar navbar-fixed-bottom navbar-inverse">
 			<div class="navbar-inner">
 				<div class="container">
-					<div class="nav-collapse collapse navbar-inverse-collapse">
-                    <ul class="nav">
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{'Více'|_}} <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li ng-repeat="item in moreItems"><a href="#{{item.url}}">{{item.name}}</a></li>
-                        </ul>
-                      </li>
-                      <li class="active"><a href="#">{{'Exit'|_}}</a></li>
-                    </ul>
-                  </div>
+					<div class="nav-collapse collapse">
+	                   <ul class="nav">
+	                     <li class="dropdown">
+	                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{'Více'|_}} <b class="caret"></b></a>
+	                       <ul class="dropdown-menu">
+	                         <li ng-repeat="item in moreItems"><a href="#{{item.url}}">{{item.name}}</a></li>
+	                       </ul>
+	                     </li>
+	                     <li class="active"><a href="#">{{'Exit'|_}}</a></li>
+	                   </ul>
+                	</div>
 				</div>
 			</div>
 		</div>
+		
+		<div ng-view></div>
 	
 		<!-- JS Scripts -->
 		<!-- Libraries -->
@@ -54,10 +54,12 @@
 		<script type="text/javascript" src="js/controllers/MenuCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/HtmlCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/OfferListCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/OfferCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/LoadAccountCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/QRCodeCtrl.js"></script>
 		
 		<!-- Models -->
+		<script type="text/javascript" src="js/models/OfferModel.js"></script>
 		<script type="text/javascript" src="js/models/TitleModel.js"></script>
 		<script type="text/javascript" src="js/filters.js"></script>
 	</body>

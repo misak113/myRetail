@@ -1,5 +1,5 @@
 var wlInitOptions = {
-    connectOnStartup : true
+    connectOnStartup : false
 };
 
 WLJSX.bind(window, "load", function() {
