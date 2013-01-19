@@ -1,0 +1,17 @@
+{
+  "name": "myRetailServer",
+  "version": "1.0.3",
+  "description": "ERROR: No README.md file found!",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.0.6",
+    "mongodb": "~1.2.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "misak113",
+  "license": "BSD"
+}
