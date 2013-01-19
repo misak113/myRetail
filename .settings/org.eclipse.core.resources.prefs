@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//apps/myRetail/android/css/myRetail.css=UTF-8
 encoding//apps/myRetail/common/css/myRetail.css=UTF-8
 encoding//apps/myRetail/common/templates/loadAccount.html=UTF-8
+encoding//apps/myRetail/common/templates/offer.html=UTF-8
 encoding//apps/myRetail/common/templates/offerList.html=UTF-8
 encoding/<project>=UTF-8
 wl_version=5.0.2

@@ -1,0 +1,21 @@
+
+<section class="container" id="offer-container">
+	<div class="offer media well">
+		<div class="image-wrapper well well-small">
+			<img class="media-object offer-image img-rounded" src="{{offer.image.medium}}" />
+		</div>
+		<div class="media-body">
+			<h4 class="media-heading">{{offer.title}}</h4>
+			<div class="media">{{offer.description}}</div>
+			<div class="media">
+				<div><strong>{{'Vaše cena:'|_}}</strong> <span class="badge">{{offer.price | price:offer.currency}}</span></div>
+				<div><strong>{{'sleva:'|_}}</strong> <span class="badge badge-important">{{ offer.price / offer.product.price | salePercentage }}</span></div>
+				<div><strong>{{'zbývá:'|_}}</strong> <span class="badge badge-success">{{offer.date_end | timeLeft}}</span></div>
+			</div>
+			<div class="media">
+				<button type="button" class="btn btn-right" ng-click="goBack()"><i class="icon-circle-arrow-left"></i> {{'Zpět'|_}}</button>
+			</div>
+		</div>
+		
+	</div>
+</section>

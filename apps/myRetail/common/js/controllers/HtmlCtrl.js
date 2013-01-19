@@ -9,11 +9,11 @@ function HtmlCtrl($scope) {
 	$scope.moreItems = [
 	            		{
 	            			name: 'Moje ID - účet',
-	            			controller: 'Ctrl',
+	            			controller: 'MojeIdCtrl',
 	            			url: '/moje-id'
 	            		},{
 	            			name: 'Čárkový kód',
-	            			controller: 'Ctrl',
+	            			controller: 'BarCodeCtrl',
 	            			url: '/bar-code'
 	            		},{
 	            			name: 'QR kód skupiny',
