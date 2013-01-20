@@ -9,7 +9,9 @@ var OfferModel = function ($http) {
 	};
 	
 	this.getOffers = function (cb) {
-		cb(dataOffers);
+        $http.get(serverUrl+'/offers').success(function(res) {
+            cb(res);
+        });
 	};
 	
 	this.getOffer = function (id, cb) {

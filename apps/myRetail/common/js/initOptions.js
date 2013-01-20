@@ -1,7 +1,12 @@
+
+var serverUrl = 'http://localhost:1337';
+
 var wlInitOptions = {
     connectOnStartup : false
 };
 
-WLJSX.bind(window, "load", function() {
-    WL.Client.init(wlInitOptions);
-});
+if (typeof WLJSX !== 'undefined') {
+	WLJSX.bind(window, "load", function() {
+	    WL.Client.init(wlInitOptions);
+	});
+}

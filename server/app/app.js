@@ -1,7 +1,7 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
-var l = console;
+var l = require('./services/logDispatcher');;
 
 var config = require('./config/config');
 var router = require('./router');
