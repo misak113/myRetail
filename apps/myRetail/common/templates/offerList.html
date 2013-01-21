@@ -5,7 +5,7 @@
 		<li class="offer media well" ng-repeat="offer in offers">
 			<button type="button" class="close" ng-click="unwanted(offer)">&times;</button>
 			<a class="pull-left" href="#/offer/{{offer.id}}">
-				<img class="media-object offer-image" src="{{offer.image.small}}" />
+				<img class="media-object offer-image" ng-src="{{offer.image.small}}" />
 			</a>
 			<div class="media-body">
 				<a href="#/offer/{{offer.id}}"><h4 class="media-heading">{{offer.title}}</h4></a>

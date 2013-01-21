@@ -16,11 +16,13 @@ var OfferModel = function ($http) {
 	
 	this.getOffer = function (id, cb) {
 		var returnOffer = null;
-		angular.forEach(dataOffers, function (offer) {
-			if (offer.id == id) {
-				returnOffer = offer;
-			}
+		this.getOffers(function (offers) {
+			angular.forEach(offers, function (offer) {
+				if (offer.id == id) {
+					returnOffer = offer;
+				}
+			});
+			cb(returnOffer);
 		});
-		cb(returnOffer);
 	};
 };
