@@ -19,5 +19,6 @@ db.on('open', function () {
 
 db.on('close', function () {
 	l.error('Database connection closed');
-	server.dbReconnect(app);
+	server.stop(app);
+	server.dbReconnect();
 });

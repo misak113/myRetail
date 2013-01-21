@@ -6,31 +6,36 @@ var config = require('./config/config');
 var l = require('./services/logDispatcher');
 
 
-var db = null;
-
 exports.start = function (app) {
 
 	app.listen(config.server.port);
+	app.on('error', function (e) { // @todo jinam
+		l.error(e);
+	});
 	l.info('Server is running on port '+config.server.port);
 };
 
-exports.dbReconnect = function (app) {
-	l.info('Server is restarting');
-	db = null;
-	app.close();
-	dbConnect();
+exports.stop = function (app) {
+
 };
 
-var connection = function () {
-	if (!db) {
-		l.error('Tried to get connection which doesn`t exists');
-	}
-
-	return db;
+var dbReconnect = exports.dbReconnect = function () {
+	l.info('Server is restarting');
+	var db = dbConnect();
 };
 
 var dbConnect = exports.dbConnect = function () {
 	mongoose.connect(config.db.url);
-	db = mongoose.connection;
-	return db;
+	return mongoose.connection;
 };
+
+var delayedDbReconnect = function () {
+	setTimeout(dbReconnect, 2000);
+};
+
+
+var errorDbConnect = function (e) {
+	l.error('Failed to reconnect database');
+	delayedDbReconnect();
+};
+mongoose.connection.on('error', errorDbConnect);

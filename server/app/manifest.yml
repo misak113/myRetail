@@ -1,0 +1,17 @@
+---
+applications:
+  .:
+    name: myretail
+    framework:
+      name: node
+      info:
+        mem: 64M
+        description: Node.js Application
+        exec: 
+    infra: ''
+    url: ${name}.${target-base}
+    mem: 64M
+    instances: 1
+    services:
+      mongodb-67922:
+        type: mongodb
