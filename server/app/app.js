@@ -13,13 +13,14 @@ var app = express();
 var startServer = function () {
 
 	app.listen(config.server.port).on('error', function (e) {
-		l.error(e);
+		l.error('Server already running on port '+config.server.port);
+	}).on('listening', function () {
+		l.info('Server is running on port '+config.server.port);
 	});
-	l.info('Server is running on port '+config.server.port);
 };
 
 var stopServer = function () {
-
+	//app.close();
 };
 
 var dbReconnect = function () {
@@ -47,7 +48,7 @@ var db = dbConnect();
 
 // Events
 mongoose.connection.on('error', function (e) {
-	l.error('Failed to reconnect database');
+	l.error('Failed to connect database');
 	delayedDbReconnect();
 });
 

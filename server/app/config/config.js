@@ -7,7 +7,9 @@ var configLocal = require('./config.local');
 
 // Deafault config
 var config = {
-	db: {},
+	db: {
+		url: 'mongodb://localhost:27017/myretail'
+	},
 	server: {
 		port: 80
 	}
