@@ -24,8 +24,8 @@ var stopServer = function () {
 };
 
 var dbReconnect = function () {
-	l.info('Server is restarting');
-	var db = dbConnect();
+	l.info('Database is reconnecting');
+	return dbConnect();
 };
 
 var dbConnect = function () {
