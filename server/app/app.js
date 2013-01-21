@@ -1,21 +1,23 @@
 
 var express = require('express');
-var mongoose = require('mongoose');
-var l = require('./services/logDispatcher');;
 
-var config = require('./config/config');
 var router = require('./router');
+var server = require('./server');
+
+var l = require('./services/logDispatcher');
 
 var app = express();
 
-mongoose.connect(config.db.url);
-var db = mongoose.connection;
-
 router.route(app);
 
-db.on('open', function () {
+var db = server.dbConnect();
 
-	app.listen(config.server.port);
-	l.log('Server is running on port '+config.server.port);
+db.on('open', function () {
+	l.info('Database connection opened');
+	server.start(app);
 });
 
+db.on('close', function () {
+	l.error('Database connection closed');
+	server.dbReconnect(app);
+});
