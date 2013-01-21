@@ -13,7 +13,7 @@ var app = express();
 var startServer = function () {
 
 	app.listen(config.server.port).on('error', function (e) {
-		l.error('Server already running on port '+config.server.port);
+		l.warning('Server already running on port '+config.server.port);
 	}).on('listening', function () {
 		l.info('Server is running on port '+config.server.port);
 	});

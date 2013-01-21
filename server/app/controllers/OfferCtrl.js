@@ -10,6 +10,7 @@ exports.offers = function (req, res) {
 			l.error(e);
 			return res.send(404);
 		}
+		l.d('vráceny offers from mongoDB');
 		res.send(offers);
 	});
 };
