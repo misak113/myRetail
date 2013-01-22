@@ -47,7 +47,7 @@ var db = dbConnect();
 
 
 // Events
-mongoose.connection.on('error', function (e) {
+db.on('error', function (e) {
 	l.error('Failed to connect database');
 	delayedDbReconnect();
 });
