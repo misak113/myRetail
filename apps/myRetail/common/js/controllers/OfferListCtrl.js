@@ -3,7 +3,9 @@
  */
 
 function OfferListCtrl($scope, offerModel) {
-
+	var testPlugin = new TestPlugin();
+	testPlugin.test('AHOJ', function (e, mes) {console.log({e: e,mes: mes}); alert(mes);});
+	
 	offerModel.getOffers(function (offers) {
 		$scope.offers = offers;
 	});
