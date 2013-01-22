@@ -13,5 +13,5 @@ applications:
     mem: 64M
     instances: 1
     services:
-      mongodb-67922:
+      myretail:
         type: mongodb
