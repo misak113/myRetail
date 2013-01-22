@@ -62,3 +62,5 @@ db.on('close', function () {
 	stopServer();
 	dbReconnect();
 });
+
+module.exports = app;

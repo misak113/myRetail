@@ -1,5 +1,5 @@
 
-var dataOffers = [
+module.exports = dataOffers = [
       			{
     				"id" : 1568,
     				"title" : "Lahodná rajčátka",
