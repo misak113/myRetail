@@ -15,12 +15,6 @@ myRetail.
 			otherwise({redirectTo: '/menu'});
 	}]);
 
-// Services
-myRetail.factory('offerModel', function ($http) {
-	var offerModel = new OfferModel($http);
-	return offerModel;
-});
-
 
 
 

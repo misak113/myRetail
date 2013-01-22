@@ -1,6 +1,4 @@
 
-var serverUrl = 'http://localhost:1337';
-
 var wlInitOptions = {
     connectOnStartup : false
 };

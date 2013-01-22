@@ -4,12 +4,12 @@
 
 var OfferModel = function ($http) {
 	
-	this.markAsUnwanted = function (offer) {
+	this.markAsUnwanted = function (offer, config) {
 		$http.get('/todo').success(function() {alert('Unwanted');}); // @todo
 	};
 	
 	this.getOffers = function (cb) {
-        $http.get(serverUrl+'/offers').success(function(res) {
+        $http.get(config.serverUrl+'/offers').success(function(res) {
             cb(res);
         });
 	};
@@ -26,3 +26,8 @@ var OfferModel = function ($http) {
 		});
 	};
 };
+
+myRetail.factory('offerModel', function ($http) {
+	var offerModel = new OfferModel($http);
+	return offerModel;
+});
