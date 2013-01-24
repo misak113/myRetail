@@ -2,7 +2,7 @@
 var config = {
 		serverUrl: 'http://myretail.avantcore.cz:14500'
 };
-config = _.extend(config, window.configLocal);
+config = _.extend(config, configLocal);
 
 myRetail.factory('config', function () {
 	return config;
