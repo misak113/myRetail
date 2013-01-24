@@ -2,7 +2,7 @@
 <section class="container" id="offerList-container">
 	
 	<ul class="media-list">
-		<li class="offer media well" ng-repeat="offer in offers">
+		<li class="offer media well" ng-repeat="offer in offers" ui-animate>
 			<button type="button" class="close" ng-click="unwanted(offer)">&times;</button>
 			<a class="pull-left" ng-href="#/offer/{{offer.id}}">
 				<img class="media-object offer-image" ng-src="{{offer.image.small}}" />

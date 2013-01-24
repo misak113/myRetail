@@ -49,7 +49,23 @@ h1, h2, h3 {
 	width: 100px;
 	height: 100px;
 }
+/* Animations */
+#offerList-container .offer {
+  transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  max-height: 200px; /* 1000px works too */
+  overflow: hidden;
+  padding: 10px;
+  margin: 0px 0 15px 0;
+}
+#offerList-container .offer.ui-animate {
+  opacity: 0;
+  max-height: 0;
+}
 
+/** Offer */
 #offer-container .offer .image-wrapper {
 	text-align: center;
 }
@@ -58,8 +74,6 @@ h1, h2, h3 {
 	width: 100%;
 	max-width: 300px;
 }
-
-
 
 
 
