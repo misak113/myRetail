@@ -12,6 +12,9 @@ var config = {
 	},
 	server: {
 		port: 80
+	},
+	path: {
+		frontendBasePath: __dirname+'/../../../apps/myRetail/common/'
 	}
 };
 
