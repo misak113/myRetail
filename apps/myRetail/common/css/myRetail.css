@@ -4,10 +4,16 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 	padding: 0;
 }
 
+html {
+	height: 100%;
+}
+
 /* Worklight container div */
 #content {
 	background-color: #DDDDDD;
-	margin: 0 auto 40px auto;
+	margin: 0 auto 0 auto;
+	padding-top: 35px;
+	height: 85%;
 }
 
 
@@ -22,6 +28,7 @@ a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, c
 }
 	
 section.container {
+	height: 100%;
 	position: relative;
 	width: 90%;
 	max-width: 760px;
@@ -32,9 +39,46 @@ h1, h2, h3 {
 	text-align: center;
 }
 
+.ng-view {
+	height: 100%;
+}
 
 
 
+
+
+
+
+/* Navbar */
+.navbar .navbar-inner.btn-group {
+	margin: 0;
+}
+.navbar .navbar-inner.btn-group .btn {
+	border-radius: 0;
+	-ms-border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+}
+
+/* QR code */
+#home-container .qr-code-container {
+	position: absolute;
+	z-index: -1;
+	bottom: 0;
+}
+
+
+
+/* Menu */
+#menu-container .nav li a {
+	background-color: #EEEEEE;
+	border-color: #000000;
+}
+#menu-container .nav li a:hover {
+	background-color: #FFFFFF;
+	border-color: #000000;
+}
 
 
 
@@ -52,6 +96,7 @@ h1, h2, h3 {
 /* Animations */
 #offerList-container .offer {
   transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;

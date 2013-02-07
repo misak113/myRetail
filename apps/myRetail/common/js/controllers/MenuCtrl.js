@@ -3,21 +3,35 @@
  */
 
 function MenuCtrl($scope) {
-	$scope.title = 'Nabídky - myRetail';
+
+	$scope.title = 'Menu - myRetail - můj obchodní řetězec';
 	
-	$scope.menuItems = [
-		{
-			name: 'Načíst Účet',
-			controller: 'LoadAccountCtrl',
-			url: '/load-account'
-		},{
-			name: 'Nabídka',
-			controller: 'OfferListCtrl',
-			url: '/offer-list'
-		},{
-			name: 'QR code',
-			controller: 'QRCodeCtrl',
-			url: '/qr-code'
-		}
-	];
+	$scope.items = [
+	            		{
+	            			name: 'Můj účet',
+	            			controller: 'AccountCtrl',
+	            			url: '/moje-id',
+	            			icon: 'user'
+	            		},{
+	            			name: 'Nákupy',
+	            			controller: 'OrderListCtrl',
+	            			url: '/order-list',
+	            			icon: 'list-alt'
+	            		},{
+	            			name: 'Skupina',
+	            			controller: 'GroupCtrl',
+	            			url: '/group',
+	            			icon: 'qrcode'
+	            		},{
+	            			name: 'Nastavení',
+	            			controller: 'SettingCtrl',
+	            			url: '/setting',
+	            			icon: 'wrench'
+	            		},{
+	            			name: 'Exit',
+	            			controller: 'GroupQRCodeCtrl',
+	            			url: '/exit',
+	            			icon: 'off'
+	            		}
+	            	];
 }
