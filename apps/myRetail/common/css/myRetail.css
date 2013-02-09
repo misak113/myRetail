@@ -69,18 +69,16 @@ h1, h2, h3 {
 }
 
 
-
 /* Menu */
 #menu-container .nav li a {
 	background-color: #EEEEEE;
 	border-color: #000000;
+	font-size: 160%;
 }
 #menu-container .nav li a:hover {
 	background-color: #FFFFFF;
 	border-color: #000000;
 }
-
-
 
 
 

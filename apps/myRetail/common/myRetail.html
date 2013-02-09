@@ -11,18 +11,18 @@
 		
 		<!-- CSS stylesheet -->
 		<link rel="stylesheet" href="css/bootstrap.css" />
-		<link rel="stylesheet" href="css/bootstrap.icon-large.min.css" />
+		<link rel="stylesheet" href="css/bootstrap.icon.css" />
 		<link rel="stylesheet" href="css/myRetail.css" />
 		<link rel="stylesheet" href="css/angular-ui.min.css" />
 		
 	</head>
 	<body id="content"><!-- style="display: none" -->	
 		
-		<section ng-controller="MenuCtrl" class="navbar navbar-fixed-top">
+		<section ng-controller="MenuCtrl" id="navigation" class="navbar navbar-fixed-top">
 			<div class="btn-group navbar-inner container">
-				<a href="#" class="btn btn-large home"><i class="icon-large icon-home"></i> {{'Interspar'|_}}</a>
-				<a href="#/messages" class="btn btn-large messages"><i class="icon-large icon-warning-sign"></i></a>
-				<a href="#/menu" class="btn btn-large menu"><i class="icon-large icon-justify"></i></a>
+				<a href="#" class="btn btn-large home"><i class="icon-medium icon-home"></i> <span class="title">{{'Interspar'|_}}</span></a>
+				<a href="#/messages" class="btn btn-large messages"><i class="icon-medium icon-globe"></i></a>
+				<a href="#/menu" class="btn btn-large menu"><i class="icon-medium icon-justify"></i></a>
 			</div>
 		</section>
 		

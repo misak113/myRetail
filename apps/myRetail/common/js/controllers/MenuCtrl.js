@@ -16,22 +16,22 @@ function MenuCtrl($scope) {
 	            			name: 'Nákupy',
 	            			controller: 'OrderListCtrl',
 	            			url: '/order-list',
-	            			icon: 'list-alt'
+	            			icon: 'shopping-cart'
 	            		},{
 	            			name: 'Skupina',
 	            			controller: 'GroupCtrl',
 	            			url: '/group',
-	            			icon: 'qrcode'
+	            			icon: 'group'
 	            		},{
 	            			name: 'Nastavení',
 	            			controller: 'SettingCtrl',
 	            			url: '/setting',
-	            			icon: 'wrench'
+	            			icon: 'cogwheel'
 	            		},{
 	            			name: 'Exit',
 	            			controller: 'GroupQRCodeCtrl',
 	            			url: '/exit',
-	            			icon: 'off'
+	            			icon: 'power'
 	            		}
 	            	];
 }
