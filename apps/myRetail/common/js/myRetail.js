@@ -12,6 +12,7 @@ myRetail.
 			when('/messages', {templateUrl: 'templates/messages.html',   controller: MessagesCtrl}).
 			when('/offer-list', {templateUrl: 'templates/offerList.html', controller: OfferListCtrl}).
 			when('/offer/:offerId', {templateUrl: 'templates/offer.html', controller: OfferCtrl}).
+			when('/order-list', {templateUrl: 'templates/orderList.html', controller: OrderListCtrl}).
 			otherwise({redirectTo: '/home'});
 	}]);
 

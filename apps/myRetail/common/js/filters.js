@@ -20,6 +20,11 @@ angular.module('filters', [])
 	    return (Math.round(input*100)/100+'').replace('.', ',') + ' ' + curs[currency];
 	  };
 	})
+.filter('formatDate', function() {
+	  return function(input, format) {
+	    return moment(input).format(format);
+	  };
+	})
 .filter('_', function() {
 	  return function(text) {
 	    return text;

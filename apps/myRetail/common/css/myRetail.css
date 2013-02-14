@@ -61,11 +61,16 @@ h1, h2, h3 {
 	-o-border-radius: 0;
 }
 
+
+
 /* QR code */
 #home-container .qr-code-container {
-	position: absolute;
+	position: relative;
 	z-index: -1;
 	bottom: 0;
+	max-width: 350px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -141,10 +146,12 @@ h1, h2, h3 {
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
+	
 }
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+	
 }
  
 /* Landscape phones and down */

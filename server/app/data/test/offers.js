@@ -8,6 +8,7 @@ module.exports = dataOffers = [
     				"currency" : "czk",
     				"date_start" : "2013-01-02 12:00:00",
     				"date_end" : "2013-01-18 18:59:59",
+                    "qtyLimit" : 100,
     				"product" : {
     					"id" : 146860,
     					"name" : "Rajčata",
@@ -51,6 +52,7 @@ module.exports = dataOffers = [
     				"currency" : "czk",
     				"date_start" : "2012-11-12 12:00:00",
     				"date_end" : "2013-02-09 18:59:59",
+                    "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
     					"name" : "Čokoláda",
@@ -84,6 +86,7 @@ module.exports = dataOffers = [
     				"currency" : "czk",
     				"date_start" : "2012-11-12 12:00:00",
     				"date_end" : "2013-02-09 18:59:59",
+                    "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
     					"name" : "Čokoláda",
@@ -117,6 +120,7 @@ module.exports = dataOffers = [
     				"currency" : "czk",
     				"date_start" : "2012-11-12 12:00:00",
     				"date_end" : "2013-01-19 18:59:59",
+                    "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
     					"name" : "Čokoláda",
@@ -150,6 +154,7 @@ module.exports = dataOffers = [
     				"currency" : "czk",
     				"date_start" : "2012-11-12 12:00:00",
     				"date_end" : "2013-02-01 18:59:59",
+                    "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
     					"name" : "Čokoláda",
@@ -183,6 +188,7 @@ module.exports = dataOffers = [
     				"currency" : "czk",
     				"date_start" : "2012-11-12 12:00:00",
     				"date_end" : "2013-01-19 18:59:59",
+                    "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
     					"name" : "Čokoláda",

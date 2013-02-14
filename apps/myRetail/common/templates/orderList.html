@@ -1,0 +1,15 @@
+
+<section class="container" id="orderList-container">
+	
+	<ul class="media-list">
+		<li ng-repeat="order in orders" class="media">
+			<div class="media-body">
+				<a href="#order/{{order.id}}">
+					<h4>{{order.date|formatDate:'D. M. YY H:mm'}}</h4>
+					<span class="badge">{{order.totalPrice | price:order.currency}}</span>
+				</a>
+			</div>
+		</li>
+	</ul>
+	
+</section>
