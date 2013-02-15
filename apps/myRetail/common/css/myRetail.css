@@ -12,7 +12,7 @@ html {
 #content {
 	background-color: #DDDDDD;
 	margin: 0 auto 0 auto;
-	padding-top: 45px;
+	padding-top: 50px;
 	height: 85%;
 }
 
@@ -28,11 +28,11 @@ html {
 }
 	
 section.container {
-	height: 100%;
 	position: relative;
-	width: 90%;
+	width: 97%;
 	max-width: 760px;
-	padding-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 h1, h2, h3 {
@@ -106,7 +106,7 @@ h1, h2, h3 {
   max-height: 200px; /* 1000px works too */
   overflow: hidden;
   padding: 10px;
-  margin: 0px 0 15px 0;
+  margin: 0px 0 4px 0;
 }
 #offerList-container .offer.ui-animate {
   opacity: 0;
@@ -123,7 +123,15 @@ h1, h2, h3 {
 	max-width: 300px;
 }
 
-
+/** Order */
+#order-container .order-items .order-item .order-item-image {
+	width: 57px;
+	height: 57px;
+}
+#order-container .order-items .order-item {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
 
 
 

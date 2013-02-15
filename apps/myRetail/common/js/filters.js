@@ -27,7 +27,7 @@ angular.module('filters', [])
 	})
 .filter('_', function() {
 	  return function(text) {
-	    return text;
+	    return _t(text);
 	  };
 	})
 	

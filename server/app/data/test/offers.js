@@ -6,8 +6,8 @@ module.exports = dataOffers = [
     				"description" : "Nepřehlédněte nabídku čtvrt kila lahodných rajčat první jakosti",
     				"price" : 18.54,
     				"currency" : "czk",
-    				"date_start" : "2013-01-02 12:00:00",
-    				"date_end" : "2013-01-18 18:59:59",
+    				"date_start" : "2013-01-02T12:00:00",
+    				"date_end" : "2013-01-18T18:59:59",
                     "qtyLimit" : 100,
     				"product" : {
     					"id" : 146860,
@@ -20,7 +20,12 @@ module.exports = dataOffers = [
     					"measure_unit" : "g",
     					"price" : 25.8,
     					"currency" : "czk",
-    					"images" : [
+    					"image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [
     							{
     								"small" : "http://api.myretail.cz/images/tomate-250g-14860-1_small.png",
     								"medium" : "http://api.myretail.cz/images/tomate-250g-14860-1_medium.png",
@@ -50,8 +55,8 @@ module.exports = dataOffers = [
     				"description" : "Čokoláda co se rozplývá na jazyku!",
     				"price" : 42.89,
     				"currency" : "czk",
-    				"date_start" : "2012-11-12 12:00:00",
-    				"date_end" : "2013-02-09 18:59:59",
+    				"date_start" : "2012-11-12T12:00:00",
+    				"date_end" : "2013-02-09T18:59:59",
                     "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
@@ -64,7 +69,12 @@ module.exports = dataOffers = [
     					"measure_unit" : "g",
     					"price" : 75.9,
     					"currency" : "czk",
-    					"images" : [ {
+    					"image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [ {
     						"small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
     						"medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
     						"large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
@@ -84,8 +94,8 @@ module.exports = dataOffers = [
     				"description" : "Vynikající kakao od Granka!",
     				"price" : 22.80,
     				"currency" : "czk",
-    				"date_start" : "2012-11-12 12:00:00",
-    				"date_end" : "2013-02-09 18:59:59",
+    				"date_start" : "2012-11-12T12:00:00",
+    				"date_end" : "2013-02-09T18:59:59",
                     "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
@@ -98,7 +108,12 @@ module.exports = dataOffers = [
     					"measure_unit" : "g",
     					"price" : 45.9,
     					"currency" : "czk",
-    					"images" : [ {
+    					"image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [ {
     						"small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
     						"medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
     						"large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
@@ -118,8 +133,8 @@ module.exports = dataOffers = [
     				"description" : "Čokoláda co se rozplývá na jazyku!",
     				"price" : 89.12,
     				"currency" : "czk",
-    				"date_start" : "2012-11-12 12:00:00",
-    				"date_end" : "2013-01-19 18:59:59",
+    				"date_start" : "2012-11-12T12:00:00",
+    				"date_end" : "2013-01-19T18:59:59",
                     "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
@@ -132,7 +147,12 @@ module.exports = dataOffers = [
     					"measure_unit" : "g",
     					"price" : 165.9,
     					"currency" : "czk",
-    					"images" : [ {
+    					"image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [ {
     						"small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
     						"medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
     						"large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
@@ -152,8 +172,8 @@ module.exports = dataOffers = [
     				"description" : "Čokoláda co se rozplývá na jazyku!",
     				"price" : 142.00,
     				"currency" : "czk",
-    				"date_start" : "2012-11-12 12:00:00",
-    				"date_end" : "2013-02-01 18:59:59",
+    				"date_start" : "2012-11-12T12:00:00",
+    				"date_end" : "2013-02-01T18:59:59",
                     "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
@@ -166,7 +186,12 @@ module.exports = dataOffers = [
     					"measure_unit" : "g",
     					"price" : 165.9,
     					"currency" : "czk",
-    					"images" : [ {
+    					"image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [ {
     						"small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
     						"medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
     						"large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
@@ -186,8 +211,8 @@ module.exports = dataOffers = [
     				"description" : "Čokoláda co se rozplývá na jazyku!",
     				"price" : 11.15,
     				"currency" : "czk",
-    				"date_start" : "2012-11-12 12:00:00",
-    				"date_end" : "2013-01-19 18:59:59",
+    				"date_start" : "2012-11-12T12:00:00",
+    				"date_end" : "2013-01-19T18:59:59",
                     "qtyLimit" : 100,
     				"product" : {
     					"id" : 146861,
@@ -200,7 +225,12 @@ module.exports = dataOffers = [
     					"measure_unit" : "g",
     					"price" : 15.9,
     					"currency" : "czk",
-    					"images" : [ {
+    					"image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [ {
     						"small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
     						"medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
     						"large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"

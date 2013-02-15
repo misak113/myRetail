@@ -1,0 +1,20 @@
+
+<section class="container" id="order-container">
+
+	<ul class="media-list order-items">
+		<li class="order-item media well" ng-repeat="item in order.items">
+			<a class="pull-left" ng-href="#/order-item/{{item.id}}">
+				<img class="media-object order-item-image" ng-src="{{item.product.image.small}}" />
+			</a>
+			<div class="media-body">
+				<h4 class="media-heading">{{item.product.name}}</h4>
+				<div class="media">
+					<span class="badge badge-inverse">{{item.qty}}x</span>
+					<span class="badge badge-success">{{item.price | price:item.currency}}</span>
+					<span ng-hide="item.hideSalePrice" class="badge badge-important">{{item.offer.price | price:item.offer.currency}}</span>
+				</div>
+			</div>
+		</li>
+	</ul>
+	
+</section>

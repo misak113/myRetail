@@ -1,15 +1,25 @@
 
 <section class="container" id="orderList-container">
 	
-	<ul class="media-list">
-		<li ng-repeat="order in orders" class="media">
-			<div class="media-body">
-				<a href="#order/{{order.id}}">
-					<h4>{{order.date|formatDate:'D. M. YY H:mm'}}</h4>
-					<span class="badge">{{order.totalPrice | price:order.currency}}</span>
-				</a>
-			</div>
-		</li>
-	</ul>
+	<table class="table table-striped table-hover table-bordered">
+		<tr ng-repeat="order in orders">
+			<td>
+				<div>
+					<a class="media-body" href="#order/{{order.id}}">
+						<h4>
+							{{order.branch.name}}
+							<small>{{order.date|formatDate:'D. M. YY H:mm'}}</small>
+						</h4>
+					</a>
+				</div>
+				<span class="badge badge-success">
+					{{order.totalPrice | price:order.currency}}
+				</span>
+				<span class="badge">
+					{{order.originalPrice | price:order.currency}}
+				</span>
+			</td>
+		</tr>
+	</table>
 	
 </section>
