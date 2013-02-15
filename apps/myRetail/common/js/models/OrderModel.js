@@ -9,6 +9,20 @@ var OrderModel = function ($http) {
             cb(res);
         });
 	};
+	
+	this.getOrder = function (id, cb) {
+		this.getOrders(function (orders) {
+			var returnOrder = null;
+			angular.forEach(orders, function (order) {
+				if (order.id == id) {
+					returnOrder = order;
+				}
+			});
+			if (returnOrder !== null) {
+				cb(returnOrder);
+			}
+		});
+	};
 };
 
 myRetail.factory('orderModel', function ($http) {

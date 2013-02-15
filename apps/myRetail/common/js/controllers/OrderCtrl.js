@@ -2,11 +2,9 @@
 function OrderCtrl($scope, $routeParams, orderModel) {
 	var id = $routeParams.orderId;
 	
-	orderModel.getOrders(function (orders) {
-		orders.pop();
-		$scope.order = orders.pop(); // @todo
-		
-		angular.forEach($scope.order.items, function (item, key) {
+	orderModel.getOrder(id, function (order) {
+		$scope.order = order;
+		angular.forEach(order.items, function (item, key) {
 			if (item.product === null && item.price < 0) {
 				$scope.order.items[key].product = {
 					name: _t('Odečtení slevy'),
