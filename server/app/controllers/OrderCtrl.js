@@ -15,6 +15,11 @@ var orders = [
 		totalPrice: 152.60,
 		originalPrice: 195.12,
 		currency: 'czk',
+		loyaltyPoints: 12,
+		paymentType: {
+			name: 'visa',
+			title: 'Visa card'
+		},
 		branch: {
 			name: 'Interspar Zličín',
 			geolocation: {
@@ -87,7 +92,7 @@ var orders = [
 				},
 				"product" : {
     					"id" : 146861,
-    					"name" : "Čokoláda",
+    					"name" : "Rajčátka",
     					"title" : "Bílá čokoláda 120g",
     					"product_code" : "566489148",
     					"short_description" : "",
@@ -98,6 +103,34 @@ var orders = [
     					"currency" : "czk",
     					"image": {
 							"small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+							"medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+							"large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+						},
+						"images" : [ {
+    						"small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
+    						"medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
+    						"large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
+    					} ]
+    				}
+			},
+			{
+				qty: 3,
+				price: 12.97,
+				currency: 'czk',
+				offer: null,
+				"product" : {
+    					"id" : 146861,
+    					"name" : "Čokoláda",
+    					"title" : "Bílá čokoláda 120g",
+    					"product_code" : "566489148",
+    					"short_description" : "",
+    					"description" : null,
+    					"quantity" : 120,
+    					"measure_unit" : "g",
+    					"price" : 165.9,
+    					"currency" : "czk",
+    					"image": {
+							"small" : "http://yojoyfrozenyogurt.com/wp-content/uploads/catablog/thumbnails/white%20chocolate%20mousse.jpg",
 							"medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
 							"large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
 						},
@@ -123,6 +156,11 @@ var orders = [
 		totalPrice: 292.60,
 		originalPrice: 295.12,
 		currency: 'czk',
+		loyaltyPoints: 5,
+		paymentType: {
+			name: 'cash',
+			title: 'hotovost'
+		},
 		branch: {
 			name: 'Interspar Černý most',
 			geolocation: {

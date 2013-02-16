@@ -18,4 +18,13 @@ function OrderCtrl($scope, $routeParams, orderModel) {
 			}
 		});
 	});
+	
+	$scope.paymentTypes = {
+		visa: {
+			image: config.baseUrl+'/images/paymentType/visa.png'
+		},
+		cash: {
+			image: config.baseUrl+'/images/paymentType/cash.png'
+		}
+	};
 };
