@@ -26,7 +26,7 @@ var OrderModel = function ($http) {
 	
 	this.getOrderItem = function (id, cb) {
 		this.getOrder(1864686, function (order) {
-			cb(order.items[0]);
+			cb(order.items[0]); // @todo
 		});
 	};
 };

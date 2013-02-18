@@ -15,12 +15,9 @@ myRetail.
 			when('/order-list', {templateUrl: 'templates/orderList.html', controller: OrderListCtrl}).
 			when('/order/:orderId', {templateUrl: 'templates/order.html', controller: OrderCtrl}).
 			when('/order-item/:orderItemId', {templateUrl: 'templates/orderItem.html', controller: OrderItemCtrl}).
+			when('/product/:productId', {templateUrl: 'templates/product.html', controller: ProductCtrl}).
 			otherwise({redirectTo: '/home'});
 	}]);
-
-
-
-
 
 
 
