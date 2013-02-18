@@ -44,6 +44,15 @@ h1, h2, h3 {
 }
 
 
+/* Bootstrap extension */
+.well.soft {
+	background-color: #F0E9C9;
+}
+.well.soft:hover {
+	background-color: #F0EBD4;
+}
+
+
 
 
 

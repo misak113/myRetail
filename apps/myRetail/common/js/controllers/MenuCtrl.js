@@ -34,4 +34,4 @@ function MenuCtrl($scope) {
 	            			icon: 'power'
 	            		}
 	            	];
-}
+};

@@ -10,7 +10,7 @@
  */
 function _t(text) {
 	return text;
-}
+};
 
 Messages = {
 	// Add here your messages for the default language. 

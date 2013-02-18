@@ -14,6 +14,7 @@ myRetail.
 			when('/offer/:offerId', {templateUrl: 'templates/offer.html', controller: OfferCtrl}).
 			when('/order-list', {templateUrl: 'templates/orderList.html', controller: OrderListCtrl}).
 			when('/order/:orderId', {templateUrl: 'templates/order.html', controller: OrderCtrl}).
+			when('/order-item/:orderItemId', {templateUrl: 'templates/orderItem.html', controller: OrderItemCtrl}).
 			otherwise({redirectTo: '/home'});
 	}]);
 
@@ -29,5 +30,5 @@ myRetail.
 
 function wlCommonInit(){
 	// Common initialization code goes here
-}
+};
 
