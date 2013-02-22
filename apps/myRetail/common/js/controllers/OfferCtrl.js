@@ -9,6 +9,6 @@ function OfferCtrl ($scope, $routeParams, offerModel) {
 	});
 	
 	$scope.goBack = function() {
-		window.history.back();
+		window.history.back(); // @todo předělat na angular $location
 	};
 };

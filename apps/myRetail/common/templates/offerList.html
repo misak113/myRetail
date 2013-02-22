@@ -10,9 +10,18 @@
 			<div class="media-body">
 				<a href="#/offer/{{offer.id}}"><h4 class="media-heading">{{offer.title}}</h4></a>
 				<div class="media">
-					<div><strong>{{'cena:'|_}}</strong> <span class="badge">{{offer.price | price:offer.currency}}</span></div>
-					<div><strong>{{'sleva:'|_}}</strong> <span class="badge badge-important">{{ offer.price / offer.product.price | salePercentage }}</span></div>
-					<div><strong>{{'zbývá:'|_}}</strong> <span class="badge badge-success">{{offer.date_end | timeLeft}}</span></div>
+					<div>
+						<strong>{{'cena:'|_}}</strong> 
+						<span class="badge">{{offer.price | price:offer.currency}}</span>
+					</div>
+					<div>
+						<strong>{{'sleva:'|_}}</strong> 
+						<span class="badge badge-important">{{ offer.price / offer.product.price | salePercentage }}</span>
+					</div>
+					<div>
+						<strong>{{'zbývá:'|_}}</strong> 
+						<span class="badge badge-success">{{offer.date_end | timeLeft}}</span>
+					</div>
 				</div>
 			</div>
 		</li>

@@ -1,0 +1,32 @@
+
+<section class="container" id="orderList-container">
+	
+	<table class="table table-hover table-bordered">
+		<tr>
+			<td class="well soft">
+				<a ng-href="#create-shop-cart">
+					<h5><i class="icon-large icon-circle-plus"></i> {{'Vytvořit nákupní seznam'|_}}</h5>
+				</a>
+			</td>
+		</tr>
+		<tr ng-repeat="order in orders">
+			<td class="well">
+				<div>
+					<a ng-href="#/order/{{order.id}}">
+						<h4>
+							{{order.branch.name}}
+							<small>{{order.date|formatDate:'D. M. YY H:mm'}}</small>
+						</h4>
+					</a>
+				</div>
+				<span class="badge badge-success">
+					{{order.totalPrice | price:order.currency}}
+				</span>
+				<span class="badge">
+					{{order.originalPrice | price:order.currency}}
+				</span>
+			</td>
+		</tr>
+	</table>
+	
+</section>

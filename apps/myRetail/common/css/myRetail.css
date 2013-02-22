@@ -12,7 +12,7 @@ html {
 #content {
 	background-color: #DDDDDD;
 	margin: 0 auto 0 auto;
-	padding-top: 45px;
+	padding-top: 50px;
 	height: 85%;
 }
 
@@ -28,11 +28,11 @@ html {
 }
 	
 section.container {
-	height: 100%;
 	position: relative;
-	width: 90%;
+	width: 97%;
 	max-width: 760px;
-	padding-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 h1, h2, h3 {
@@ -41,6 +41,15 @@ h1, h2, h3 {
 
 .ng-view {
 	height: 100%;
+}
+
+
+/* Bootstrap extension */
+.well.soft {
+	background-color: #F0E9C9;
+}
+.well.soft:hover {
+	background-color: #F0EBD4;
 }
 
 
@@ -61,11 +70,16 @@ h1, h2, h3 {
 	-o-border-radius: 0;
 }
 
+
+
 /* QR code */
 #home-container .qr-code-container {
-	position: absolute;
+	position: relative;
 	z-index: -1;
 	bottom: 0;
+	max-width: 350px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -100,8 +114,8 @@ h1, h2, h3 {
   -webkit-transition: all 0.5s ease;
   max-height: 200px; /* 1000px works too */
   overflow: hidden;
-  padding: 10px;
-  margin: 0px 0 15px 0;
+  padding: 8px;
+  margin: 0px 0 4px 0;
 }
 #offerList-container .offer.ui-animate {
   opacity: 0;
@@ -118,8 +132,31 @@ h1, h2, h3 {
 	max-width: 300px;
 }
 
-
-
+/** Order */
+#order-container .order-items .order-item .order-item-image {
+	width: 57px;
+	height: 57px;
+}
+#order-container .order-items .order-item {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding: 8px;
+}
+#order-container .order-items .order-item.total .badge {
+	font-size: 24px;
+	line-height: 28px;
+}
+#order-container .order-items .order-info {
+	text-align: center;
+}
+#order-container .order-items .order-info .badge {
+	font-size: 40px;
+	line-height: 44px;
+}
+#order-container .order-items .order-info .payment-type {
+	max-width: 100%;
+	max-height: 80px;
+}
 
 
 
@@ -141,10 +178,12 @@ h1, h2, h3 {
  
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
+	
 }
  
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+	
 }
  
 /* Landscape phones and down */

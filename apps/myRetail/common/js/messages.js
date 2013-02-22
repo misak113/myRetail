@@ -5,6 +5,13 @@
 * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
+/**
+ * Translate
+ */
+function _t(text) {
+	return text;
+};
+
 Messages = {
 	// Add here your messages for the default language. 
 	// Generate a similar file with a language suffix containing the translated messages
