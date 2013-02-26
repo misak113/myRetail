@@ -58,6 +58,8 @@ h1, h2, h3 {
 
 
 
+
+
 /* Navbar */
 .navbar .navbar-inner.btn-group {
 	margin: 0;
@@ -121,7 +123,6 @@ h1, h2, h3 {
   opacity: 0;
   max-height: 0;
 }
-
 /** Offer */
 #offer-container .offer .image-wrapper {
 	text-align: center;
@@ -132,28 +133,36 @@ h1, h2, h3 {
 	max-width: 300px;
 }
 
-/** Order */
-#order-container .order-items .order-item .order-item-image {
+
+
+
+
+
+
+
+
+/** Purchase */
+#purchase-container .purchase-items .purchase-item .purchase-item-image {
 	width: 57px;
 	height: 57px;
 }
-#order-container .order-items .order-item {
+#purchase-container .purchase-items .purchase-item {
 	margin-top: 2px;
 	margin-bottom: 2px;
 	padding: 8px;
 }
-#order-container .order-items .order-item.total .badge {
+#purchase-container .purchase-items .purchase-item.total .badge {
 	font-size: 24px;
 	line-height: 28px;
 }
-#order-container .order-items .order-info {
+#purchase-container .purchase-items .purchase-info {
 	text-align: center;
 }
-#order-container .order-items .order-info .badge {
+#purchase-container .purchase-items .purchase-info .badge {
 	font-size: 40px;
 	line-height: 44px;
 }
-#order-container .order-items .order-info .payment-type {
+#purchase-container .purchase-items .purchase-info .payment-type {
 	max-width: 100%;
 	max-height: 80px;
 }

@@ -1,12 +1,12 @@
 
-function OrderCtrl($scope, $routeParams, orderModel) {
-	var id = $routeParams.orderId;
+function PurchaseCtrl($scope, $routeParams, purchaseModel) {
+	var id = $routeParams.purchaseId;
 	
-	orderModel.getOrder(id, function (order) {
-		$scope.order = order;
-		angular.forEach(order.items, function (item, key) {
+	purchaseModel.getPurchase(id, function (purchase) {
+		$scope.purchase = purchase;
+		angular.forEach(purchase.items, function (item, key) {
 			if (item.product === null && item.price < 0) {
-				$scope.order.items[key].product = {
+				$scope.purchase.items[key].product = {
 					name: _t('Odečtení slevy'),
 					image: {
 						small: config.baseUrl+'/images/sale.png'
@@ -14,7 +14,7 @@ function OrderCtrl($scope, $routeParams, orderModel) {
 				};
 			}
 			if (item.offer === null) {
-				$scope.order.items[key].hideSalePrice = true;
+				$scope.purchase.items[key].hideSalePrice = true;
 			}
 		});
 	});

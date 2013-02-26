@@ -1,10 +1,10 @@
 
-<section class="container" id="order-container">
+<section class="container" id="purchase-container">
 
-	<ul class="media-list order-items">
-		<li class="order-item media well" ng-repeat="item in order.items">
-			<a class="pull-left" ng-href="#/order-item/{{item.id}}">
-				<img class="media-object order-item-image" ng-src="{{item.product.image.small}}" />
+	<ul class="media-list purchase-items">
+		<li class="purchase-item media well" ng-repeat="item in purchase.items">
+			<a class="pull-left" ng-href="#/purchase-item/{{item.id}}">
+				<img class="media-object purchase-item-image" ng-src="{{item.product.image.small}}" />
 			</a>
 			<div class="media-body">
 				<h4 class="media-heading">{{item.product.name}}</h4>
@@ -17,27 +17,27 @@
 		</li>
 		
 		<!-- Celkem -->
-		<li class="order-item total media well">
+		<li class="purchase-item total media well">
 			<div class="media-body">
 				<h4 class="media-heading">{{'Cena celkem'|_}}</h4>
 				<div class="media">
-					<span class="badge badge-important">{{order.totalPrice|price:order.currency}}</span>
+					<span class="badge badge-important">{{purchase.totalPrice|price:purchase.currency}}</span>
 				</div>
 			</div>
 		</li>
 		
 		<!-- Info -->
-		<li class="order-info media well">
+		<li class="purchase-info media well">
 			<div class="row-fluid show-grid">
 				<div class="span5">
 					<h5>{{'Získané body'|_}}</h5>
-					<span class="badge badge-info">{{order.loyaltyPoints}}</span>
+					<span class="badge badge-info">{{purchase.loyaltyPoints}}</span>
 				</div>
 				<div class="span2">
-					<img class="payment-type" alt="{{order.paymentType.title}}" ng-src="{{paymentTypes[order.paymentType.name].image}}">
+					<img class="payment-type" alt="{{purchase.paymentType.title}}" ng-src="{{paymentTypes[purchase.paymentType.name].image}}">
 				</div>
 				<div class="span5">
-					<h4>{{order.branch.name}}</h4>
+					<h4>{{purchase.branch.name}}</h4>
 				</div>
 			</div>
 		</li>

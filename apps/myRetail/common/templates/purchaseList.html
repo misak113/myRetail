@@ -1,5 +1,5 @@
 
-<section class="container" id="orderList-container">
+<section class="container" id="purchaseList-container">
 	
 	<table class="table table-hover table-bordered">
 		<tr>
@@ -9,21 +9,21 @@
 				</a>
 			</td>
 		</tr>
-		<tr ng-repeat="order in orders">
+		<tr ng-repeat="purchase in purchases">
 			<td class="well">
 				<div>
-					<a ng-href="#/order/{{order.id}}">
+					<a ng-href="#/purchase/{{purchase.id}}">
 						<h4>
-							{{order.branch.name}}
-							<small>{{order.date|formatDate:'D. M. YY H:mm'}}</small>
+							{{purchase.branch.name}}
+							<small>{{purchase.date|formatDate:'D. M. YY H:mm'}}</small>
 						</h4>
 					</a>
 				</div>
 				<span class="badge badge-success">
-					{{order.totalPrice | price:order.currency}}
+					{{purchase.totalPrice | price:purchase.currency}}
 				</span>
 				<span class="badge">
-					{{order.originalPrice | price:order.currency}}
+					{{purchase.originalPrice | price:purchase.currency}}
 				</span>
 			</td>
 		</tr>

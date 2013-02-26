@@ -14,8 +14,8 @@ function MenuCtrl($scope) {
 	            			icon: 'user'
 	            		},{
 	            			name: 'Nákupy',
-	            			controller: 'OrderListCtrl',
-	            			url: '/order-list',
+	            			controller: 'PurchaseListCtrl',
+	            			url: '/purchase-list',
 	            			icon: 'shopping-cart'
 	            		},{
 	            			name: 'Skupina',
