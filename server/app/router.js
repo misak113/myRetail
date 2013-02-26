@@ -7,7 +7,7 @@ var allowCrossDomain = require('./plugins/allowCrossDomain');
 
 // Controllers
 var OfferCtrl = require('./controllers/OfferCtrl');
-var OrderCtrl = require('./controllers/OrderCtrl');
+var PurchaseCtrl = require('./controllers/PurchaseCtrl');
 
 
 exports.route = function (app) {
@@ -19,5 +19,5 @@ exports.route = function (app) {
 	});
 
 	app.all('/offers', OfferCtrl.offers);
-	app.all('/orders', OrderCtrl.orders);
+	app.all('/purchases', PurchaseCtrl.purchases);
 };
