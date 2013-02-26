@@ -14,7 +14,6 @@ myRetail.
 			when('/offer/:offerId', {templateUrl: 'templates/offer.html', controller: OfferCtrl}).
 			when('/purchase-list', {templateUrl: 'templates/purchaseList.html', controller: PurchaseListCtrl}).
 			when('/purchase/:purchaseId', {templateUrl: 'templates/purchase.html', controller: PurchaseCtrl}).
-			when('/purchase-item/:purchaseItemId', {templateUrl: 'templates/purchaseItem.html', controller: PurchaseItemCtrl}).
 			when('/product/:productId', {templateUrl: 'templates/product.html', controller: ProductCtrl}).
 			otherwise({redirectTo: '/home'});
 	}]);

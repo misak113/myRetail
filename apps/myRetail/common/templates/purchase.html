@@ -2,8 +2,8 @@
 <section class="container" id="purchase-container">
 
 	<ul class="media-list purchase-items">
-		<li class="purchase-item media well" ng-repeat="item in purchase.items">
-			<a class="pull-left" ng-href="#/purchase-item/{{item.id}}">
+		<li class="purchase-item media well" ng-class="item.additionalClass" ng-repeat="item in purchase.items">
+			<a class="pull-left" ng-href="{{item.detailHref}}">
 				<img class="media-object purchase-item-image" ng-src="{{item.product.image.small}}" />
 			</a>
 			<div class="media-body">
