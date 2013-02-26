@@ -3,7 +3,7 @@
  * AngularJS setup
  * 	Routes
  */
-var myRetail = angular.module('myRetail', ['filters', 'ui']);
+var myRetail = angular.module('myRetail', ['filters']);
 myRetail.
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
