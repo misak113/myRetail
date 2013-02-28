@@ -1,3 +1,4 @@
 bin
-\apps/myRetail/android/native/bin
+apps/myRetail/android/native/bin
 node_modules
+~$*
