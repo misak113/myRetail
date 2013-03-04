@@ -1,4 +1,4 @@
 
-exports.products = -> req, res
+exports.products = (req, res) ->
 	res.send 404
 	
