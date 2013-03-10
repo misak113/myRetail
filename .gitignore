@@ -2,3 +2,5 @@ bin
 apps/myRetail/android/native/bin
 node_modules
 ~$*
+[Tt]humbs.db
+*.DS_Store
