@@ -1,7 +1,7 @@
 
 (function ($) {
 
-	this.start = function () {
+	this.start = function () {return;
 		var pullDown = $('.pull-down');
 		// turn-on css
 		pullDown.addClass('turn-on');
@@ -27,6 +27,12 @@
 		$(window).unbind('moveend');
 		pullDown.find('.stop').on('click', function (ev) {
 			stopWorking(ev, pullDown);
+		});
+
+		pullDown.find('.work').on('click', function (ev) {
+			eventTriggerPullDown(pullDown);
+			pullDown.addClass('working');
+			this.stop();
 		});
 	};
 
@@ -111,6 +117,7 @@
 		$(window).trigger('pullDown', ev);
 	};
 
+	this.stop();
 
 	$(document).ready(this.start);
 

@@ -5,7 +5,6 @@
 .pull-down .indicator-click {
   float: left;
   margin: 14px;
-  cursor: pointer;
 }
 .pull-down .indicator {
   -webkit-animation: noRotate 0.5s ease 0 1 normal;
@@ -22,10 +21,12 @@
   display: none;
 }
 .pull-down .stop {
+  display: block;
   display: none;
 }
 .pull-down .stop.close {
-  margin: 5px;
+  float: right;
+  margin: 14px;
 }
 .pull-down .pulled-label {
   margin: 20px;
