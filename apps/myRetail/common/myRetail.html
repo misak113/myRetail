@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/bootstrap.icon.css" />
 		<link rel="stylesheet" href="css/myRetail.css" />
+		<link rel="stylesheet" href="css/bootstrap.pull-down.css" />
 		
 	</head>
 	<body id="content"><!-- style="display: none" -->	
@@ -24,6 +25,17 @@
 				<a href="#/menu" class="btn btn-large menu"><i class="icon-medium icon-justify"></i></a>
 			</div>
 		</section>
+
+		<div class="pull-down">
+			<a href="#"><i class="indicator-click icon-refresh icon-large"></i></a>
+			<i class="indicator icon-down-arrow icon-large"></i>
+			<i class="indicator-working icon-roundabout icon-large"></i>
+			<span class="pulled-label">{{'Uvolněním aktualizovat'|_}}</span>
+			<span class="pull-label">{{'Stažením aktualizovat'|_}}</span>
+			<span class="default-label">{{'Kliknutím aktualizovat'|_}}</span>
+			<span class="working-label">{{'Aktualizuji'|_}}</span>
+			<button type="button" class="close stop">&times;</button>
+		</div>
 		
 		<div class="ng-view" ng-view></div>
 	
@@ -34,6 +46,8 @@
 		<script type="text/javascript" src="js/libs/angular.js"></script>
 		<script type="text/javascript" src="js/libs/moment.min.js"></script>
 		<script type="text/javascript" src="js/libs/underscore-min.js"></script>
+		<script type="text/javascript" src="js/libs/jquery.event.move.js"></script>
+		<script type="text/javascript" src="js/libs/bootstrap.pull-down.js"></script>
 		
 		<!-- Configurations -->
 		<script type="text/javascript" src="js/initOptions.js"></script>
