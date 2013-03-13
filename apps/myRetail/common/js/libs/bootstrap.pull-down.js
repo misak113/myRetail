@@ -1,8 +1,11 @@
 
 (function ($) {
 	var self = this;
+	this.enabled = true;
 
 	this.start = function (pullDown) {
+		// Když je vypnuto
+		if (this.enabled === false) return;
 
 		// turn-on css
 		pullDown.addClass('turn-on');
