@@ -12,10 +12,10 @@
 		hidePullDown(pullDown);
 
 		// on scroll do
-		$(window).on('move', function (ev) {
+		$(window).on('touchmove', function (ev) {
 			scrollAction(ev, pullDown);
 		});
-		$(window).on('moveend', function (ev) {
+		$(window).on('touchend', function (ev) {
 			// do scrolled action
 			scrolledAction(pullDown);
 		});
@@ -28,8 +28,8 @@
 		pullDown.removeClass('turn-on');
 
 		// on scroll do
-		$(window).unbind('move');
-		$(window).unbind('moveend');
+		$(window).unbind('touchmove');
+		$(window).unbind('touchend');
 		pullDown.find('.stop').unbind('click').on('click', function (ev) {
 			stopWorking(ev, pullDown);
 		});
