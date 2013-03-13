@@ -1,10 +1,12 @@
 
 (function ($) {
+	var self = this;
 
-	this.start = function () {return;
-		var pullDown = $('.pull-down');
+	this.start = function (pullDown) {
+
 		// turn-on css
 		pullDown.addClass('turn-on');
+		hidePullDown(pullDown);
 
 		// on scroll do
 		$(window).on('move', function (ev) {
@@ -17,23 +19,28 @@
 		pullDown.find('.stop').unbind('click');
 	};
 
-	this.stop = function () {
-		var pullDown = $('.pull-down');
+	this.stop = function (pullDown) {
+
 		// turn-on css
 		pullDown.removeClass('turn-on');
 
 		// on scroll do
 		$(window).unbind('move');
 		$(window).unbind('moveend');
-		pullDown.find('.stop').on('click', function (ev) {
+		pullDown.find('.stop').unbind('click').on('click', function (ev) {
 			stopWorking(ev, pullDown);
 		});
 
-		pullDown.find('.work').on('click', function (ev) {
+		pullDown.find('.work').unbind('click').on('click', function (ev) {
 			eventTriggerPullDown(pullDown);
 			pullDown.addClass('working');
-			this.stop();
+			self.stop(pullDown);
 		});
+	};
+
+	this.restart = function (pullDown) {
+		self.stop(pullDown);
+		self.start(pullDown);
 	};
 
 	var scrollAction = function (ev, pullDown) {
@@ -52,7 +59,7 @@
 			eventTriggerPullDown(pullDown);
 			pullDown.addClass('working');
 			hidePullDownAbove(pullDown);
-			this.stop();
+			self.stop(pullDown);
 		} else if (pullDown.hasClass('down')) {
 			hidePullDown(pullDown);
 		}
@@ -103,8 +110,7 @@
 	var stopWorking = function (ev, pullDown) {
 		eventTriggerStopWorking(ev, pullDown);
 		pullDown.removeClass('working');
-		hidePullDown(pullDown);
-		this.start();
+		this.start(pullDown);
 	};
 
 	var eventTriggerStopWorking = function (ev, pullDown) {
@@ -117,9 +123,11 @@
 		$(window).trigger('pullDown', ev);
 	};
 
-	this.stop();
 
-	$(document).ready(this.start);
+	$(document).ready(function () {
+		var pullDown = $('.pull-down');
+		self.restart(pullDown);
+	});
 
 	// add to jQuery
 	$.pullDown = this;
