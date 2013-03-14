@@ -22,6 +22,8 @@
 			moving = true;
 		};
 		var movingEnd = function (ev) {
+			lastMoveEvent = null;
+			nowMoveEvent = null;
 			moving = false;
 		};
 
@@ -83,7 +85,10 @@
 			var scrollTop = getScrollUp();
 			var deltaY = getDeltaY(ev);
 			var marginTop = getMarginTop(pullDown);
-			if (scrollTop == 0 && marginTop+deltaY > -getHeightPullDown(pullDown)) {
+			if (scrollTop == 0 
+				&& marginTop+deltaY > -getHeightPullDown(pullDown)
+				) {
+				ev.preventDefault();
 				pullDown.css('margin-top', (marginTop+deltaY)+'px');
 				scrollToTop();
 				statusUpdate(pullDown);
@@ -163,7 +168,19 @@
 		var getDeltaY = function (ev) {
 			if (lastMoveEvent === null) return 0;
 
-			var deltaY = ev.clientY - lastMoveEvent.clientY;
+			var touch = ev;
+			var lastTouch = lastMoveEvent;
+			if (ev.type === "touchmove") {
+				// For multitouch mobile
+				try {
+					touch = ev.originalEvent.targetTouches[0];
+					lastTouch = lastMoveEvent.originalEvent.targetTouches[0];
+				} catch (e) {
+					return 0;
+				}
+			}
+
+			var deltaY = touch.clientY - lastTouch.clientY;
 			return deltaY;
 		};
 
