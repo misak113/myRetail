@@ -4,7 +4,7 @@
 	var pullDown = function () {
 		var self = this;
 		this.enabled = true;
-		this.container = $('body');
+		this.container;
 
 		var lastMoveEvent = null;
 		var nowMoveEvent = null;
@@ -14,28 +14,31 @@
 		var TOUCHMOVE = 'touchmove mousemove';
 		var TOUCHEND = 'touchend mouseup';
 
-		var movingDuration = function (ev) {
-			lastMoveEvent = nowMoveEvent;
-			nowMoveEvent = ev;
-		};
-		var movingStart = function (ev) {
-			moving = true;
-		};
-		var movingEnd = function (ev) {
-			lastMoveEvent = null;
-			nowMoveEvent = null;
-			moving = false;
+
+		this.start = function (options) {
+			if (typeof options === 'undefined') options = {};
+			if (typeof options.pullDown === 'undefined') options.pullDown = $('.pull-down');
+			if (typeof options.container === 'undefined') {
+				this.container = $('body');
+			} else {
+				this.container = options.container;
+			}
+
+			stopListen(options.pullDown);
+			listen(options.pullDown);
 		};
 
-		var prepare = function () {
-			// bind store moving
-			self.container.unbind(TOUCHMOVE, movingDuration).on(TOUCHMOVE, movingDuration);
-			// Mouse fix
-			self.container.unbind(TOUCHSTART, movingStart).on(TOUCHSTART, movingStart);
-			self.container.unbind(TOUCHEND, movingEnd).on(TOUCHEND, movingEnd);
+		this.enable = function () {
+			this.enabled = true;
+			this.start();
 		};
 
-		this.start = function (pullDown) {
+		this.disable = function () {
+			this.enabled = false;
+			this.start();
+		};
+
+		var listen = function (pullDown) {
 			prepare();
 
 			// Když je vypnuto
@@ -59,28 +62,48 @@
 			statusUpdate(pullDown);
 		};
 
-		this.stop = function (pullDown) {
+		var stopListen = function (pullDown) {
 
 			// turn-on css
 			pullDown.removeClass('turn-on');
+			hidePullDownAbove(pullDown);
 
 			// on scroll do
 			self.container.unbind(TOUCHMOVE);
 			self.container.unbind(TOUCHEND);
 			pullDown.find('.stop').unbind('click').on('click', function (ev) {
+				ev.preventDefault();
+				moving = false;
 				stopWorking(ev, pullDown);
 			});
 
 			pullDown.find('.work').unbind('click').on('click', function (ev) {
+				ev.preventDefault();
 				eventTriggerPullDown(pullDown);
 				pullDown.addClass('working');
-				self.stop(pullDown);
+				stopListen(pullDown);
 			});
 		};
 
-		this.restart = function (pullDown) {
-			self.stop(pullDown);
-			self.start(pullDown);
+		var movingDuration = function (ev) {
+			lastMoveEvent = nowMoveEvent;
+			nowMoveEvent = ev;
+		};
+		var movingStart = function (ev) {
+			moving = true;
+		};
+		var movingEnd = function (ev) {
+			lastMoveEvent = null;
+			nowMoveEvent = null;
+			moving = false;
+		};
+
+		var prepare = function () {
+			// bind store moving
+			self.container.unbind(TOUCHMOVE, movingDuration).on(TOUCHMOVE, movingDuration);
+			// Mouse fix
+			self.container.unbind(TOUCHSTART, movingStart).on(TOUCHSTART, movingStart);
+			self.container.unbind(TOUCHEND, movingEnd).on(TOUCHEND, movingEnd);
 		};
 
 		var scrollAction = function (ev, pullDown) {
@@ -101,8 +124,7 @@
 			if (pullDown.hasClass('pulled')) {
 				eventTriggerPullDown(pullDown);
 				pullDown.addClass('working');
-				hidePullDownAbove(pullDown);
-				self.stop(pullDown);
+				stopListen(pullDown);
 			} else if (pullDown.hasClass('down')) {
 				hidePullDown(pullDown);
 			}
@@ -154,7 +176,7 @@
 		var stopWorking = function (ev, pullDown) {
 			eventTriggerStopWorking(ev, pullDown);
 			pullDown.removeClass('working');
-			self.start(pullDown);
+			listen(pullDown);
 		};
 
 		var eventTriggerStopWorking = function (ev, pullDown) {
@@ -186,16 +208,10 @@
 			return deltaY;
 		};
 
-		prepare();
+		//prepare();
 
 	};
 	// add to jQuery
 	$.pullDown = new pullDown();
-
-	$(document).ready(function () {
-		$.pullDown.container = $('.ng-view'); // @todo moveout of library
-		var pullDown = $('.pull-down');
-		$.pullDown.restart(pullDown);
-	});
 
 })(jQuery);

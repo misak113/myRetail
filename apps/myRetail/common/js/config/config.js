@@ -8,3 +8,8 @@ config = _.extend(config, configLocal);
 myRetail.factory('config', function () {
 	return config;
 });
+
+// Render init
+$(document).ready(function () {
+	$.pullDown.start({container: $('.ng-view')});
+});
