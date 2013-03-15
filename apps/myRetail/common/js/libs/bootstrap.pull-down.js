@@ -55,6 +55,8 @@
 				scrolledAction(pullDown);
 			});
 			pullDown.find('.stop').unbind('click');
+
+			statusUpdate(pullDown);
 		};
 
 		this.stop = function (pullDown) {
