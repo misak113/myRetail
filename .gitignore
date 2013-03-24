@@ -4,6 +4,7 @@ node_modules
 ~$*
 [Tt]humbs.db
 *.DS_Store
+*.tmp
 
 ## Frontend common
 apps/myRetail/common/js/config/config.local.js
