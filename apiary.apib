@@ -30,17 +30,17 @@ POST /login
 
 Logout user
 POST /logout
-{"username": "misak113", "message": "Uživatel odhlášen", "accessToken": "77d450bbbd948bb44cfa68a21a6c84be0b0a48ea953d2b4214a7d4a74c06ed7c"}
+{"username": "misak113", "accessToken": "77d450bbbd948bb44cfa68a21a6c84be0b0a48ea953d2b4214a7d4a74c06ed7c"}
 < 200
 < Content-Type: application/json
-{ "status": "unlogged", "time": 135489548, "data": {}}
+{ "status": "unlogged", "message": "Uživatel odhlášen", "time": 135489548, "data": {}}
 
 Simple register user
 POST /register
-{"username": "misak113", "message": "Uživatel zaregistrován", "password": "mojeheslo"}
+{"username": "misak113", "password": "mojeheslo"}
 < 200
 < Content-Type: application/json
-{ "status": "registered", "time": 135489548, "data": {}}
+{ "status": "registered", "message": "Uživatel zaregistrován", "time": 135489548, "data": {}}
 
 
 --
@@ -58,7 +58,7 @@ GET /offers
 { "status": "returned", "message": "Nabídky vráceny", "data": {
     "offers": [
         {
-			"_id" : {"$oid": "512e6a7bdea8ace96a5855b4"},
+    		"_id" : {"$oid": "512e6a7bdea8ace96a5855b4"},
 			"title" : "Lahodná rajčátka",
 			"description" : "Nepřehlédněte nabídku čtvrt kila lahodných rajčat první jakosti",
 			"price" : 18.54,
@@ -88,7 +88,7 @@ GET /offers
 						{
 							"small" : "http://api.myretail.cz/images/tomate-250g-14860-1_small.png",
 							"medium" : "http://api.myretail.cz/images/tomate-250g-14860-1_medium.png",
-							"large" : "http://api.myretail.cz/images/tomate-250g-14860-1_large.png"
+							"large" : "http://api.myretail.cz/images/tomate-250g-14860-1_large.png"javascript:UserVoice.showPopupWidget();
 						},
 						{
 							"small" : "http://api.myretail.cz/images/tomate-250g-14860-2_small.png",
@@ -154,4 +154,65 @@ GET /offers
 
 
 
+
+
+Get one offer for specified user by offer id, if has permission
+GET /offer
+> Content-Type: application/json
+{ "offer_oid": "512e6a7bdea8ace96a5855b4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Nabídka vrácena", "data": {
+    "offer": {
+    	"_id" : {"$oid": "512e6a7bdea8ace96a5855b4"},
+		"title" : "Lahodná rajčátka",
+		"description" : "Nepřehlédněte nabídku čtvrt kila lahodných rajčat první jakosti",
+		"price" : 18.54,
+		"currency" : "czk",
+		"date_start" : "2013-01-02T12:00:00",
+		"date_end" : "2013-01-18T18:59:59",
+        "qtyLimitTotal" : 100,
+        "qtyLimitUser" : 10,
+        "categories": ["personal", "common"],
+		"product" : {
+			"id" : 146860,
+			"name" : "Rajčata",
+			"title" : "Rajčata Balení 250g",
+			"product_code" : "566489138",
+			"short_description" : "",
+			"description" : null,
+			"quantity" : 250,
+			"measure_unit" : "g",
+			"price" : 25.8,
+			"currency" : "czk",
+			"image": {
+                "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+            },
+            "images" : [
+					{
+						"small" : "http://api.myretail.cz/images/tomate-250g-14860-1_small.png",
+						"medium" : "http://api.myretail.cz/images/tomate-250g-14860-1_medium.png",
+						"large" : "http://api.myretail.cz/images/tomate-250g-14860-1_large.png"javascript:UserVoice.showPopupWidget();
+					},
+					{
+						"small" : "http://api.myretail.cz/images/tomate-250g-14860-2_small.png",
+						"medium" : "http://api.myretail.cz/images/tomate-250g-14860-2_medium.png",
+						"large" : "http://api.myretail.cz/images/tomate-250g-14860-2_large.png"
+					} ]
+		},
+		"priority" : 0.890415,
+		"image": {
+			"small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+			"medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+			"large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+		},
+		"images" : [ {
+			"small" : "http://api.myretail.cz/images/super_tomate-250g-14860-1_small.png",
+			"medium" : "http://api.myretail.cz/images/super_tomate-250g-14860-1_medium.png",
+			"large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+		} ]
+	}
+}}
 
