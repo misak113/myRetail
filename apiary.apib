@@ -592,3 +592,119 @@ GET /purchase
 }}
 
 
+
+Get list of products by parametrs, if has permission
+GET /products
+> Content-Type: application/json
+{ "category_oid": "512e6a7bdea8ace96a5854c4", tags: ["vegetable", "milk"]}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Produkty vráceny", "data": {
+        "products": [
+            {
+                "_id" : {"$oid": "512e6a7bdea8ace96a5855f4"},
+                "name" : "Rajčata",
+                "title" : "Rajčata Balení 250g",
+                "product_code" : "566489138",
+                "short_description" : "",
+                "description" : null,
+                "quantity" : 250,
+                "measure_unit" : "g",
+                "price" : 25.8,
+                "currency" : "czk",
+                "category": {
+                    "_id": {"$oid":"512e6a7bdea8ace96a5854c4"} 
+                },
+                "tags": ["tomate", "vegetable", "red"],
+                "image": {
+                    "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                    "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                    "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                },
+                "images" : [
+                        {
+                            "small" : "http://api.myretail.cz/images/tomate-250g-14860-1_small.png",
+                            "medium" : "http://api.myretail.cz/images/tomate-250g-14860-1_medium.png",
+                            "large" : "http://api.myretail.cz/images/tomate-250g-14860-1_large.png"
+                        },
+                        {
+                            "small" : "http://api.myretail.cz/images/tomate-250g-14860-2_small.png",
+                            "medium" : "http://api.myretail.cz/images/tomate-250g-14860-2_medium.png",
+                            "large" : "http://api.myretail.cz/images/tomate-250g-14860-2_large.png"
+                        } ]
+            },
+            {
+                "_id" : {"$oid": "512e6a7bdea8ace96a5855e7"},
+                "name" : "Čokoláda",
+                "title" : "Bílá čokoláda 120g",
+                "product_code" : "566489148",
+                "short_description" : "",
+                "description" : null,
+                "quantity" : 120,
+                "measure_unit" : "g",
+                "price" : 165.9,
+                "currency" : "czk",
+                "category": {
+                    "_id": {"$oid":"512e6a7bdea8ace96a5854c4"} 
+                },
+                "tags": ["chocolate", "milk", "milka"],
+                "image": {
+                    "small" : "http://yojoyfrozenyogurt.com/wp-content/uploads/catablog/thumbnails/white%20chocolate%20mousse.jpg",
+                    "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                    "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                },
+                "images" : [ {
+                    "small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
+                    "medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
+                    "large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
+                } ]
+            }
+        ]
+    }
+}
+
+
+
+Get one product by id, if has permission
+GET /product
+> Content-Type: application/json
+{ "product_oid": "512e6a7bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Produkt vrácen", "data": {
+        "product": {
+            "_id" : {"$oid": "512e6a7bdea8ace96a5855f4"},
+            "name" : "Rajčata",
+            "title" : "Rajčata Balení 250g",
+            "product_code" : "566489138",
+            "short_description" : "",
+            "description" : null,
+            "quantity" : 250,
+            "measure_unit" : "g",
+            "price" : 25.8,
+            "currency" : "czk",
+            "category": {
+                "_id": {"$oid":"512e6a7bdea8ace96a5854c4"} 
+            },
+            "tags": ["tomate", "vegetable", "red"],
+            "image": {
+                "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+            },
+            "images" : [
+                    {
+                        "small" : "http://api.myretail.cz/images/tomate-250g-14860-1_small.png",
+                        "medium" : "http://api.myretail.cz/images/tomate-250g-14860-1_medium.png",
+                        "large" : "http://api.myretail.cz/images/tomate-250g-14860-1_large.png"
+                    },
+                    {
+                        "small" : "http://api.myretail.cz/images/tomate-250g-14860-2_small.png",
+                        "medium" : "http://api.myretail.cz/images/tomate-250g-14860-2_medium.png",
+                        "large" : "http://api.myretail.cz/images/tomate-250g-14860-2_large.png"
+                    } ]
+        }
+    }
+}
+
+
