@@ -1,5 +1,8 @@
 
 var express = require('express');
+var socketio = require('socket.io');
+var http = require('http');
+var path = require('path');
 
 var config = require('./config/config');
 
@@ -11,6 +14,8 @@ var PurchaseCtrl = require('./controllers/PurchaseCtrl');
 
 
 exports.route = function (app) {
+
+	var staticPath = path.normalize(config.path.frontendBasePath);
 	
 	app.configure(function () {
 		// Allow cross domain requests by AJAX (server is on other domain)
@@ -18,10 +23,20 @@ exports.route = function (app) {
 		// set simple routing from express
 		app.use(app.router);
 		// set static routing on mobile application frontend
-		app.use(express.static(config.path.frontendBasePath));
+		app.use(express.static(staticPath));
+	});
+
+	// redirect index.html to myRetail.html
+	app.get('/', function (req, res) {
+	  res.sendfile(staticPath + 'myRetail.html');
 	});
 
 	// simple routing on controller and action (like MVC)
 	app.all('/offers', OfferCtrl.offers);
 	app.all('/purchases', PurchaseCtrl.purchases);
+
+
+	// Websocket support
+	var server = http.createServer(app);
+	var io = socketio.listen(server);
 };
