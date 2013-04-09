@@ -12,20 +12,9 @@ POST /login
 {"username": "misak113", "password": "testheslo"}
 < 200
 < Content-Type: application/json
-{ "status": "logged", "message": "Uživatel přihlášen", "time": 135489548, "data": {
+{ "status": "loggedIn", "message": "Uživatel přihlášen", "time": 135489548, "data": {
     "accessToken": "77d450bbbd948bb44cfa68a21a6c84be0b0a48ea953d2b4214a7d4a74c06ed7c",
     "user_oid": "512e6a85dea8ace96a5855b5",
-}}
-
-Simple login by username and password atempt to open web socket
-POST /login
-{"username": "misak113", "password": "testheslo", "openWebSocket": true}
-< 200
-< Content-Type: application/json
-{ "status": "logged", "message": "Uživatel přihlášen a přidělen web socket", "time": 135489548, "data": {
-    "accessToken": "77d450bbbd948bb44cfa68a21a6c84be0b0a48ea953d2b4214a7d4a74c06ed7c",
-    "user_oid": "512e6a85dea8ace96a5855b5",
-    "webSocket": {"port": 14583, "host": "myretail.avantcore.cz"}
 }}
 
 Logout user
@@ -33,7 +22,7 @@ POST /logout
 {"username": "misak113", "accessToken": "77d450bbbd948bb44cfa68a21a6c84be0b0a48ea953d2b4214a7d4a74c06ed7c"}
 < 200
 < Content-Type: application/json
-{ "status": "unlogged", "message": "Uživatel odhlášen", "time": 135489548, "data": {}}
+{ "status": "loggedOff", "message": "Uživatel odhlášen", "time": 135489548, "data": {}}
 
 Simple register user
 POST /register
@@ -706,6 +695,352 @@ GET /product
                         "large" : "http://api.myretail.cz/images/tomate-250g-14860-2_large.png"
                     } ]
         }
+    }
+}
+
+
+
+Get user by id, if has permission
+GET /user
+> Content-Type: application/json
+{ "user_oid": "512e6a7bdea8ace9135855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Uživatel vrácen", "data": {
+        "user": {
+            "_id" : {"$oid": "512e6a7bdea8ace96a5855f4"},
+            "forename": "Michael",
+            "surname": "Žabka",
+            "email": "zabka.michael@seznam.cz",
+            "authenticates": [
+                {
+                    "type": "username",
+                    "identity": "misak113",
+                    "verification": null,
+                }
+            ]
+        }
+    }
+}
+
+
+
+Get shopping-lists by user id, if has permission
+GET /shopping-lists
+> Content-Type: application/json
+{ "user_oid": "512e6a7bdea8ace9135855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Nákupní seznamy vráceny", "data": {
+        "shopping-lists": ["512e6a7bdea8ace96a5855f4","512e6a8bdea8ace96a5855f4","512e6a9bdea8ace96a5855f4"]
+    }
+}
+
+
+
+Get shopping-list by id, if has permission
+GET /shopping-list
+> Content-Type: application/json
+{ "shoping-list_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Nákupní seznam vrácen", "data": {
+        "shopping-list": {
+            "_id" : {"$oid": "512e6a7bdea8ace06a5855c4"},
+            "date": "2013-01-02T12:00:00",
+            "totalPrice": 152.60,
+            "originalPrice": 195.12,
+            "currency": 'czk',
+            "loyaltyPoints": 12,
+            "items": [
+                {
+                    "_id" : {"$oid": "512e6a7bdea8ace96a5855d6"},
+                    "type": "title",
+                    "qty": 3,
+                    "name": "Vajíčka"
+                },
+                {
+                    "_id" : {"$oid": "512e6a7bdea8ace96a5855d6"},
+                    "type": "product",
+                    "qty": 3,
+                    "price": 12.97,
+                    "currency": 'czk',
+                    "product" : {
+                            "_id" : {"$oid": "512e6a7bdea8ace96a5855e7"},
+                            "name" : "Čokoláda",
+                            "title" : "Bílá čokoláda 120g",
+                            "product_code" : "566489148",
+                            "short_description" : "",
+                            "description" : null,
+                            "quantity" : 120,
+                            "measure_unit" : "g",
+                            "price" : 165.9,
+                            "currency" : "czk",
+                            "image": {
+                                "small" : "http://yojoyfrozenyogurt.com/wp-content/uploads/catablog/thumbnails/white%20chocolate%20mousse.jpg",
+                                "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                                "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                            },
+                            "images" : [ {
+                                "small" : "http://api.myretail.cz/images/chocolate-14861-1_small.png",
+                                "medium" : "http://api.myretail.cz/images/chocolate-14861-1_medium.png",
+                                "large" : "http://api.myretail.cz/images/chocolate-14861-1_large.png"
+                            } ]
+                        }
+                },
+                {
+                    "_id" : {"$oid": "512e6a7bdea8ace96a5855d5"},
+                    "type": "offer",
+                    "qty": 3,
+                    "price": 22.97,
+                    "currency": 'czk',
+                    "offer": {
+                        "_id" : {"$oid": "512e6a7bdea8ace96a5855e4"},
+                        "title" : "Lahodná rajčátka",
+                        "description" : "Nepřehlédněte nabídku čtvrt kila lahodných rajčat první jakosti",
+                        "price" : 18.54,
+                        "currency" : "czk",
+                        "date_start" : "2013-01-02T12:00:00",
+                        "date_end" : "2013-01-18T18:59:59",
+                        "qtyLimit" : 100,
+                        "product" : {
+                            "_id" : {"$oid": "512e6a7bdea8ace96a5855f4"},
+                            "name" : "Rajčata",
+                            "title" : "Rajčata Balení 250g",
+                            "product_code" : "566489138",
+                            "short_description" : "",
+                            "description" : null,
+                            "quantity" : 250,
+                            "measure_unit" : "g",
+                            "price" : 25.8,
+                            "currency" : "czk",
+                            "image": {
+                                "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                                "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                                "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                            },
+                            "images" : [
+                                    {
+                                        "small" : "http://api.myretail.cz/images/tomate-250g-14860-1_small.png",
+                                        "medium" : "http://api.myretail.cz/images/tomate-250g-14860-1_medium.png",
+                                        "large" : "http://api.myretail.cz/images/tomate-250g-14860-1_large.png"
+                                    },
+                                    {
+                                        "small" : "http://api.myretail.cz/images/tomate-250g-14860-2_small.png",
+                                        "medium" : "http://api.myretail.cz/images/tomate-250g-14860-2_medium.png",
+                                        "large" : "http://api.myretail.cz/images/tomate-250g-14860-2_large.png"
+                                    } ]
+                        },
+                        "priority" : 0.890415,
+                        "image": {
+                            "small" : "http://img.weiku.com/IMG/2010/11/26/1/product/36_38_tomato_paste17318_s.jpg",
+                            "medium" : "http://www.countryliving.com/cm/countryliving/images/spicy-tomato-jam-3761-200.jpg",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        },
+                        "images" : [ {
+                            "small" : "http://api.myretail.cz/images/super_tomate-250g-14860-1_small.png",
+                            "medium" : "http://api.myretail.cz/images/super_tomate-250g-14860-1_medium.png",
+                            "large" : "http://api.myretail.cz/imagessuper_tomate-250g-14860-1_large.png"
+                        } ]
+                    }
+                },
+                {
+                    "_id" : {"$oid": "512e6a7bdea8ace96a5854f4"},
+                    "type": "discount",
+                    "price": -45.21,
+                    "currency": 'czk',
+                }
+            ]
+        }
+    }
+}
+
+
+
+
+Get settings by user id, if has permission
+GET /settings
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Nastavení vrácena", "data": {
+    }
+}
+
+
+
+
+Get groups by user id, if has permission
+GET /groups
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Skupiny vráceny", "data": {
+    }
+}
+
+
+
+
+Get notifications by user id, if has permission
+GET /notifications
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Notifikace vráceny", "data": {
+    }
+}
+
+
+
+
+Get loyality points by user id, if has permission
+GET /loyality-points
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Věrnostní body vráceny", "data": {
+    }
+}
+
+Get loyality status by user id, if has permission
+GET /loyality-status
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Věrnostní status vrácen", "data": {
+    }
+}
+
+
+
+
+Get favorite products by user id, if has permission
+GET /favorite-products
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Oblíbené produkty vráceny", "data": {
+    }
+}
+
+
+
+Get discounts by user id, if has permission
+GET /discounts
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Slevy vráceny", "data": {
+    }
+}
+
+
+
+Get branches for retailer id, if has permission
+GET /branches
+> Content-Type: application/json
+{ "retailer_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Oblíbené produkty vráceny", "data": {
+    }
+}
+
+
+
+Get recipes by user id, if has permission
+GET /recipes
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Recepty vráceny", "data": {
+    }
+}
+
+
+
+
+Get serial offers by user id, if has permission
+GET /serial-offers
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "returned", "message": "Seriálové nabídky vráceny", "data": {
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+--
+Modifying Data
+The following is a section of resources related to modifying data on server
+--
+
+
+Create new shopping-list for user id, if has permission
+GET /create-shopping-list
+> Content-Type: application/json
+{ "user_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "created", "message": "Nákupní seznam vytvořen", "data": {
+    }
+}
+
+
+
+
+Rate offer, if has permission
+GET /rate-offer
+> Content-Type: application/json
+{ "offer_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "rated", "message": "Produkt ohodnocen", "data": {
+    }
+}
+
+
+
+
+Haggle about offer, if has permission
+GET /haggle-offer
+> Content-Type: application/json
+{ "offer_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "haggled", "message": "Nabídka vysmlouvána", "data": {
+    }
+}
+
+
+
+
+Unwant offer, if has permission
+GET /unwanted-offer
+> Content-Type: application/json
+{ "offer_oid": "512e6a8bdea8ace96a5855f4"}
+< 200
+< Content-Type: application/json
+{ "status": "set-as-unwanted", "message": "Objednávka nastavena jako nechtěná", "data": {
     }
 }
 
