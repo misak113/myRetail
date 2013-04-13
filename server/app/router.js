@@ -32,18 +32,17 @@ exports.route = function (app) {
 	});
 
 	// simple routing on controller and action (like MVC)
-	app.all('/offers', OfferCtrl.offers);
-	app.all('/purchases', PurchaseCtrl.purchases);
+	app.all('/offers', OfferCtrl.offersAction);
+	app.all('/purchases', PurchaseCtrl.purchasesAction);
 
 
 	// Websocket support
 	var server = http.createServer(app);
 	var io = socketio.listen(server);
 	io.sockets.on('connection', function (socket) {
-		socket.emit('news', { hello: 'world' });
-		socket.on('my other event', function (data) {
- 			console.log(data);
-		});
+		socket.emit('connection', { status: 'connected' });
+		socket.on('/offers', OfferCtrl.offers);
+		socket.on('/purchases', PurchaseCtrl.purchases);
 	});
 	app.server = server;
 	app.io = io;

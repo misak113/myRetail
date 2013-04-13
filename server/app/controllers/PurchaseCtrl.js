@@ -3,7 +3,15 @@ var Purchase = require('../models/Purchase');
 var l = require('../services/logDispatcher');
 
 
-exports.purchases = function (req, res) {
+
+exports.purchases = function (data, cb) {
+	cb(purchases);
+};
+
+
+
+// maping for AJAX
+exports.purchasesAction = function (req, res) {
 	res.send(purchases);
 };
 

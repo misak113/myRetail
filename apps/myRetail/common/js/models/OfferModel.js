@@ -2,14 +2,19 @@
  * 
  */
 
-var OfferModel = function ($http) {
+var OfferModel = function ($http, socket) {
 	
 	this.markAsUnwanted = function (offer, config) {
 		$http.get('/todo').success(function() {alert('Unwanted');}); // @todo
 	};
 	
 	this.getOffers = function (cb) {
-        $http.get(config.serverUrl+'/offers').success(function(res) {
+		socket.emit('/offers', {}, function (data) {
+			cb(data);
+		});
+	};
+	this.getOffersy= function (cb) {
+		$http.get(config.serverUrl+'/offers').success(function(res) {
             cb(res);
         });
 	};
@@ -27,7 +32,7 @@ var OfferModel = function ($http) {
 	};
 };
 
-myRetail.factory('offerModel', function ($http) {
-	var offerModel = new OfferModel($http);
+myRetail.factory('offerModel', function ($http, socket) {
+	var offerModel = new OfferModel($http, socket);
 	return offerModel;
 });

@@ -19,6 +19,13 @@ myRetail.
 	}]);
 
 
+// init socket.io as angular service
+myRetail.factory('socket', function () {
+	var socket = io.connect(config.serverUrl);
+	return socket;
+});
+
+
 
 
 //Worklight comes with the jQuery framework bundled inside. If you do not want to use it, please comment out the line below.
