@@ -39,4 +39,15 @@ exports.route = function (app) {
 	// Websocket support
 	var server = http.createServer(app);
 	var io = socketio.listen(server);
+	io.sockets.on('connection', function (socket) {
+		socket.emit('news', { hello: 'world' });
+		socket.on('my other event', function (data) {
+ 			console.log(data);
+		});
+	});
+	app.server = server;
+	app.io = io;
+	app.listen = function (port) {
+		return app.server.listen(port);
+	};
 };
