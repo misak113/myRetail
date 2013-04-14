@@ -3,6 +3,7 @@ var express = require('express');
 var socketio = require('socket.io');
 var http = require('http');
 var path = require('path');
+var l = require('./services/logDispatcher');
 
 var config = require('./config/config');
 
@@ -24,6 +25,8 @@ exports.route = function (app) {
 		app.use(app.router);
 		// set static routing on mobile application frontend
 		app.use(express.static(staticPath));
+		// for mockups of mobile app @todo @debug 
+		app.use(express.static(path.normalize(staticPath+'/../../../diagrams/mockups')));
 	});
 
 	// redirect index.html to myRetail.html
@@ -40,13 +43,16 @@ exports.route = function (app) {
 	var server = http.createServer(app);
 	var io = socketio.listen(server);
 	io.sockets.on('connection', function (socket) {
+		// vytvoří socket pro každého uživatele a naslouchá
 		socket.emit('connection', { status: 'connected' });
 		socket.on('/offers', OfferCtrl.offers);
 		socket.on('/purchases', PurchaseCtrl.purchases);
 	});
 
+	// nastaví server a socket.io do globálníh kontextu app
 	app.server = server;
 	app.io = io;
+	// nahrazení původního listen za nový, který se má volat pro socket.io
 	app.listen = function (port) {
 		return app.server.listen(port);
 	};
