@@ -13,11 +13,6 @@ var OfferModel = function ($http, socket) {
 			cb(data);
 		});
 	};
-	this.getOffersy= function (cb) {
-		$http.get(config.serverUrl+'/offers').success(function(res) {
-            cb(res);
-        });
-	};
 	
 	this.getOffer = function (id, cb) {
 		var returnOffer = null;

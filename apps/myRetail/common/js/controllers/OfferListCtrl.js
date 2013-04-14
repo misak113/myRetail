@@ -7,6 +7,7 @@ function OfferListCtrl($scope, offerModel) {
 
 	offerModel.getOffers(function (offers) {
 		$scope.offers = offers;
+		$scope.$apply();
 	});
 	
 	$scope.unwanted = function (offer) {
