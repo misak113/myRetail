@@ -15,6 +15,9 @@ var config = {
 	},
 	path: {
 		frontendBasePath: __dirname+'/../../../apps/myRetail/common/'
+	},
+	debug: {
+		logLevel: 2
 	}
 };
 

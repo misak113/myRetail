@@ -44,9 +44,13 @@ exports.route = function (app) {
 		socket.on('/offers', OfferCtrl.offers);
 		socket.on('/purchases', PurchaseCtrl.purchases);
 	});
+
 	app.server = server;
 	app.io = io;
 	app.listen = function (port) {
 		return app.server.listen(port);
 	};
+
+	// options socket.io
+	io.set('log level', config.debug.logLevel);
 };
