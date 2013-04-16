@@ -3,7 +3,7 @@ var express = require('express');
 var socketio = require('socket.io');
 var http = require('http');
 var path = require('path');
-var l = require('./services/logDispatcher');
+var l = require('log-dispatch');
 
 var config = require('./config/config');
 

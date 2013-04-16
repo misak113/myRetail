@@ -1,6 +1,8 @@
 
+var l = require('log-dispatch');
+
+
 var Offer = require('../models/Offer');
-var l = require('../services/logDispatcher');
 
 
 

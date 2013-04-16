@@ -1,12 +1,12 @@
 // Dependencies
 var mongoose = require('mongoose');
 var express = require('express');
+var l = require('log-dispatch');
 
 // Confiruration with local config
 var config = require('./config/config');
 
 // Local services
-var l = require('./services/logDispatcher');
 var router = require('./router');
 
 // Create application server

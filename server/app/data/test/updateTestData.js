@@ -5,7 +5,7 @@ var app = require('../../app');
 var mongoose = require('mongoose');
 var Col = mongoose.Collection;
 
-var l = require('../../services/logDispatcher');
+var l = require('log-dispatch');
 
 var data = {
 	offers: require('./offers')

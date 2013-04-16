@@ -1,6 +1,8 @@
 
+var l = require('log-dispatch');
+
+
 var Purchase = require('../models/Purchase');
-var l = require('../services/logDispatcher');
 
 
 
