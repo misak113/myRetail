@@ -54,7 +54,7 @@ exports.route = function (app) {
 	app.io = io;
 	// nahrazení původního listen za nový, který se má volat pro socket.io
 	app.listen = function (port) {
-		return app.server.listen(port);
+		return app.server.listen.apply(app.server, arguments);
 	};
 
 	// options socket.io
