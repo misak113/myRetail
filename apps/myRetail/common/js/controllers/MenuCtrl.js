@@ -4,8 +4,6 @@
 
 function MenuCtrl($scope) {
 
-	$scope.title = 'Menu - myRetail - můj obchodní řetězec';
-	
 	$scope.items = [
 	            		{
 	            			name: 'Můj účet',

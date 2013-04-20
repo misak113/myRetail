@@ -3,8 +3,7 @@
  */
 
 function OfferListCtrl($scope, offerModel) {
-	$scope.offers = [];
-
+	
 	offerModel.getOffers(function (offers) {
 		$scope.offers = offers;
 		$scope.$apply();

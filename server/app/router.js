@@ -12,6 +12,7 @@ var allowCrossDomain = require('./plugins/allowCrossDomain');
 // Controllers
 var OfferCtrl = require('./controllers/OfferCtrl');
 var PurchaseCtrl = require('./controllers/PurchaseCtrl');
+var ShoppingCartCtrl = require('./controllers/ShoppingCartCtrl');
 
 
 exports.route = function (app) {
@@ -47,6 +48,7 @@ exports.route = function (app) {
 		socket.emit('connection', { status: 'connected' });
 		socket.on('/offers', OfferCtrl.offers);
 		socket.on('/purchases', PurchaseCtrl.purchases);
+		socket.on('/shopping-carts', ShoppingCartCtrl.shoppingCarts);
 	});
 
 	// nastaví server a socket.io do globálníh kontextu app
