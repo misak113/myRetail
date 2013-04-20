@@ -133,11 +133,20 @@ h3 {
   -o-border-radius: 0;
 }
 .navbar .navbar-inner.btn-group .btn.home {
-  width: 70%;
+  width: 55%;
 }
 .navbar .navbar-inner.btn-group .btn.messages,
-.navbar .navbar-inner.btn-group .btn.menu {
+.navbar .navbar-inner.btn-group .btn.menu,
+.navbar .navbar-inner.btn-group .btn.back {
   width: 15%;
+}
+.navbar .navbar-inner.btn-group .title {
+  font-size: 15px;
+  font-weight: bold;
+  display: inline-block;
+  height: 24px;
+  vertical-align: bottom;
+  line-height: 24px;
 }
 /* QR code */
 
@@ -163,12 +172,20 @@ h3 {
 /** OfferList */
 
 #offerList-container .offer {
+  position: relative;
   padding: 8px;
   margin: 0px 0 4px 0;
 }
 #offerList-container .offer .offer-image {
   width: 100px;
   height: 100px;
+}
+#offerList-container .offer.new {
+  background-color: #ddcccc;
+}
+#offerList-container .offer .close {
+  position: relative;
+  z-index: 10;
 }
 /** Offer */
 
@@ -178,6 +195,24 @@ h3 {
 #offer-container .offer .offer-image {
   width: 100%;
   max-width: 300px;
+}
+/** Categories of offers */
+
+.category-label {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 90px;
+  height: 90px;
+}
+.offer.common .category-label {
+  background-image: url('../images/offers/category-label-common.png');
+}
+.offer.personal .category-label {
+  background-image: url('../images/offers/category-label-personal.png');
+}
+.offer.segment .category-label {
+  background-image: url('../images/offers/category-label-segment.png');
 }
 /** Purchase */
 

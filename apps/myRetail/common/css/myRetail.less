@@ -79,11 +79,19 @@ h1, h2, h3 {
 			-o-border-radius: 0;
 
 			&.home {
-				width: 70%;
+				width: 55%;
 			}
-			&.messages, &.menu {
+			&.messages, &.menu, &.back {
 				width: 15%;
 			}
+		}
+		.title {
+			font-size: 15px;
+			font-weight: bold;
+			display: inline-block;
+			height: 24px;
+			vertical-align: bottom;
+			line-height: 24px;
 		}
 	}
 }
@@ -130,12 +138,20 @@ h1, h2, h3 {
 /** OfferList */
 #offerList-container {
 	.offer {
+		position: relative;
 		padding: 8px;
 		margin: 0px 0 4px 0;
 		
 		.offer-image {
 			width: 100px;
 			height: 100px;
+		}
+		&.new {
+			background-color: #ddcccc;
+		}
+		.close {
+			position: relative;
+			z-index: 10;
 		}
 	}
 }
@@ -151,6 +167,25 @@ h1, h2, h3 {
 			width: 100%;
 			max-width: 300px;
 		}
+	}
+}
+/** Categories of offers */
+.category-label {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 90px;
+	height: 90px;
+}
+.offer {
+	&.common .category-label {
+		background-image: url('../images/offers/category-label-common.png');
+	}
+	&.personal .category-label {
+		background-image: url('../images/offers/category-label-personal.png');
+	}
+	&.segment .category-label {
+		background-image: url('../images/offers/category-label-segment.png');
 	}
 }
 

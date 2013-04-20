@@ -2,12 +2,13 @@
 
 
 function OfferCtrl ($scope, $routeParams, offerModel) {
-	$scope.offer = [];
+	$scope.offer = null;
 
 	var id = $routeParams.offerId;
 	
 	offerModel.getOffer(id, function (offer) {
 		$scope.offer = offer;
+		$scope.$apply();
 	});
 	
 	$scope.goBack = function() {

@@ -3,8 +3,8 @@
 			<nav class="nav" id="menu" ng-controller="HomeCtrl">
 				<a ng-href="#/offer-list" class="btn btn-large">
 					{{'Nabídka'|_}}<br />
-					<span class="badge">13</span>
-					<span class="badge badge-important">6</span>
+					<span class="badge">{{countOffers}}</span>
+					<span class="badge badge-important" ng-show="countNewOffers > 0">{{countNewOffers}}</span>
 				</a>
 			</nav>
 			

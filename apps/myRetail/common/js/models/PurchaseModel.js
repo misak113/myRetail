@@ -14,7 +14,7 @@ var PurchaseModel = function ($http) {
 		this.getPurchases(function (purchases) {
 			var returnPurchase = null;
 			angular.forEach(purchases, function (purchase) {
-				if (purchase.id == id) {
+				if (purchase._id == id) {
 					returnPurchase = purchase;
 				}
 			});

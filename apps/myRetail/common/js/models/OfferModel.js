@@ -18,7 +18,7 @@ var OfferModel = function ($http, socket) {
 		var returnOffer = null;
 		this.getOffers(function (offers) {
 			angular.forEach(offers, function (offer) {
-				if (offer.id == id) {
+				if (offer._id == id) {
 					returnOffer = offer;
 				}
 			});

@@ -7,7 +7,7 @@ var Offer = require('../models/Offer');
 
 
 exports.offers = function (data, cb) {
-	Offer.find({}, function (e, offers) {
+	Offer.getOffers(function (e, offers) {
 		if (e) {
 			l.error(e);
 			cb(404);

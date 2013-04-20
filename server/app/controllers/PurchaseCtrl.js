@@ -20,7 +20,7 @@ exports.purchasesAction = function (req, res) {
 
 var purchases = [
 	{
-		id: 1864686,
+		_id: 1864686,
 		date: "2013-01-02T12:00:00",
 		totalPrice: 152.60,
 		originalPrice: 195.12,
@@ -48,12 +48,12 @@ var purchases = [
 		},
 		items: [
 			{
-				id: 6568646,
+				_id: 6568646,
 				qty: 3,
 				price: 22.97,
 				currency: 'czk',
 				offer: {
-					"id" : 1568,
+					"_id" : 1568,
 					"title" : "Lahodná rajčátka",
 					"description" : "Nepřehlédněte nabídku čtvrt kila lahodných rajčat první jakosti",
 					"price" : 18.54,
@@ -62,7 +62,7 @@ var purchases = [
 					"date_end" : "2013-01-18T18:59:59",
 	                "qtyLimit" : 100,
 					"product" : {
-						"id" : 146860,
+						"_id" : 146860,
 						"name" : "Rajčata",
 						"title" : "Rajčata Balení 250g",
 						"product_code" : "566489138",
@@ -102,7 +102,7 @@ var purchases = [
 					} ]
 				},
 				"product" : {
-    					"id" : 146861,
+    					"_id" : 146861,
     					"name" : "Rajčátka",
     					"title" : "Bílá čokoláda 120g",
     					"product_code" : "566489148",
@@ -125,13 +125,13 @@ var purchases = [
     				}
 			},
 			{
-				id: 87987426,
+				_id: 87987426,
 				qty: 3,
 				price: 12.97,
 				currency: 'czk',
 				offer: null,
 				"product" : {
-    					"id" : 146861,
+    					"_id" : 146861,
     					"name" : "Čokoláda",
     					"title" : "Bílá čokoláda 120g",
     					"product_code" : "566489148",
@@ -154,7 +154,7 @@ var purchases = [
     				}
 			},
 			{
-				id: 594674984,
+				_id: 594674984,
 				qty: 1,
 				price: -45.21,
 				currency: 'czk',
@@ -164,7 +164,7 @@ var purchases = [
 		]
 	},
 	{
-		id: 1864689,
+		_id: 1864689,
 		date: "2013-01-15T12:00:00",
 		totalPrice: 292.60,
 		originalPrice: 295.12,
@@ -192,13 +192,13 @@ var purchases = [
 		},
 		items: [
 			{
-				id: 4584168,
+				_id: 4584168,
 				qty: 3,
 				price: 12.97,
 				currency: 'czk',
 				offer: null,
 				"product" : {
-    					"id" : 146861,
+    					"_id" : 146861,
     					"name" : "Čokoláda",
     					"title" : "Bílá čokoláda 120g",
     					"product_code" : "566489148",

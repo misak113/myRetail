@@ -8,11 +8,11 @@ function PurchaseCtrl($scope, $routeParams, purchaseModel) {
 			// view options
 			$scope.purchase.items[key].detailHref = '#'; // @todo to není pěkné... url jsem zatím zvolil aby byly v šablonách (takhle se to rozhází)
 			if (item.product !== null) {
-				$scope.purchase.items[key].detailHref = '#/product/'+item.product.id; // @todo to není pěkné... url jsem zatím zvolil aby byly v šablonách (takhle se to rozhází)
+				$scope.purchase.items[key].detailHref = '#/product/'+item.product._id; // @todo to není pěkné... url jsem zatím zvolil aby byly v šablonách (takhle se to rozhází)
 			}
 			if (item.offer !== null) {
 				$scope.purchase.items[key].additionalClass = 'reduced';
-				$scope.purchase.items[key].detailHref = '#/offer/'+item.offer.id; // @todo to není pěkné... url jsem zatím zvolil aby byly v šablonách (takhle se to rozhází)
+				$scope.purchase.items[key].detailHref = '#/offer/'+item.offer._id; // @todo to není pěkné... url jsem zatím zvolil aby byly v šablonách (takhle se to rozhází)
 			} else {
 				$scope.purchase.items[key].hideSalePrice = true;
 			}
