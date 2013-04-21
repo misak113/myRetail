@@ -725,27 +725,27 @@ GET /user
 
 
 
-Get shopping-lists by user id, if has permission
-GET /shopping-lists
+Get shopping-carts by user id, if has permission
+GET /shopping-carts
 > Content-Type: application/json
 { "user_oid": "512e6a7bdea8ace9135855f4"}
 < 200
 < Content-Type: application/json
 { "status": "returned", "message": "Nákupní seznamy vráceny", "data": {
-        "shopping-lists": ["512e6a7bdea8ace96a5855f4","512e6a8bdea8ace96a5855f4","512e6a9bdea8ace96a5855f4"]
+        "shopping-carts": ["512e6a7bdea8ace96a5855f4","512e6a8bdea8ace96a5855f4","512e6a9bdea8ace96a5855f4"]
     }
 }
 
 
 
-Get shopping-list by id, if has permission
-GET /shopping-list
+Get shopping-cart by id, if has permission
+GET /shopping-cart
 > Content-Type: application/json
 { "shoping-list_oid": "512e6a8bdea8ace96a5855f4"}
 < 200
 < Content-Type: application/json
 { "status": "returned", "message": "Nákupní seznam vrácen", "data": {
-        "shopping-list": {
+        "shopping-cart": {
             "_id" : {"$oid": "512e6a7bdea8ace06a5855c4"},
             "date": "2013-01-02T12:00:00",
             "totalPrice": 152.60,
