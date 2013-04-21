@@ -11,6 +11,7 @@ var config = {
 		url: 'mongodb://localhost:27017/myretail'
 	},
 	server: {
+		host: 'localhost',
 		port: 80
 	},
 	path: {

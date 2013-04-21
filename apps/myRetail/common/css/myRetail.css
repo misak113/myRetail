@@ -127,10 +127,6 @@ h3 {
   padding-left: 0;
   padding-right: 0;
   border-radius: 0;
-  -ms-border-radius: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
 }
 .navbar .navbar-inner.btn-group .btn.home {
   width: 55%;
@@ -182,10 +178,22 @@ h3 {
 }
 #offerList-container .offer.new {
   background-color: #ddcccc;
+  -webkit-animation: warning 2s linear 0 infinite normal;
 }
 #offerList-container .offer .close {
   position: relative;
   z-index: 10;
+}
+@-webkit-keyframes warning {
+  0% {
+    background-color: #ddcccc;
+  }
+  50% {
+    background-color: inherit;
+  }
+  100% {
+    background-color: #ddcccc;
+  }
 }
 /** Offer */
 

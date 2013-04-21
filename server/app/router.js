@@ -61,4 +61,12 @@ exports.route = function (app) {
 
 	// options socket.io
 	io.set('log level', config.debug.logLevel);
+	//io.set("origins", [config.server.host+':'+config.server.port]);
+	io.set('transports', [
+		'websocket'
+		, 'flashsocket'
+		, 'htmlfile'
+		, 'xhr-polling'
+		, 'jsonp-polling'
+	]);
 };
