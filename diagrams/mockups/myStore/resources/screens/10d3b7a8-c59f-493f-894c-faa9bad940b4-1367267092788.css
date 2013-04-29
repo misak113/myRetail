@@ -1,0 +1,184 @@
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 {
+  background-color: transparent;
+  min-width: 386px;
+  min-height: 675px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #alignmentBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_1 {
+  position: absolute;
+  top: 184px;
+  left: 67px;
+  width: 318px;
+  height: 491px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Group_1 {
+  position: absolute;
+  top: 142px;
+  left: 66px;
+  width: 320px;
+  height: 43px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Application_bar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 320px;
+  height: 43px;
+  background-color: transparent;
+  background-image: url('../../images/4b91b422-7fbc-43de-9acb-3a6bfc00ac09.png');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-attachment: scroll;
+  font-size: 14pt;
+  font-family: Tahoma;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Application_bar .valign {
+  vertical-align: middle;
+  text-align: center;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Application_bar span {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: Tahoma;
+  font-size: 14pt;
+  font-style: normal;
+  font-weight: normal;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Application_bar span#rtr-s-Application_bar_0 {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: Tahoma;
+  font-size: 14pt;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 0px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_2 {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_3 {
+  position: absolute;
+  top: 6px;
+  left: 242px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_4 {
+  position: absolute;
+  top: 6px;
+  left: 280px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_5 {
+  position: absolute;
+  top: 487px;
+  left: 287px;
+  width: 32px;
+  height: 32px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_6 {
+  position: absolute;
+  top: 487px;
+  left: 318px;
+  width: 32px;
+  height: 32px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Image_7 {
+  position: absolute;
+  top: 488px;
+  left: 319px;
+  width: 32px;
+  height: 32px;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Background_stripes {
+  position: absolute;
+  top: 576px;
+  left: 67px;
+  width: 318px;
+  height: 99px;
+  background-color: #FFFFFF;
+  background-image: url('../../images/2ec89af1-3cfb-478f-b452-07b18c3cec79.png');
+  background-repeat: repeat;
+  background-position: top left;
+  background-attachment: scroll;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Red_button {
+  position: absolute;
+  top: 603px;
+  left: 87px;
+  width: 261px;
+  height: 28px;
+  background-color: transparent;
+  background-image: url('../../images/0061831f-5774-4dfa-8244-9faf8938c5d7.png');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-attachment: scroll;
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-top-color: #282A2F;
+  border-right-width: 3px;
+  border-right-style: solid;
+  border-right-color: #282A2F;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: #282A2F;
+  border-left-width: 3px;
+  border-left-style: solid;
+  border-left-color: #282A2F;
+  border-top-left-radius: 12px;
+  -moz-border-radius-topleft: 12px;
+  -webkit-border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  -moz-border-radius-topright: 12px;
+  -webkit-border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  -moz-border-radius-bottomleft: 12px;
+  -webkit-border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  -moz-border-radius-bottomright: 12px;
+  -webkit-border-bottom-right-radius: 12px;
+  padding-top: 6px;
+  padding-right: 6px;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  cursor: pointer;
+  font-size: 16pt;
+  font-family: Arial;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Red_button .valign {
+  vertical-align: middle;
+  text-align: center;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Red_button span {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: Arial;
+  font-size: 16pt;
+  font-style: normal;
+  font-weight: bold;
+}
+#s-10d3b7a8-c59f-493f-894c-faa9bad940b4 #s-Red_button span#rtr-s-Red_button_0 {
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  font-family: Arial;
+  font-size: 16pt;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 0px;
+}
