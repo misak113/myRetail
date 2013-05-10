@@ -13,3 +13,4 @@ apps/myRetail/common/js/config/config.local.js
 node_modules
 server/app/config/config.local.js
 temp
+daemon
