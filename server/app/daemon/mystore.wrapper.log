@@ -1,0 +1,13 @@
+2013-05-10 17:44:02 - Starting node.exe --harmony "C:\Users\Michael\Work\Programing\javascript\node-windows\node_modules\node-windows\lib\wrapper.js" -f "C:\Users\Michael\Work\Programing\eclipse\myRetail\server\app\app.js" -l "myStore" -g 0.25 -w 1 -r 3 -a n
+2013-05-10 17:44:02 - Started 5284
+2013-05-10 17:56:17 - Starting node.exe --harmony "C:\Users\Michael\Work\Programing\javascript\node-windows\node_modules\node-windows\lib\wrapper.js" -f "C:\Users\Michael\Work\Programing\eclipse\myRetail\server\app\app.js" -l "myStore" -g 0.25 -w 1 -r 3 -a n
+2013-05-10 17:56:17 - Started 6416
+2013-05-10 17:56:59 - Stopping mystore.exe
+2013-05-10 17:56:59 - ProcessKill 6416
+2013-05-10 17:56:59 - Finished mystore.exe
+2013-05-10 17:57:00 - Starting node.exe --harmony "C:\Users\Michael\Work\Programing\javascript\node-windows\node_modules\node-windows\lib\wrapper.js" -f "C:\Users\Michael\Work\Programing\eclipse\myRetail\server\app\app.js" -l "myStore" -g 0.25 -w 1 -r 3 -a n
+2013-05-10 17:57:00 - Started 384
+2013-05-10 17:57:23 - Starting node.exe --harmony "C:\Users\Michael\Work\Programing\javascript\node-windows\node_modules\node-windows\lib\wrapper.js" -f "C:\Users\Michael\Work\Programing\eclipse\myRetail\server\app\app.js" -l "myStore" -g 0.25 -w 1 -r 3 -a n
+2013-05-10 17:57:23 - Started 5292
+2013-05-10 17:58:10 - Starting node.exe --harmony "C:\Users\Michael\Work\Programing\javascript\node-windows\node_modules\node-windows\lib\wrapper.js" -f "C:\Users\Michael\Work\Programing\eclipse\myRetail\server\app\app.js" -l "myStore" -g 0.25 -w 1 -r 3 -a n
+2013-05-10 17:58:10 - Started 3548
