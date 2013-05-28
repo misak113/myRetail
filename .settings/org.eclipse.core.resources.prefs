@@ -8,4 +8,4 @@ encoding//apps/myRetail/common/templates/order.html=UTF-8
 encoding//apps/myRetail/common/templates/orderList.html=UTF-8
 encoding/<project>=UTF-8
 separateDerivedEncodings=true
-wl_version=5.0.2
+wl_version=5.0.6

@@ -2,7 +2,7 @@
 /* JavaScript content from wlclient/js/worklight.js in Common Resources */
 /*
  * Licensed Materials - Property of IBM
- * 5725-G92 (C) Copyright IBM Corp. 2006, 2012. All Rights Reserved.
+ * 5725-G92 (C) Copyright IBM Corp. 2006, 2013. All Rights Reserved.
  * US Government Users Restricted Rights - Use, duplication or
  * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  */
@@ -28,8 +28,6 @@ WL.AppProperty = {
     LATEST_VERSION : "LATEST_VERSION",
     LOGIN_DISPLAY_TYPE : "LOGIN_DISPLAY_TYPE",
     LOGIN_REALM : "LOGIN_REALM",
-    LOGIN_POPUP_HEIGHT : "LOGIN_POPUP_HEIGHT",
-    LOGIN_POPUP_WIDTH : "LOGIN_POPUP_WIDTH",
     MAIN_FILE_PATH : "MAIN_FILE_PATH",
     SHOW_IN_TASKBAR : "SHOW_IN_TASKBAR",
     THUMBNAIL_IMAGE_URL : "THUMBNAIL_IMAGE_URL",
@@ -54,13 +52,16 @@ var __WLEnvironment = {
     OSX_DASHBOARD : "dashboard",
     IPHONE : "iphone",
     IPAD : "ipad",
-    EMBEDDED : "embedded",
+    DESKTOPBROWSER : "desktopbrowser",
     FACEBOOK : "facebook",
     ADOBE_AIR : "air",
     ANDROID : "android",
     BLACKBERRY : "blackberry",
-    WINDOWS_PHONE : "windowsphone",
-    MOBILE_WEB : "mobilewebapp"
+    BLACKBERRY10 : "blackberry10",
+    WINDOWS_PHONE: "windowsphone",
+    WINDOWS_PHONE_8: "windowsphone8",
+    WINDOWS8: 'windows8',
+    MOBILE_WEB: "mobilewebapp"
 };
 __WL.prototype.Environment = __WLEnvironment;
 WL.Environment = __WLEnvironment;
@@ -76,11 +77,6 @@ WL.AppLoginType = {
     LOGIN_ON_STARTUP : "onStartup",
     LOGIN_ON_DEMAND : "onDemand",
     NO_LOGIN : "never"
-};
-
-WL.LoginDisplayType = {
-    EMBEDDED : "embedded",
-    POPUP : "popup"
 };
 
 WL.UserInfo = {
@@ -121,7 +117,8 @@ var __WLErrorCode = {
     PROCEDURE_ERROR : "PROCEDURE_ERROR",
     UNSUPPORTED_VERSION : "UNSUPPORTED_VERSION",
     UNSUPPORTED_BROWSER : "UNSUPPORTED_BROWSER",
-    DISABLED_COOKIES : "DISABLED_COOKIES"
+    DISABLED_COOKIES : "DISABLED_COOKIES",
+    CONNECTION_IN_PROGRESS : "CONNECTION_IN_PROGRESS"
 };
 __WL.prototype.ErrorCode = __WLErrorCode;
 WL.ErrorCode = __WLErrorCode;
@@ -255,7 +252,7 @@ __WLUtils = function() {
         var isCheckDone = false;
         // iOS's isReachable does not check a server's availability. Rather, it
         // merely checks is a socket can be opened.
-        if (typeof navigator.network != "undefined" && navigator.network.connection.type == 'NONE') {
+        if (typeof navigator.network != "undefined" && navigator.connection.type == 'NONE') {
             WL.Utils.dispatchWLEvent(__WL.InternalEvents.REACHABILITY_TEST_FAILURE);
             isCheckDone = true;
         }
@@ -498,7 +495,7 @@ __WLUtils = function() {
         var resultURL;
 
         // if "path" is an absolute URL we just use it
-        if (path.match('http://') || path.match('https://') || path.match("itms://")) {
+        if (/^[a-z]+:\/\//i.test(path)) {
             resultURL = path;
         } else if (path.indexOf("/") === 0) {
             // In case using absolute url like "/random" it must be under
@@ -549,11 +546,9 @@ __WLUtils = function() {
         // readUserPref is syncronized on Android but async on iOS, this is why
         // the implementation differ
 
-        if (WL.Client.getEnvironment() === WL.Env.ANDROID) {
-            skinName = WL.App.readUserPref('wlSkinName');
-        } else if (WL.EnvProfile.isEnabled(WL.EPField.ISIOS)) {
-            skinName = WL.StaticAppProps.SKIN_NAME;
-        } else if (WL.Client.getEnvironment() === WL.Env.WINDOWS_PHONE) {
+        if (WL.Client.getEnvironment() === WL.Env.ANDROID || WL.EnvProfile.isEnabled(WL.EPField.ISIOS)) {
+        	skinName = WL.StaticAppProps.SKIN_NAME;
+        } else if (WL.Client.getEnvironment() === WL.Env.WINDOWS_PHONE || WL.Client.getEnvironment() === WL.Env.WINDOWS_PHONE_8) {
             skinName = getUrlParam("skinName");
             if (skinName.length == 0) {
                 skinName = "default";
@@ -573,10 +568,8 @@ __WLUtils = function() {
      */
     this.getFreeSpaceOnDevice = function() {
         var freeSpace;
-
-        if (WL.Client.getEnvironment() === WL.Env.ANDROID) {
-            freeSpace = cordova.exec(null, null, 'Utils', 'getAvailableSpace', []);
-        } else if (WL.EnvProfile.isEnabled(WL.EPField.ISIOS)) {
+        
+        if (WL.EnvProfile.isEnabled(WL.EPField.ISIOS) || WL.Client.getEnvironment() === WL.Env.ANDROID) {
             freeSpace = WL.StaticAppProps.FREE_SPACE;
         }
         // environements that don't support skins should return 'default'
@@ -606,11 +599,7 @@ __WLUtils = function() {
 
     this.getSkinLoaderChecksum = function() {
         var skinLoaderChecksum;
-        // readUserPref is syncronized on Android but async on iOS, this is why
-        // the implementation differ
-        if (WL.Client.getEnvironment() === WL.Env.ANDROID) {
-            skinLoaderChecksum = WL.App.readUserPref('wlSkinLoaderChecksum');
-        } else if (WL.EnvProfile.isEnabled(WL.EPField.ISIOS)) {
+        if (WL.EnvProfile.isEnabled(WL.EPField.ISIOS) || WL.Client.getEnvironment() === WL.Env.ANDROID) {
             skinLoaderChecksum = WL.StaticAppProps.SKIN_LOADER_CHECKSUM;
         }
         // environments that don't support skins should return null
@@ -729,16 +718,26 @@ __WLSimpleDialog = function() {
 
     this.__callback = function(result) {
 
-        if (WL.Client.getEnvironment() === WL.Env.WINDOWS_PHONE) {
+        if (WL.Client.getEnvironment() === WL.Env.WINDOWS_PHONE || WL.Client.getEnvironment() === WL.Env.WINDOWS_PHONE_8) {
             // Nothing to do on WP, since there is no bug there
         } else if (WL.EnvProfile.isEnabled(WL.EPField.USES_CORDOVA)) {
             // Phonegap bug - native code returns button number instead of
             // button index
-            result--;
+        	if (WL.StaticAppProps.ENVIRONMENT != WL.Environment.BLACKBERRY10){
+        		result--;
+        	}
+            
         } else if (WL.StaticAppProps.ENVIRONMENT == WL.Environment.BLACKBERRY) {
         } else {
             WL.SimpleDialog.__dialog.hide();
             WL.SimpleDialog.__dialog = null;
+        }
+        
+        // in case of invalid result value just clean up the array of buttons (otherwise next show will fail)
+        if (result < 0 || result >= WL.SimpleDialog.__buttons.length) {
+        	WL.SimpleDialog.__buttons = null;
+        	WL.SimpleDialog.__dialog = null;
+        	return;
         }
 
         var handler = WL.SimpleDialog.__buttons[result].handler;
@@ -794,7 +793,7 @@ __WLSimpleDialog = function() {
             });
             return;
         }
-        if (WL.SimpleDialog.__buttons != null) {
+        if (WL.SimpleDialog.__buttons != null && WL.Client.getEnvironment() !== WL.Environment.WINDOWS8) {
             WL.Logger.error("WL.SimpleDialog.show() cannot be invoked while dialog is open");
             return;
         }
@@ -806,14 +805,20 @@ __WLSimpleDialog = function() {
         if (WL.EnvProfile.isEnabled(WL.EPField.USES_CORDOVA)) {
             var buttonsArray = [];
             for ( var i = 0; i < buttons.length; i++) {
-                // Phonegap uses comma as the button seperator,
+            	// Phonegap uses comma as the button seperator,
                 // so we can't use that. Replace commas with a similar character
                 // (ascii code 130)
-                buttonsArray[i] = buttons[i].text.replace(",", "‚");
+            	buttonsArray[i] = buttons[i].text.replace(",", "‚");
             }
-
-            if (WL.StaticAppProps.ENVIRONMENT == WL.Env.WINDOWS_PHONE) {
-                PhoneGap.exec('CustomDialog.show;' + title + ';' + text + ';' + buttonsArray.join(","));
+            
+            //For Android there is special case were dialog must be modal (no back)
+            var isAndroidDirectUpdateCase = WL.StaticAppProps.ENVIRONMENT == WL.Env.ANDROID && title == WL.ClientMessages.directUpdateNotificationTitle;
+            
+            if (WL.StaticAppProps.ENVIRONMENT == WL.Env.WINDOWS_PHONE || WL.StaticAppProps.ENVIRONMENT == WL.Env.WINDOWS_PHONE_8 || isAndroidDirectUpdateCase) {
+            	var dialogPluginFunctionName = isAndroidDirectUpdateCase ? "confirm" : "showDialog";
+            	cordova.exec(function (result) { WL.SimpleDialog.__callback(result); }, 
+            			function (err) { WL.Logger.error("WL.SimpleDialog.show() error in invoking callback."); }, 
+            			"WLCustomDialog", dialogPluginFunctionName, [text, title, buttonsArray.join(",")]);
             } else {
                 navigator.notification.confirm(text, WL.SimpleDialog.__callback, title, buttonsArray.join(","));
             }
@@ -824,6 +829,12 @@ __WLSimpleDialog = function() {
             }
             var result = blackberry.ui.dialog.customAsk(title + "\n\n" + text, buttonTitlesArray, 0, true);
             this.__callback(result);
+        } else if (WL.StaticAppProps.ENVIRONMENT == WL.Environment.WINDOWS8) {
+            var messageDialog = new Windows.UI.Popups.MessageDialog(text, title);
+            for (var i = 0; i< buttons.length; i += 1) {
+                messageDialog.commands.append(new Windows.UI.Popups.UICommand(buttons[i].text, buttons[i].handler));
+            }
+            messageDialog.showAsync();
         } else {
             var dialogOptions = options || {};
 
@@ -890,15 +901,23 @@ __WLApp = function() {
             break;
         case WL.Env.IPAD:
         case WL.Env.IPHONE:
-            document.location = absoluteURL;
+        	window.open(absoluteURL, '_system'); 
             break;
         case WL.Env.ADOBE_AIR:
             var urlReq = new window.runtime.flash.net.URLRequest(absoluteURL);
             wnd = window.runtime.flash.net.navigateToURL(urlReq);
-            break;
+            break; 
         case WL.Env.BLACKBERRY:
             var args = new blackberry.invoke.BrowserArguments(absoluteURL);
             blackberry.invoke.invoke(blackberry.invoke.APP_BROWSER, args);
+            break;
+        case WL.Env.BLACKBERRY10:
+            blackberry.invoke.invoke({
+                target: "sys.browser",
+                uri: absoluteURL
+            }, function(){}, function(){
+            	WL.Logger.error("Failed to open URL " + absoluteURL);
+            });
             break;
         default:
             if (target === "_self") {
@@ -918,12 +937,13 @@ __WLApp = function() {
      * 
      * @return the user device locale code.
      */
-    this.getDeviceLocale = function() {
-        if (WL.Client.getEnvironment() == WL.Env.ANDROID) {
-            return cordova.exec(null, null, "Utils", "getDeviceLocale", []);
-        } else {
-            return (navigator.language) ? navigator.language : navigator.userLanguage;
-        }
+	this.getDeviceLocale = function(callback) {
+		locale = WL.Client.getDeviceLocale();
+		//if locale is not confiured, take it regulary from navigator, if there is Cordova it would already be set using cordova
+		if (typeof locale === 'undefined' || locale == null) {
+			return (navigator.language) ? navigator.language : navigator.userLanguage;
+		}
+		return locale;
     };
 
     /**
@@ -1002,10 +1022,17 @@ WL.App = new __WLApp;
 __WLLogger = function() {
     var priority = {
         DEBUG : 'DEBUG',
-        ERROR : 'ERROR'
+        ERROR : 'ERROR',
+        WARN  : 'WARN',
+        INFO  : 'INFO'
     };
 
-    this.__init = function() {
+	var enableLogger = true;
+	
+    this.__init = function(enabled) {
+		if (typeof(enabled) !== 'undefined'){
+			enableLogger = enabled;
+		}
     };
 
     this.debug = function(msg, ex) {
@@ -1017,7 +1044,7 @@ __WLLogger = function() {
     };
 
     function log(msg, priority, ex) {
-        if (typeof msg === 'undefined' || msg === null) {
+        if (!enableLogger || typeof msg === 'undefined' || msg === null) {
             return;
         }
 
@@ -1076,7 +1103,9 @@ __WLLogger = function() {
             break;
         case WL.Env.ANDROID:
         case WL.Env.BLACKBERRY:
+        //BLACKBERRY10 uses console.log, so no special need here
         case WL.Env.WINDOWS_PHONE:
+        case WL.Env.WINDOWS_PHONE_8:
             break;
         default:
             try {
@@ -1102,11 +1131,17 @@ WL.Response = WLJSX.Class.create({
     }
 });
 
-WL.FailResponse = WLJSX.Class.create(WL.Response, {
+WL.FailResponse = WLJSX.Class.create({
+    invocationContext : null,
+    status : -1,
     errorCode : null,
     errorMsg : null,
-    initialize : function(__super, transport, invocationContext) {
-        __super(transport, invocationContext);
+    initialize : function(transport, invocationContext) {
+        if (transport !== null && typeof transport.status != "undefined") {
+            this.status = (transport.status || 200);
+        }
+        this.invocationContext = invocationContext;
+
         this.errorCode = transport.responseJSON.errorCode;
         this.errorMsg = transport.responseJSON.errorMsg;
     }
@@ -1117,11 +1152,12 @@ WL.FailResponse = WLJSX.Class.create(WL.Response, {
  * Add double-cookie headers to the request. 2. Parse cookies from the response.
  * 3. Invoke the authenticator on demand.
  */
-window.WLJSX.Ajax.WLRequest = WLJSX.Class
-        .create({
-            // challengeCounter : 0,
+window.WLJSX.Ajax.WLRequest = WLJSX.Class.create({
             instanceId : null,
             wlAnswers : {},
+            postAnswerRealm : '',
+            MAX_AUTH_HEADER_SIZE : 900,
+            MAX_TOTAL_HEADER_SIZE : 3000,
 
             initialize : function(url, options) {
                 this.options = WLJSX.Object.clone(WLJSX.Ajax.WLRequest.options);
@@ -1168,34 +1204,20 @@ window.WLJSX.Ajax.WLRequest = WLJSX.Class
                 // Add a parameter to notify that this is an Ajax request - for
                 // Air.
                 this.options.parameters.isAjaxRequest = "true";
-
+                this.wlAnswers = {};
                 this.sendRequest();
             },
 
-            sendRequest : function() {
-                WL.Logger.debug("Request [" + this.url + "]");
-
-                // Update the random before every request to prevent caching.
-                this.options.parameters.x = Math.random();
-
-                // Cookie headers must be updated at this point, since they may
-                // have
-                // changed
-                // since the request has been created.
-                this.options.requestHeaders = WL.CookieManager.createCookieHeaders();
-                this.options.requestHeaders["x-wl-app-version"] = WL.StaticAppProps.APP_VERSION;
-                // Send the challenge response data in case we get challenge
-                // from the
-                // sever
-                // Authenticity - need to remove when doing authenticity CP
-                if (arguments[0]) {
-                    var challenge = arguments[0].challenge;
-                    if (challenge != null) {
-                        this.options.requestHeaders["WL-Challenge-Response-Data"] = challenge;
-                    }
-                }
-
-                // add Authorization header from wlAnswres
+            /*
+             * We need to know ahead of time, for challenge processing if extra work needs to be done if we try and send
+             * a message which headers are too big.
+             */
+            createRequestHeaders : function(){
+            	var requestHeaders = {};
+            	requestHeaders = WL.CookieManager.createCookieHeaders();
+                requestHeaders["x-wl-app-version"] = WL.StaticAppProps.APP_VERSION;  
+                
+             // add Authorization header from wlAnswres
                 if (typeof this.wlAnswers != "undefined") {
                     var authJson = {};
                     var shouldSendAuthHeader = false;
@@ -1217,9 +1239,7 @@ window.WLJSX.Ajax.WLRequest = WLJSX.Class
                         }
                     }
                     if (shouldSendAuthHeader == true) {
-                        this.options.requestHeaders.Authorization = WLJSX.Object.toJSON(authJson);
-                        // init the wlAnswer map...
-                        this.wlAnswers = {};
+                        requestHeaders.Authorization = WLJSX.Object.toJSON(authJson);
                     }
                 }
 
@@ -1227,24 +1247,109 @@ window.WLJSX.Ajax.WLRequest = WLJSX.Class
                 if ((typeof WL.Client.__globalHeaders != "undefined") && (WL.Client.__globalHeaders != null)) {
                     for ( var headerName in WL.Client.__globalHeaders) {
                         if (Object.prototype.hasOwnProperty.call(WL.Client.__globalHeaders, headerName)) {
-                            this.options.requestHeaders[headerName] = WL.Client.__globalHeaders[headerName];
+                            requestHeaders[headerName] = WL.Client.__globalHeaders[headerName];
                         }
                     }
                 }
-
+                
+                return requestHeaders;
+            },
+            
+            // automaticResend is to be used when comming from submitAnswer or removeExpectedAnswer, we need to know if we should handle the
+            // request differently (add it to the challangeHandler wiating list).
+            sendRequest : function(requestHeaders) {
+            	var shouldPostAnswers = false;
+            	
+                WL.Logger.debug("Request [" + this.url + "]");
+                // Update the random before every request to prevent caching.
+                this.options.parameters.x = Math.random();
+                
+                //add headers
+                if (typeof(requestHeaders) === 'undefined'){
+                	this.options.requestHeaders = this.createRequestHeaders();
+                } else {
+                	this.options.requestHeaders = requestHeaders;
+                }
+                
+                var postAnswersOptions = {};
+            	
+            	//check if we need to send the auth header in the body, becuase it is too large or the total header size is too large
+                var allHeadersSize = WLJSX.Object.toJSON(this.options.requestHeaders).length;
+                var authHeaderSize = typeof(this.options.requestHeaders.Authorization) === 'undefined' ? -1 : 
+                	WLJSX.Object.toJSON(this.options.requestHeaders.Authorization).length;
+                
+                if ((allHeadersSize > this.MAX_TOTAL_HEADER_SIZE || authHeaderSize > this.MAX_AUTH_HEADER_SIZE) && authHeaderSize >-1 ){
+                	
+                	postAnswersOptions = WL.Utils.extend(postAnswersOptions, this.options);
+                    postAnswersOptions.requestHeaders = this.options.requestHeaders;
+                	postAnswersOptions.onSuccess = this.onPostAnswersSuccess.bind(this);
+                	postAnswersOptions.onFailure = this.onPostAnswersFailure.bind(this);
+                	
+                	postAnswersOptions.postBody = this.options.requestHeaders.Authorization;
+                	postAnswersOptions.requestHeaders.Authorization = 'wl-authorization-in-body';
+                	this.wlAnswers = {};
+                	shouldPostAnswers = true;
+                }
+                
+                if (typeof(this.options.requestHeaders.Authorization) !== 'undefined') {
+                    //init the wlAnswer map...
+                	this.wlAnswers = {};
+                }
+                
                 if (this.options.timeout > 0) {
                     this.timeoutTimer = window.setTimeout(this.handleTimeout.bind(this), this.options.timeout);
                 }
 
-                new WLJSX.Ajax.Request(this.url, this.options);
-            },
-
-            onWlSuccess : function(transport) {
-                if (this.isTimeout) {
-                    return;
+                if (shouldPostAnswers){
+                	authenticateNewUrl = WL.Utils.createAPIRequestURL('authenticate');
+                	new WLJSX.Ajax.Request(authenticateNewUrl, postAnswersOptions);
+                } else {
+                	new WLJSX.Ajax.Request(this.url, this.options);
                 }
-                this.cancelTimeout();
-                var containsChallenges = WL.Client.checkResponseForChallenges(this, transport);
+            },
+            
+            onSuccessParent : function(transport, par) {
+            	if (this.isTimeout) {
+					return;
+				}
+				this.cancelTimeout();
+				var containsChallenges = WL.Client.checkResponseForChallenges(this, transport, par);
+				
+				if (!containsChallenges) {
+					 // Handle notification subscription for push (if needed)
+	                if (transport.responseJSON && transport.responseJSON.notificationSubscriptionState && WL.Client.Push.__isDeviceSupportPush()) {
+	                    handleSubscriptions(transport.responseJSON.notificationSubscriptionState);
+	                }
+	                
+	                // Handle notification subscription for sms push (if needed)
+	        		if (transport.responseJSON && transport.responseJSON.smsNotificationSubscriptionState && WL.Client.Push.isPushSMSSupported()) {
+	        			handleSMSSubscriptions(transport.responseJSON.smsNotificationSubscriptionState);
+	                }
+				}
+				
+				return containsChallenges;
+            },
+            
+            /*
+             * Custom success handelr for PostAnswer Request, it will not send the onSuccess to the application code,
+             * because this is not a resend but a special request, and the user should not be informed about it.
+             */
+			onPostAnswersSuccess : function(transport) {
+				this.onSuccessParent(transport, this.postAnswerRealm);
+				this.postAnswerRealm = '';
+			},
+        
+            /**
+			 * when a onWlSuccess arrives but it came from an response to a
+			 * postAnsweresRequest then we should not continue the onSucess any
+			 * further
+			 * 
+			 * @param transport
+			 * @param responseToPostAnswers
+			 */
+            onWlSuccess : function(transport) {
+            	var containsChallenges = this.onSuccessParent(transport);
+                
                 if (!containsChallenges) {
                     this.onSuccess(transport);
                 }
@@ -1281,23 +1386,46 @@ window.WLJSX.Ajax.WLRequest = WLJSX.Class
                     }
                 }
 
-                // Handle notification subscription for push (if need)
-                if (transport.responseJSON && transport.responseJSON.notificationSubscriptionState
-                        && WL.Client.Push.__isDeviceSupportPush()) {
-                    handleSubscriptions(transport.responseJSON.notificationSubscriptionState);
+                //Check for pendings push notification in case user was not loggedin
+                if (WL.EnvProfile.isEnabled(WL.EPField.SUPPORT_PUSH) && WL.Client.Push.__hasPendings()) {
+                    WL.Client.Push.__dispatchPendings();
                 }
+                
                 if (typeof (this.callerOptions.onSuccess) == "function") {
                     this.callerOptions.onSuccess(transport);
                 }
             },
 
-            onWlFailure : function(transport) {
-                if (this.isTimeout) {
+            /*
+             * Custom failure handelr for PostAnswer Request, it will remove the original request from waiting list, and not send the onFailure to the application code,
+             * because this is not a resend but a special request, and the user should not be informed about it.
+             *  
+             * When a message arrives from a postAnswerRequert ("authenticate") and it is a 401,403, we need to remove it from the waitinglist so there wont be any resend on it,
+             * because if has accepts in it, it will trigger the resend.
+             */
+            onPostAnswersFailure : function(transport){
+            	if (this.isTimeout) {
                     return;
                 }
                 this.cancelTimeout();
+                WL.Client.removeFromWaitingListOnPostAnsweresWlReponse(transport, this, this.postAnswerRealm);
+                WL.Client.checkResponseForChallenges(this, transport, this.postAnswerRealm);
+                this.postAnswerRealm = '';
+            },
+
+            onWlFailure : function(transport) {
+				if (this.isTimeout) {
+                    return;
+                }
+                this.cancelTimeout();
+                if (!WL.EnvProfile.isEnabled(WL.EPField.SUPPORT_COOKIES)) {
+                    if (transport && transport.getAllHeaders && transport.getAllHeaders() !== null) {
+                        var headers = transport.getAllHeaders().split("\n");
+                        WL.CookieManager.handleResponseHeaders(headers);
+                    }
+                }
                 var containsChallenges = WL.Client.checkResponseForChallenges(this, transport);
-                if (!containsChallenges) {
+                if (!containsChallenges)  {
                     this.onFailure(transport);
                 }
             },
@@ -1441,8 +1569,6 @@ window.WLJSX.Ajax.WLRequest = WLJSX.Class
 
             // initialize the wlAnswer table with realm = null values
             setExpectedAnswers : function(realms) {
-                // TODO work this out with Onn, find out how exactly we get the
-                // realms
                 for ( var realm in realms) {
                     if (Object.prototype.hasOwnProperty.call(realms, realm)) {
                         this.wlAnswers[realm] = null;
@@ -1453,16 +1579,44 @@ window.WLJSX.Ajax.WLRequest = WLJSX.Class
             submitAnswer : function(realm, answer) {
                 this.wlAnswers[realm] = answer;
                 if (this.checkIfCanResend()) {
-                    this.sendRequest();
+                	this.handleResendOrSendPostAnswers(realm);
                 }
             },
-
+            
             removeExpectedAnswer : function(realm) {
                 delete this.wlAnswers[realm];
                 if (this.checkIfCanResend()) {
-                    this.sendRequest();
+                	this.handleResendOrSendPostAnswers(realm);                   
                 }
-
+            },
+            
+            /*
+             * If the total header size is larger than MAX_TOTAL_HEADER_SIZE or the auth header is larger than MAX_AUTH_HEADER_SIZE
+             * we need to put the original request into the waiting list, because we will send a special "authenticate" request that will have the 
+             * Autherization header in the body.
+             * 
+             */
+            handleResendOrSendPostAnswers : function(realm){
+            	var headers = this.createRequestHeaders();
+            	
+            	var moveToWaitingList = false;
+            	var allHeadersSize = WLJSX.Object.toJSON(headers).length;
+				var authHeaderSize = typeof(headers.Authorization) === 'undefined' ? -1 : 
+					WLJSX.Object.toJSON(headers.Authorization).length;
+				 
+				if ((allHeadersSize > this.MAX_TOTAL_HEADER_SIZE || authHeaderSize > this.MAX_AUTH_HEADER_SIZE) && authHeaderSize >-1 ){
+					moveToWaitingList = true;
+				}
+            	
+            	if (moveToWaitingList){
+            		//iterate over all the challageHandlers
+            		this.postAnswerRealm = realm;
+            		handler = WL.Client.__chMap[realm];
+            		if (typeof(handler) !== 'undefined'){
+            			handler.moveToWaitingList(this);
+            		}
+            	}
+            	this.sendRequest(headers);
             }
         });
 
@@ -1490,6 +1644,11 @@ function handleSubscriptions(notificationSubscriptionState) {
     }
 }
 
+function handleSMSSubscriptions(notificationSubscriptionState) {
+    WL.Client.Push.__clearSubscribedSMSEventSources();
+    var eventSources = notificationSubscriptionState.eventSources;
+    WL.Client.Push.__updateSubscribedSMSEventSources(eventSources);
+}
 /**
  * Cookie manager singleton
  */
@@ -1761,7 +1920,7 @@ WL.CookieManager = function() {
         storeCookies : function() {
             try {
                 var JSONCookies = WLJSX.Object.toJSON(cookies);
-                PhoneGap.exec("IsolatedStorage.write;" + PERSISTED_COOKIES_NAME + ";" + JSONCookies + "");
+                window.localStorage.setItem(PERSISTED_COOKIES_NAME, JSONCookies);
                 WL.Logger.debug("Storing cookies: (" + JSONCookies + ")");
                 this.readCookies();
             } catch (e) {
@@ -1771,7 +1930,14 @@ WL.CookieManager = function() {
 
         readCookies : function() {
             try {
-                PhoneGap.exec("IsolatedStorage.read;" + PERSISTED_COOKIES_NAME + ";WL.CookieManager.updateCookies");
+            	JSONCookies = window.localStorage.getItem(PERSISTED_COOKIES_NAME);
+				
+				if (JSONCookies != null) {
+					var cookiesObj = WLJSX.String.evalJSON(JSONCookies);
+					for (var key in cookiesObj){
+						cookies[key] = cookiesObj[key];
+					}
+				}
             } catch (e) {
                 WL.Logger.error("Error reading cookies: " + e.message);
             }
@@ -1779,7 +1945,7 @@ WL.CookieManager = function() {
 
         clearCookies : function() {
             try {
-                PhoneGap.exec("IsolatedStorage.write;" + PERSISTED_COOKIES_NAME + ";''");
+            	window.localStorage.removeItem(PERSISTED_COOKIES_NAME);
                 WL.Logger.debug("Delete cookies: " + JSONCookies);
             } catch (e) {
                 WL.Logger.error("Error deleting cookies: " + e.message);
@@ -1866,6 +2032,7 @@ WL.CookieManager = function() {
             cookiePersister = new AndroidCookiePersister();
             break;
         case WL.Env.WINDOWS_PHONE:
+        case WL.Env.WINDOWS_PHONE_8:
             cookiePersister = new WPCookiePersister();
             break;
         default:
@@ -1986,7 +2153,7 @@ WL.CookieManager = function() {
                 var deviceId = {};
                 deviceId.id = device.uuid;
                 deviceId.os = device.version;
-                deviceId.model = device.name;
+                deviceId.model = device.model;
                 deviceId.environment = WL.Client.getEnvironment();
                 headers.deviceId = WLJSX.Object.toJSON(deviceId);
             }
@@ -2026,10 +2193,12 @@ WL.CookieManager = function() {
             }
 
             // Add the session cookies into the memory cookies
-            /*
-             * for (var key in sessionCookies){ cookies[key] =
-             * sessionCookies[key]; }
-             */
+           if (isCookieManagementRequired()) {
+              for (var key in sessionCookies){
+                 cookies[key] = sessionCookies[key];
+              }
+            }
+             
         },
 
         getJSessionID : function() {
@@ -2071,11 +2240,13 @@ WL.EPField = {
     SUPPORT_DIAGNOSTIC : "SUPPORT_DIAGNOSTIC",
     ISIOS : "ISIOS",
     SUPPORT_PUSH : "SUPPORT_PUSH",
+    SUPPORT_PUSH_SMS : "SUPPORT_PUSH_SMS",
     WEB_BROWSER_ONLY : "WEB_BROWSER_ONLY",
     SUPPORT_CHALLENGE : "SUPPORT_CHALLENGE",
     SUPPORT_SHELL : "SUPPORT_SHELL",
     SUPPORT_DEVICE_AUTH : "SUPPORT_DEVICE_AUTH",
-    SERVER_ADDRESS_CONFIGURABLE : "SERVER_ADDRESS_CONFIGURABLE"
+    SERVER_ADDRESS_CONFIGURABLE : "SERVER_ADDRESS_CONFIGURABLE",
+    SUPPORT_WL_USER_PREF : "SUPPORT_WL_USER_PREF"
 };
 
 WL.EnvProfileField = WL.EPField;
@@ -2084,8 +2255,10 @@ WL.BaseProfileData = {
     SUPPORT_DIRECT_UPDATE_FROM_SERVER : false,
     SUPPORT_DIAGNOSTIC : false,
     SUPPORT_PUSH : false,
+    SUPPORT_PUSH_SMS : false,
     SUPPORT_DEVICE_AUTH : false,
-    SERVER_ADDRESS_CONFIGURABLE : false
+    SERVER_ADDRESS_CONFIGURABLE : false,
+    SUPPORT_WL_USER_PREF : false
 };
 WL.WebProfileData = {
     WEB : true
@@ -2143,10 +2316,12 @@ WL.iosDeviceProfileData[WL.EPField.ISIOS] = true;
 WL.iosDeviceProfileData[WL.EPField.USES_CORDOVA] = true;
 WL.iosDeviceProfileData[WL.EPField.SUPPORT_DIAGNOSTIC] = true;
 WL.iosDeviceProfileData[WL.EPField.SUPPORT_PUSH] = true;
+WL.iosDeviceProfileData[WL.EPField.SUPPORT_PUSH_SMS] = true;
 WL.iosDeviceProfileData[WL.EPField.SUPPORT_CHALLENGE] = true;
 WL.iosDeviceProfileData[WL.EPField.SUPPORT_SHELL] = true;
 WL.iosDeviceProfileData[WL.EPField.SUPPORT_DEVICE_AUTH] = true;
 WL.iosDeviceProfileData[WL.EPField.SERVER_ADDRESS_CONFIGURABLE] = true;
+WL.iosDeviceProfileData[WL.EPField.SUPPORT_WL_USER_PREF] = true;
 
 WL.iphoneProfileData = WLJSX.Object.clone(WL.iosDeviceProfileData);
 WL.ipadProfileData = WLJSX.Object.clone(WL.iosDeviceProfileData);
@@ -2161,19 +2336,37 @@ WL.androidProfileData[WL.EPField.SAVES_USERNAME] = true;
 WL.androidProfileData[WL.EPField.USES_CORDOVA] = true;
 WL.androidProfileData[WL.EPField.SUPPORT_DIAGNOSTIC] = true;
 WL.androidProfileData[WL.EPField.SUPPORT_PUSH] = true;
+WL.androidProfileData[WL.EPField.SUPPORT_PUSH_SMS] = true;
 WL.androidProfileData[WL.EPField.SUPPORT_CHALLENGE] = true;
 WL.androidProfileData[WL.EPField.SUPPORT_SHELL] = true;
 WL.androidProfileData[WL.EPField.SUPPORT_DEVICE_AUTH] = true;
 WL.androidProfileData[WL.EPField.SERVER_ADDRESS_CONFIGURABLE] = true;
+WL.androidProfileData[WL.EPField.SUPPORT_WL_USER_PREF] = true;
 
 WL.blackberryProfileData = WLJSX.Object.clone(WL.MobileProfileData);
 WL.blackberryProfileData[WL.EPField.MOBILE] = true;
-WL.blackberryProfileData[WL.EPField.HAS_NATIVE_LOGGER] = true;
+WL.blackberryProfileData[WL.EPField.HAS_NATIVE_LOGGER] = false;
+WL.blackberryProfileData[WL.EPField.SUPPORT_PUSH_SMS] = true;
+
+WL.blackberry10ProfileData = WLJSX.Object.clone(WL.MobileProfileData);
+WL.blackberry10ProfileData[WL.EPField.MOBILE] = true;
+WL.blackberry10ProfileData[WL.EPField.HAS_NATIVE_LOGGER] = true;
+WL.blackberry10ProfileData[WL.EPField.SUPPORT_PUSH_SMS] = true;
+WL.blackberry10ProfileData[WL.EPField.USES_CORDOVA] = true;
 
 WL.windowsphoneProfileData = WLJSX.Object.clone(WL.MobileProfileData);
 WL.windowsphoneProfileData[WL.EPField.MOBILE] = true;
 WL.windowsphoneProfileData[WL.EPField.HAS_NATIVE_LOGGER] = true;
 WL.windowsphoneProfileData[WL.EPField.USES_CORDOVA] = true;
+WL.windowsphoneProfileData[WL.EPField.SUPPORT_PUSH_SMS] = true;
+
+WL.windowsphone8ProfileData = WLJSX.Object.clone(WL.MobileProfileData);
+WL.windowsphone8ProfileData[WL.EPField.MOBILE] = true;
+WL.windowsphone8ProfileData[WL.EPField.HAS_NATIVE_LOGGER] = true;
+WL.windowsphone8ProfileData[WL.EPField.USES_CORDOVA] = true;
+WL.windowsphone8ProfileData[WL.EPField.SUPPORT_PUSH_SMS] = true;
+WL.windowsphone8ProfileData[WL.EPField.SUPPORT_PUSH] = true;
+
 /**
  * EnvironmentProfile
  */
@@ -2258,16 +2451,30 @@ __WLLocalStorage = function() {
     var isSupportLocalStorage = (typeof localStorage != "undefined");
     var HTML5_NOT_SUPPORT_MSG = ". HTML5 localStorage not supported on current browser.";
 
-    // prevent from clear Worklight special values
-    if (typeof Storage != "undefined" && isSupportLocalStorage) {
-        Storage.prototype.clear = function() {
-            for (item in localStorage) {
-                if (item != "cookies" && item != "userName") {
-                    localStorage.removeItem(item);
-                }
-            }
-        };
+    if (typeof document.addEventListener != 'undefined') {
+	    document.addEventListener('deviceready', deviceReadyCallback, false);
+    } else {
+    	document.attachEvent('ondeviceready', deviceReadyCallback);
     }
+    
+    function preventClearSpecialValues () {
+    	// prevent from clear Worklight special values
+        if (typeof Storage != "undefined" && isSupportLocalStorage) {
+            Storage.prototype.clear = function() {
+                for (item in localStorage) {
+                    if (item != "cookies" && item != "userName") {
+                        localStorage.removeItem(item);
+                    }
+                }
+            };
+        }
+    };
+    
+    function deviceReadyCallback() {
+    	isSupportLocalStorage = (typeof localStorage != "undefined");
+        preventClearSpecialValues();
+    };
+    
 
     this.getValue = function(key) {
         var value = null;

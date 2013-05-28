@@ -1,101 +1,276 @@
 
 /* Stylesheet content from css/myRetail.css in folder common */
 /* Reset CSS */
-a, abbr, address, article, aside, audio, b, blockquote, body, canvas, caption, cite, code, dd, del, details, dfn, dialog, div, dl, dt, em, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, p, pre, q, samp, section, small, span, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, ul, var, video {
-	margin: 0;
-	padding: 0;
-}
 
+a,
+abbr,
+address,
+article,
+aside,
+audio,
+b,
+blockquote,
+body,
+canvas,
+caption,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+dialog,
+div,
+dl,
+dt,
+em,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+p,
+pre,
+q,
+samp,
+section,
+small,
+span,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
 /* Worklight container div */
+
 #content {
-	background-color: #DDDDDD;
-	margin: 0 auto 40px auto;
+  background-color: #dddddd;
+  margin: 0 auto 0 auto;
+  padding-top: 50px;
+  height: 85%;
 }
-
-
 /* Default */
+
 #page {
-	text-align: center;
+  text-align: center;
 }
-	
 #menu .btn {
-	margin: 10px;
-	display: block;
+  margin: 10px;
+  display: block;
 }
-	
 section.container {
-	position: relative;
-	width: 90%;
-	max-width: 760px;
-	padding-top: 20px;
+  position: relative;
+  width: 97%;
+  max-width: 760px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-
-h1, h2, h3 {
-	text-align: center;
+h1,
+h2,
+h3 {
+  text-align: center;
 }
+.ng-view {
+  height: 100%;
+}
+/* Bootstrap extension */
 
+.well.soft {
+  background-color: #f0e9c9;
+}
+.well.soft:hover {
+  background-color: #f0ebd4;
+}
+/* Navbar */
 
+.navbar .navbar-inner.btn-group {
+  margin: 0;
+  width: 100%;
+}
+.navbar .navbar-inner.btn-group .btn {
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+}
+.navbar .navbar-inner.btn-group .btn.home {
+  width: 55%;
+}
+.navbar .navbar-inner.btn-group .btn.messages,
+.navbar .navbar-inner.btn-group .btn.menu,
+.navbar .navbar-inner.btn-group .btn.back {
+  width: 15%;
+}
+.navbar .navbar-inner.btn-group .title {
+  font-size: 15px;
+  font-weight: bold;
+  display: inline-block;
+  height: 24px;
+  vertical-align: bottom;
+  line-height: 24px;
+}
+/* QR code */
 
+#home-container .qr-code-container {
+  position: relative;
+  z-index: -1;
+  bottom: 0;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Menu */
 
-
-
-
-
-
-
-
-
-
+#menu-container .nav li a {
+  background-color: #eeeeee;
+  border-color: black;
+  font-size: 160%;
+}
+#menu-container .nav li a:hover {
+  background-color: white;
+  border-color: black;
+}
 /** OfferList */
-#offerList-container .offer .offer-image {
-	width: 100px;
-	height: 100px;
+
+#offerList-container .offer {
+  position: relative;
+  padding: 8px;
+  margin: 0px 0 4px 0;
 }
+#offerList-container .offer .offer-image {
+  width: 100px;
+  height: 100px;
+}
+#offerList-container .offer.new {
+  background-color: #ddcccc;
+  -webkit-animation: warning 2s linear 0 infinite normal;
+}
+#offerList-container .offer .close {
+  position: relative;
+  z-index: 10;
+}
+@-webkit-keyframes warning {
+  0% {
+    background-color: #ddcccc;
+  }
+  50% {
+    background-color: inherit;
+  }
+  100% {
+    background-color: #ddcccc;
+  }
+}
+/** Offer */
 
 #offer-container .offer .image-wrapper {
-	text-align: center;
+  text-align: center;
 }
-
 #offer-container .offer .offer-image {
-	width: 100%;
-	max-width: 300px;
+  width: 100%;
+  max-width: 300px;
 }
+/** Categories of offers */
 
+.category-label {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 90px;
+  height: 90px;
+}
+.offer.common .category-label {
+  background-image: url('../images/offers/category-label-common.png');
+}
+.offer.personal .category-label {
+  background-image: url('../images/offers/category-label-personal.png');
+}
+.offer.segment .category-label {
+  background-image: url('../images/offers/category-label-segment.png');
+}
+/** Purchase */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#purchase-container .purchase-items .purchase-item {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 8px;
+}
+#purchase-container .purchase-items .purchase-item .purchase-item-image {
+  width: 57px;
+  height: 57px;
+}
+#purchase-container .purchase-items .purchase-item.total .badge {
+  font-size: 24px;
+  line-height: 28px;
+}
+#purchase-container .purchase-items .purchase-info {
+  text-align: center;
+}
+#purchase-container .purchase-items .purchase-info .badge {
+  font-size: 40px;
+  line-height: 44px;
+}
+#purchase-container .purchase-items .purchase-info .payment-type {
+  max-width: 100%;
+  max-height: 80px;
+}
 /* Large desktop */
-@media (min-width: 1200px) {
 
+@media (min-width: 1200px) {
+  
 }
- 
 /* Portrait tablet to landscape and desktop */
+
 @media (min-width: 768px) and (max-width: 979px) {
+  
 }
- 
 /* Landscape phone to portrait tablet */
+
 @media (max-width: 767px) {
+  
 }
- 
 /* Landscape phones and down */
-@media (max-width: 480px) { 
-	
+
+@media (max-width: 480px) {
+  
 }
+
 /* Stylesheet content from css/myRetail.css in folder android */
 
 /* this CSS file extends the application CSS file found under common\css */

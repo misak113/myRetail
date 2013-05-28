@@ -1,0 +1,12 @@
+
+<section class="container" id="messages-container">
+	<ul class="media-list">
+		<li ng-repeat="message in messages" class="media">
+			<img class="media-object pull-left" data-src="holder.js/64x64" alt="{{message.title}}" src="{{message.image}}" />
+			<div class="media-body">
+				<h4>{{message.title}}</h4>
+				{{message.text}}
+			</div>
+		</li>
+	</ul>
+</section>

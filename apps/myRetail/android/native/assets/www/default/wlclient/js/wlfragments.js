@@ -2,7 +2,7 @@
 /* JavaScript content from wlclient/js/wlfragments.js in Common Resources */
 /*
 * Licensed Materials - Property of IBM
-* 5725-G92 (C) Copyright IBM Corp. 2006, 2012. All Rights Reserved.
+* 5725-G92 (C) Copyright IBM Corp. 2006, 2013. All Rights Reserved.
 * US Government Users Restricted Rights - Use, duplication or
 * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
 */
@@ -124,6 +124,9 @@ License:
 	if (typeof data.css == "undefined") {
 	    this.data.css = [];
 	}
+
+    // Added logging for Deprecated WL.Page and WL.Fragment APIs 
+	//WL.Logger.debug("The WL.Page and WL.Fragment APIs are deprecated. Developers are advised to use the fragments implementation of JS frameworks such as: jQuery Mobile, Sencha, Dojo Mobile.");
 
 	this.init();
 	this.load();
@@ -406,7 +409,6 @@ License:
 
 	createScriptTag : function(url, success, error) {
 	    var scriptTag = document.createElement("script");
-	    scriptTag.setAttribute("type", "text/javascript");
 	    scriptTag.setAttribute("src", url);
 	    scriptTag.onload = scriptTag.onreadystatechange = function() {
 		if ((!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
@@ -426,7 +428,6 @@ License:
 
 	globalEval : function(data, url) {
 	    var script = document.createElement("script");
-	    script.type = "text/javascript";
 	    script.setAttribute(ensureEVAL_JS_SRC, url);
 	    if (HttpLibrary.browser.msie) {
 		script.text = data;
@@ -703,7 +704,10 @@ __WLFragment = function() {
 	}
 	return cleanHTML;
     }
-
+    /**
+     * @deprecated Use the fragment implementation of JS frameworks such as: jQuery Mobile, Sencha, Dojo Mobile.
+     * 
+     */
     this.load = function(fragmentPath, parent, options) {
 
 	WL.Validators.validateArguments(['string', 'object', WL.Validators.validateOptions.curry({
@@ -727,6 +731,10 @@ __WLPage = function() {
 
     this.onUnload = null;
 
+    /**
+     * @deprecated Use the fragment implementation of JS frameworks such as: jQuery Mobile, Sencha, Dojo Mobile.
+     * 
+     */
     this.load = function(pagePath, options) {
 	WL.Validators.validateArguments(['string', WL.Validators.validateOptions.curry({
 	    onComplete : 'function',
@@ -753,7 +761,10 @@ __WLPage = function() {
 
 	WL.Fragment.load(pagePath, pagePort, options);
     };
-
+    /**
+     * @deprecated Use the fragment implementation of JS frameworks such as: jQuery Mobile, Sencha, Dojo Mobile.
+     * 
+     */
     this.back = function(options) {
 	WL.Validators.validateOptions({
 	    pagesBack : 'number'
@@ -789,7 +800,10 @@ __WLPage = function() {
 
 	return false;
     };
-
+    /**
+     * @deprecated Use the fragment implementation of JS frameworks such as: jQuery Mobile, Sencha, Dojo Mobile.
+     * 
+     */
     this.hasBack = function() {
 	return (pageHistory.length > 1);
     };

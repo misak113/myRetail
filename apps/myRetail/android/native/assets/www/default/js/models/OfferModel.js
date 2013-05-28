@@ -4,23 +4,23 @@
  * 
  */
 
-var OfferModel = function ($http) {
+var OfferModel = function ($http, socket) {
 	
 	this.markAsUnwanted = function (offer, config) {
 		$http.get('/todo').success(function() {alert('Unwanted');}); // @todo
 	};
 	
 	this.getOffers = function (cb) {
-        $http.get(config.serverUrl+'/offers').success(function(res) {
-            cb(res);
-        });
+		socket.emit('/offers', {}, function (data) {
+			cb(data);
+		});
 	};
 	
 	this.getOffer = function (id, cb) {
 		var returnOffer = null;
 		this.getOffers(function (offers) {
 			angular.forEach(offers, function (offer) {
-				if (offer.id == id) {
+				if (offer._id == id) {
 					returnOffer = offer;
 				}
 			});
@@ -29,7 +29,7 @@ var OfferModel = function ($http) {
 	};
 };
 
-myRetail.factory('offerModel', function ($http) {
-	var offerModel = new OfferModel($http);
+myRetail.factory('offerModel', function ($http, socket) {
+	var offerModel = new OfferModel($http, socket);
 	return offerModel;
 });

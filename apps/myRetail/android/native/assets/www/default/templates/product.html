@@ -1,0 +1,19 @@
+
+<section class="container" id="product-container">
+	<div class="product media well">
+		<div class="image-wrapper well well-small">
+			<img class="media-object product-image img-rounded" ng-src="{{product.image.medium}}" />
+		</div>
+		<div class="media-body">
+			<h4 class="media-heading">{{product.title}}</h4>
+			<div class="media" ng-hide="product.description == null">{{product.description}}</div>
+			<div class="media">
+				<div><strong>{{'Cena:'|_}}</strong> <span class="badge">{{product.price | price:product.currency}}</span></div>
+			</div>
+			<div class="media">
+				<button type="button" class="btn btn-right" ng-click="goBack()"><i class="icon-circle-arrow-left"></i> {{'Zpět'|_}}</button>
+			</div>
+		</div>
+		
+	</div>
+</section>

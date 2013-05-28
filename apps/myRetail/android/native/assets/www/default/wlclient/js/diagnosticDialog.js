@@ -2,7 +2,7 @@
 /* JavaScript content from wlclient/js/diagnosticDialog.js in Common Resources */
 /*
  * Licensed Materials - Property of IBM
- * 5725-G92 (C) Copyright IBM Corp. 2006, 2012. All Rights Reserved.
+ * 5725-G92 (C) Copyright IBM Corp. 2006, 2013. All Rights Reserved.
  * US Government Users Restricted Rights - Use, duplication or
  * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  */
@@ -20,9 +20,8 @@ __WLDiagnosticDialog = function() {
         }
         if (WL.App.close) {
             buttons.push({
-                text : WL.ClientMessages.exit,
+                text : WL.ClientMessages.close,
                 handler : function() {
-                    WL.App.close();
                 }
             });
         }
@@ -41,7 +40,7 @@ __WLDiagnosticDialog = function() {
 
         if (buttons.length == 0) {
             buttons.push({
-                text : WL.ClientMessages.ok,
+                text : WL.ClientMessages.close,
                 handler : function() {
                 }
             });
@@ -138,11 +137,11 @@ __WLDiagnosticDialog = function() {
             'value' : WL.ClientMessages.copyToClipboard,
             'title' : WL.ClientMessages.copyToClipboard
         });
-        var exitButton = WLJSX.newElement('<input/>', {
+        var reloadButton = WLJSX.newElement('<input/>', {
             'class' : 'diagnosticButtons',
             'type' : 'button',
-            'value' : WL.ClientMessages.exit,
-            'title' : WL.ClientMessages.exit
+            'value' : WL.ClientMessages.reload,
+            'title' : WL.ClientMessages.reload
         });
         var buttonsDiv = WLJSX.newElement('<div/>', {
             'class' : 'center'
@@ -153,17 +152,16 @@ __WLDiagnosticDialog = function() {
             WL.App.copyToClipboard(diagnosticToCopy);
         });
 
-        WLJSX.bind(exitButton, 'click', function() {
-            WL.App.close();
+        WLJSX.bind(reloadButton, 'click', function() {
+        	 WL.Client.reloadApp();
         });
 
+        buttonsDiv.appendChild(reloadButton);
         buttonsDiv.appendChild(copyButton);
-        buttonsDiv.appendChild(exitButton);
-
+       
         // Add worklight setting button to android
         if (WL.Env.ANDROID == WL.StaticAppProps.ENVIRONMENT) {
-            var isSettingsEnable = cordova.exec(null, null, "Utils", "readPref", [ "enableSettings" ]);
-            if (isSettingsEnable == "true") {
+            if (WL.Client.isSettingsEnabled()) {
                 var settingsButton = WLJSX.newElement('<input/>', {
                     'class' : 'diagnosticButtons',
                     'type' : 'button',

@@ -5,10 +5,11 @@
  */
 
 function OfferListCtrl($scope, offerModel) {
-
+	
 	offerModel.getOffers(function (offers) {
 		$scope.offers = offers;
-	}); // @todo
+		$scope.$apply();
+	});
 	
 	$scope.unwanted = function (offer) {
 		var index = $scope.offers.indexOf(offer);

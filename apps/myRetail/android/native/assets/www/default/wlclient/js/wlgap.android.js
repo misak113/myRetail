@@ -2,7 +2,7 @@
 /* JavaScript content from wlclient/js/wlgap.android.js in android Common Resources */
 /*
  * Licensed Materials - Property of IBM
- * 5725-G92 (C) Copyright IBM Corp. 2006, 2012. All Rights Reserved.
+ * 5725-G92 (C) Copyright IBM Corp. 2006, 2013. All Rights Reserved.
  * US Government Users Restricted Rights - Use, duplication or
  * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
  */
@@ -35,32 +35,50 @@ WL.App.openURL = function(url, target, options) {
 
 WL.Client.reloadApp = function() {
     window.isReloading = true;
-    // clear the session cookies
-    cordova.exec(null, null, 'Utils', 'clearSessionCookies', []);
-    cordova.exec(null, null, "Utils", "writePref", [ "exitOnSkinLoader", "false" ]);
-    cordova.exec(null, null, "Utils", "reload", []);
+    cordova.exec(null, null, 'Utils', 'reloadApp', []);
 };
 
-WL.App.getScreenHeight = function() {
-    var screenHeight = cordova.exec(null, null, "Utils", "getScreenHeight", []);
-    return screenHeight.height;
+WL.App.getScreenHeight = function(){
+	return WL.Client.__getScreenHeight();
 };
 
-WL.App.getScreenWidth = function() {
-    var screenWidth = cordova.exec(null, null, "Utils", "getScreenWidth", []);
-    return screenWidth.width;
+WL.App.getScreenWidth = function(){
+	return WL.Client.__getScreenWidth();
 };
 
-WL.App.readUserPref = function(key, successCallback, failCallback) {
-    return cordova.exec(successCallback, failCallback, "Utils", "readPref", [ key ]);
+WL.App.getScreenSize = function(callback) {
+    cordova.exec(callback, callback, "Utils", "getScreenSize", []);
+};
+
+//Takes: key, options OR key, successCallback, failCallback
+WL.App.readUserPref = function(key, options) {
+
+    if (typeof options === "object" &&
+        typeof options.onSuccess === "function" &&
+        typeof options.onFailure === "function") {
+
+        cordova.exec(options.onSuccess,
+           options.onFailure, "Utils", "readPref", [ key ]);
+        
+        return;
+    }
+
+    var successCallback = (typeof options === 'function') ? options : function () {},
+    	failCallback = arguments[2] || function() {};
+    cordova.exec(successCallback, failCallback, "Utils", "readPref", [ key ]);
 };
 
 WL.App.writeUserPref = function(key, value) {
     cordova.exec(null, null, "Utils", "writePref", [ key, value ]);
 };
 
+WL.App.getInitParameters = function(parameters, successCallback, failCallback) {
+    return cordova.exec(successCallback, failCallback, "Utils", "getInitParameters", [ parameters ]);
+};
+
+
 /**
- * Update the web resources from the WrokLight server. This feature is currently
+ * Update the web resources from the Worklight server. This feature is currently
  * applicable only for Android and iOS platforms
  * 
  * @param shouldUpdateSilently -
@@ -69,8 +87,7 @@ WL.App.writeUserPref = function(key, value) {
  */
 WL.App.__update = function(shouldUpdateSilently) {
     shouldUpdateSilently = ((typeof shouldUpdateSilently !== 'undefined') && shouldUpdateSilently);
-    cordova.exec(null, null, "WebResourcesDownloader", "updateApp", [ WL.NativePage._getCookiesForNative(),
-            WL.Client.__globalHeaders["WL-Instance-Id"], shouldUpdateSilently ]);
+    cordova.exec(null, null, "WebResourcesDownloader", "updateApp", [WL.Client.__globalHeaders["WL-Instance-Id"], shouldUpdateSilently ]);
 };
 
 WL.App._showDirectUpdateErrorMessage = function(message) {
@@ -78,8 +95,8 @@ WL.App._showDirectUpdateErrorMessage = function(message) {
         text : WL.ClientMessages.reload,
         handler : WL.App.__update
     }, {
-        text : WL.ClientMessages.exit,
-        handler : WL.App.close
+        text : WL.ClientMessages.close,
+        handler : function () {}
     } ]);
 };
 
@@ -90,14 +107,21 @@ function setWLUrl(serverURL) {
 };
 
 WL.App.__setWLServerAddress = function(callback) {
-    var defaultServerURL = cordova.exec(null, null, "Utils", "readPref", [ "WLDefaultServerURL" ]);
-    var serverURL = cordova.exec(null, null, "Utils", "readPref", [ "WLServerURL" ]);
-    if (serverURL && WL.StaticAppProps.APP_SERVICES_URL != serverURL + WL.StaticAppProps.POSTFIX_APP_SERVICES_URL) {
-        setWLUrl(serverURL);
-    } else {
-        setWLUrl(defaultServerURL);
-    }
-    callback();
+	cordova.exec(defaultServerQueryCallBack, defaultServerQueryCallBack, "Utils", "readPref", [ "WLDefaultServerURL" ]);
+
+	function defaultServerQueryCallBack(result) {
+    	var defaultServerURL = result;
+    	cordova.exec(function(result){
+    		var serverURL = result;
+    		if (serverURL && WL.StaticAppProps.APP_SERVICES_URL != serverURL + WL.StaticAppProps.POSTFIX_APP_SERVICES_URL) {
+    	        setWLUrl(serverURL);
+    	    } else {
+    	        setWLUrl(defaultServerURL);
+    	    }
+    	    callback();
+    	}, null, "Utils", "readPref", [ "WLServerURL" ]);
+	
+	};
 };
 
 __WLNativePage = function() {
@@ -385,6 +409,10 @@ __WLTabBar = function() {
         if (id === null && activeTab !== null) {
             // Deselect selected tab
             WLJSX.removeClass(activeTab, 'tabItemActive');
+            // Set back its deselected-image 
+            WLJSX.css(WLJSX.find(activeTab, "*")[0], {
+                'background-image' : 'url(' + WLJSX.attr(activeTab, 'imgSrc') + ')'
+            });
         } else {
             WL.Validators.validateArguments([ 'string' ], arguments, 'WL.TabBarItem.setSelectedItem');
             var item = items[id];
@@ -561,8 +589,7 @@ __WLOptionsMenu = function() {
      */
     this.init = function() {
         callbacks = [];
-        var isSettingsEnableString = cordova.exec(null, null, "Utils", "readPref", [ "enableSettings" ]);
-        isSettingsEnable = isSettingsEnableString == "true" ? true : false;
+        isSettingsEnable = WL.Client.isSettingsEnabled();
         NativeOptionsMenu.init();
         this.__addWLSettingItem();
     };
@@ -698,13 +725,27 @@ __WLOptionsMenu = function() {
     };
 
     /**
-     * @return whether the menu is enabled.
+     * Get menu enabled state
+     * 
+     * @callback is a callback that receives a boolean with enabled state
+     * @returns enabled state
      */
-    this.isEnabled = function() {
+    this.isEnabled = function(callback) {
+    	if (typeof(callback) === 'undefined' || callback == null) {
+    		WL.Logger.warn("Synchronous call to method WL.OptionsMenu.isEnabled is deprecated. You have to provide a callback with a parameter receiving the state.");
+    	}
+    	
         if (!isInitialized()) {
-            return;
+        	if (typeof(callback) !== 'undefined' && callback != null) {
+        		callback(false);
+        	}
+            return false;
         }
-        return NativeOptionsMenu.isEnabled();
+        var result = NativeOptionsMenu.isEnabled();
+        if (typeof(callback) !== 'undefined' && callback != null) {
+        	callback(result);
+        }
+        return result;
     };
 
     /**
@@ -722,13 +763,28 @@ __WLOptionsMenu = function() {
     };
 
     /**
-     * @return whether the menu is visible.
+     * Get the menu visibility state
+     * 
+     * @callback is a callback that receives a boolean with visible state
+     * @returns visible state 
      */
-    this.isVisible = function() {
+    this.isVisible = function(callback) {
+    	if (typeof(callback) === 'undefined' || callback == null) {
+    		WL.Logger.warn("Synchronous call to method WL.OptionsMenu.isVisible is deprecated. You have to provide a callback with a parameter receiving the state.");
+    	}
+    	
         if (!NativeOptionsMenu) {
+        	if (typeof(callback) !== 'undefined' && callback != null) {
+        		
+        		callback(false);
+        	}
             return false;
         }
-        return NativeOptionsMenu.isVisible();
+        var result = NativeOptionsMenu.isVisible();
+        if (typeof(callback) !== 'undefined' && callback != null) {
+        	callback(result);
+        }
+        return result;
     };
 };
 
@@ -738,22 +794,40 @@ WL.OptionsMenu = new __WLOptionsMenu;
 function __WLLogger() {
     var priority = {
         DEBUG : 'DEBUG',
-        ERROR : 'ERROR'
+        ERROR : 'ERROR',
+        WARN  : 'WARN',
+        INFO  : 'INFO'
     };
+	
+	var enableLogger = true;
 
-    this.__init = function() {
+    this.__init = function(enabled) {
+		if (typeof(enabled) !== 'undefined'){
+			enableLogger = enabled;
+		}
     };
 
     this.debug = function(msg, ex) {
         log(msg, priority.DEBUG, ex);
-
     };
 
     this.error = function(msg, ex) {
         log(msg, priority.ERROR, ex);
     };
+    
+    this.info = function(msg, ex) {
+        log(msg, priority.INFO, ex);
+    };
+
+    this.warn = function(msg, ex) {
+        log(msg, priority.WARN, ex);
+    }
 
     function log(msg, priority, ex) {
+		if (!enableLogger){
+			return;
+		}
+			
         if (typeof ex !== "undefined") {
             msg += " " + WL.App.getErrorMessage(ex);
         }
@@ -791,7 +865,9 @@ __WL.TerminatorDialog = new __WLTerminatorDialog;
 __WLPush = function() {
     var isTokeUpdatedOnServer = false;
     var subscribedEventSources = {};
+    var subscribedSMSEventSources = {};
     var registeredEventSources = {};
+    var pendindPushEventsArray = new Array();
     var defaultSubscribeOptions = {
         alert : true,
         badge : true,
@@ -807,6 +883,23 @@ __WLPush = function() {
         requestHeaders : {},
         onFailure : function() {
             WL.Logger.error("WL.Client.Push.unsubscribe: error unsubscribing from notifications");
+        },
+        onSuccess : function() {
+        }
+    };
+    
+    var defaultSubscribeSMSOptions = {
+        requestHeaders : {},
+        onFailure : function() {
+            WL.Logger.error("WL.Client.Push.subscribeSMS: error subscribing for notifications");
+        },
+        onSuccess : function() {
+        }
+    };
+    var defaultUnsubscribeSMSOptions = {
+        requestHeaders : {},
+        onFailure : function() {
+            WL.Logger.error("WL.Client.Push.unsubscribeSMS: error unsubscribing from notifications");
         },
         onSuccess : function() {
         }
@@ -884,14 +977,19 @@ __WLPush = function() {
         var registeredEventSource = registeredEventSources[alias];
         var requestOptions = {
             onSuccess : function() {
-                subscribedEventSources[alias] = true;
+            	subscribedEventSources[alias] = true;
                 if (extendedOptions.onSuccess) {
                     extendedOptions.onSuccess();
                 }
+                if (WL.Client.Push.__hasPendings()) {
+                    WL.Client.Push.__dispatchPendings();
+                }
             },
-            onFailure : extendedOptions.onFailure
+            onFailure : function () {
+            	extendedOptions.onFailure();
+            }
         };
-
+        
         requestOptions.requestHeaders = {};
         requestOptions.parameters = {};
         requestOptions.parameters.adapter = registeredEventSource.adapter;
@@ -918,12 +1016,14 @@ __WLPush = function() {
         var registeredEventSource = registeredEventSources[alias];
         var requestOptions = {
             onSuccess : function() {
-                subscribedEventSources[alias] = false;
+            	subscribedEventSources[alias] = false;
                 if (options.onSuccess) {
                     options.onSuccess();
                 }
             },
-            onFailure : options.onFailure
+            onFailure : function () {
+            	options.onFailure();
+            }
         };
         requestOptions.parameters = {};
         requestOptions.parameters.alias = alias;
@@ -932,7 +1032,105 @@ __WLPush = function() {
         requestOptions.parameters.unsubscribe = "";
         new WLJSX.Ajax.WLRequest("notifications", requestOptions);
     };
+    
+    this.subscribeSMS = function(alias, adapter, eventSource, phoneNumber, options) {
+        
+        WL.Validators.validateArguments([ 'string', 'string', 'string', 'string', WL.Validators.validateObjectOrNull ], arguments, 'WL.Client.Push.subscribeSMS');
+        WL.Validators.validateOptionsLoose({
+            /*alert : 'boolean',
+            sound : 'boolean',
+            badge : 'boolean',*/
+            onSuccess : 'function',
+            onFailure : 'function'
+        }, options, "WL.Client.Push.subscribeSMS");
 
+        if (!options) {
+            options = {};
+        }
+        
+        var extendedOptions = WLJSX.Object.extend(WLJSX.Object.clone(defaultSubscribeSMSOptions), options);
+        
+        var subscribedSMSEventSource = {
+                "adapter" : adapter,
+                "eventSource" : eventSource
+            };
+        
+        var requestOptions = {
+            onSuccess : function() {
+                subscribedSMSEventSources[alias] = subscribedSMSEventSource;
+                if (extendedOptions.onSuccess) {
+                    extendedOptions.onSuccess();
+                }
+            },
+            onFailure : extendedOptions.onFailure
+        };
+
+        requestOptions.requestHeaders = {};
+        requestOptions.parameters = {};
+        requestOptions.parameters.adapter = subscribedSMSEventSource.adapter;
+        requestOptions.parameters.eventSource = subscribedSMSEventSource.eventSource;
+        requestOptions.parameters.alias = alias;
+        requestOptions.parameters.transport = "SMS";
+    	requestOptions.parameters.phoneNumber = phoneNumber;
+        requestOptions.parameters.subscribe = WLJSX.Object.toJSON(options);
+        new WLJSX.Ajax.WLRequest("notifications", requestOptions);
+        //cordova.exec(null, null, 'Push', 'dispatch', [ 'WL.Client.Push.__onmessage' ]);
+    };
+    
+    this.unsubscribeSMS = function(alias, options) {
+    	
+    	 if (!subscribedSMSEventSources[alias] || !subscribedSMSEventSources[alias].adapter) {
+             WL.Logger.error("No subscribed push SMS event source for alias '" + alias + "'.");
+             if (options.onSuccess) {
+                 options.onSuccess();
+             }
+             return;
+         }
+
+        WL.Validators.validateArguments([ 'string', WL.Validators.validateObjectOrNull ], arguments, 'WL.Client.Push.unsubscribeSMS');
+        WL.Validators.validateOptionsLoose({
+            onSuccess : 'function',
+            onFailure : 'function'
+        }, options, "WL.Client.Push.unsubscribeSMS");
+
+        options = WLJSX.Object.extend(WLJSX.Object.clone(defaultUnsubscribeSMSOptions), options);
+
+        var subscribedSMSEventSource = subscribedSMSEventSources[alias];
+        var requestOptions = {
+            onSuccess : function() {
+                subscribedSMSEventSources[alias] = {};
+                if (options.onSuccess) {
+                    options.onSuccess();
+                }
+            },
+            onFailure : options.onFailure
+        };
+        requestOptions.parameters = {};
+        requestOptions.parameters.alias = alias;
+        requestOptions.parameters.adapter = subscribedSMSEventSource.adapter;
+        requestOptions.parameters.eventSource = subscribedSMSEventSource.eventSource;
+        requestOptions.parameters.unsubscribe = "";
+        requestOptions.parameters.transport = "SMS";
+        new WLJSX.Ajax.WLRequest("notifications", requestOptions);
+    };
+    
+    /**
+     * @return true if the environment supports push.
+     */
+    this.isPushSMSSupported = function() {
+        return WL.EnvProfile.isEnabled(WL.EPField.SUPPORT_PUSH_SMS);
+    };
+    
+    /**
+     * Check subscribe status of an SMS related event source.
+     * 
+     * @param alias
+     *            {string} - alias of the event source.
+     */
+    this.isSMSSubscribed = function(alias) {
+    	return (typeof subscribedSMSEventSources[alias] != "undefined" && typeof subscribedSMSEventSources[alias].eventSource != "undefined");
+    };
+    
     /**
      * Clear the subscribed event sources
      */
@@ -940,11 +1138,32 @@ __WLPush = function() {
         WL.Logger.debug("Clearing notification subscriptions.");
         subscribedEventSources = {};
     };
+    
+    /**
+     * Clear the subscribed SMS event sources
+     */
+    this.__clearSubscribedSMSEventSources = function(eventSources) {
+        WL.Logger.debug("Clearing SMS notification subscriptions.");
+        subscribedSMSEventSources = {};
+    };
 
     this.__updateSubscribedEventSources = function(eventSources) {
         WL.Logger.debug("Updating notification subscriptions.");
         for (event in eventSources) {
             subscribedEventSources[eventSources[event].alias] = true;
+        }
+    };
+    
+     /**
+     * Update the subscribed SMS event sources
+     */
+    this.__updateSubscribedSMSEventSources = function(eventSources) {
+        WL.Logger.debug("Updating SMS notification subscriptions.");
+        for (event in eventSources) {
+            subscribedSMSEventSources[eventSources[event].alias] = {
+                    "adapter" : eventSources[event].adapter,
+                    "eventSource" : eventSources[event].eventSource
+                };
         }
     };
 
@@ -967,12 +1186,29 @@ __WLPush = function() {
     this.__onmessage = function(props, payload) {
         WL.Logger.debug("WL.Client.Push received notification for alias " + payload.alias);
         try {
-            if (subscribedEventSources[payload.alias] && registeredEventSources[payload.alias]
-                    && registeredEventSources[payload.alias].callback) {
+            if (subscribedEventSources[payload.alias] && registeredEventSources[payload.alias] && registeredEventSources[payload.alias].callback) {
                 registeredEventSources[payload.alias].callback(props, payload);
+            } else {
+                // in case no lgoin user with this alias
+                pendindPushEventsArray.push ({"alias" : payload.alias, "props": props, "payload": payload});
             }
         } catch (e) {
             WL.Logger.error("Failed invoking notification callback function: " + e.message);
+        }
+    };
+    
+    this.__hasPendings = function (){
+        return pendindPushEventsArray && pendindPushEventsArray.length > 0;
+    };
+    
+    this.__dispatchPendings = function () {
+        //Dispatch the pendings push notifications
+        for (eventsCounter in pendindPushEventsArray) {
+            pendindPushEvent = pendindPushEventsArray[eventsCounter];
+            if(subscribedEventSources[pendindPushEvent.alias]) {
+                registeredEventSources[pendindPushEvent.alias].callback(pendindPushEvent.props, pendindPushEvent.payload);
+                delete pendindPushEventsArray[eventsCounter];
+            }
         }
     };
 
@@ -1012,6 +1248,9 @@ __WLPush = function() {
                     isTokeUpdatedOnServer = true;
                     WL.Utils.dispatchWLEvent("readytosubscribe");
                     WL.Client.Push.onReadyToSubscribe();
+                    if (WL.Client.Push.__hasPendings()) {
+                        WL.Client.Push.__dispatchPendings();
+                    }
                 },
                 onFailure : function() {
                     isTokeUpdatedOnServer = false;
@@ -1027,6 +1266,9 @@ __WLPush = function() {
             isTokeUpdatedOnServer = true;
             WL.Utils.dispatchWLEvent("readytosubscribe");
             WL.Client.Push.onReadyToSubscribe();
+            if (WL.Client.Push.__hasPendings()) {
+                WL.Client.Push.__dispatchPendings();
+            }
         }
     }
     ;
@@ -1059,31 +1301,31 @@ WL.Toast.show = function(text) {
     cordova.exec(null, null, "Utils", "toast", [ text ]);
 };
 
-WL.App.copyToClipboard = function(text) {
-    WL.Validators.validateArguments([ 'string' ], arguments, 'WL.App.copyToClipboard');
-    return cordova.exec(null, null, "Utils", "copyToClipboard", [ text ]);
+WL.App.copyToClipboard = function(text, callback) {
+    cordova.exec(callback, callback, "Utils", "copyToClipboard", [ text ]);
 };
 
 WL.Device.getNetworkInfo = function(callback) {
     WL.Validators.validateArguments([ 'function' ], arguments, 'WL.Device.getNetworkInfo');
-    return cordova.exec(callback, callback, "NetworkDetector", "getNetworkInfo", []);
+    cordova.exec(callback, callback, "NetworkDetector", "getNetworkInfo", []);
 };
 
 WL.App.__showWLPreferences = function() {
     WL.NativePage.show("com.worklight.common.WLPreferences", function(data) {
         if (data.isWebResourcesChanged) {
-            var newAppId = WL.App.readUserPref("newAppIdPref");
-            var newAppVersion = WL.App.readUserPref("newAppVersionPref");
-            WL.Utils.__getSkinFromRemoteSkinLoader(newAppId, newAppVersion, function(skinName) {
-                WL.App.writeUserPref('wlSkinName', skinName);
-                cordova.exec(null, null, "WebResourcesDownloader", "switchApp", [ WL.NativePage._getCookiesForNative(),
-                        WL.Client.__globalHeaders["WL-Instance-Id"], newAppId, newAppVersion ]);
-                WL.App.writeUserPref('appIdPref', newAppId);
-                WL.App.writeUserPref('appVersionPref', newAppVersion);
-            });
+        	WL.App.readUserPref("newAppIdPref", function(newAppId){
+        		WL.App.readUserPref("newAppVersionPref", function(newAppVersion){
+        			 WL.Utils.__getSkinFromRemoteSkinLoader(newAppId, newAppVersion, function(skinName) {
+        	                WL.App.writeUserPref('wlSkinName', skinName);
+        	                cordova.exec(null, null, "WebResourcesDownloader", "switchApp", [WL.Client.__globalHeaders["WL-Instance-Id"], newAppId, newAppVersion ]);
+        	                WL.App.writeUserPref('appIdPref', newAppId);
+        	                WL.App.writeUserPref('appVersionPref', newAppVersion);
+        	            });
+        		});
+        	});
         } else if (data.isServerURLChanged) {
             WL.Client.reloadApp();
-            cordova.exec(null, null, "Utils", "writePref", [ "exitOnSkinLoader", "true" ]);
+            WL.App.writeUserPref("exitOnSkinLoader", "true");
         }
     });
 };
@@ -1103,4 +1345,8 @@ WL.App.__hashData = function(data, someArgs, callback) {
     }, function() {
         WL.Logger.error("Problem to get hash from WL.App.__hashData for value" + data);
     }, "SecurityPlugin", "hashData", [ data, someArgs ]);
+};
+
+WL.DeviceAuth.__getDeviceUUID = function(successCallback, failureCallback) {
+	cordova.exec(successCallback, failureCallback, "DeviceAuth", "getDeviceUUID", []);
 };

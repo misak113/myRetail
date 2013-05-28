@@ -1,18 +1,21 @@
-<!DOCTYPE html><html ng-app="myRetail" ng-controller="HtmlCtrl">
+<!DOCTYPE html><html ng-app="myRetail">
     <head>
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" name="viewport">
-        <title ng-bind-template="{{title}}">myRetail</title>
+        <title>myRetail</title>
 		<!-- Icons -->
+        <link href="wlclient/css/wlclient.css" rel="stylesheet">
+        <link href="wlclient/css/wlgap.android.css" rel="stylesheet">
         <link href="images/favicon.png" rel="shortcut icon">
         <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
 		<!-- CSS stylesheet -->
-        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.icon.css" rel="stylesheet">
         <link href="css/myRetail.css" rel="stylesheet">
+        <link href="css/bootstrap.pull-down.css" rel="stylesheet">
 	
-        <link href="wlclient/css/wlclient.css" rel="stylesheet">
-        <link href="wlclient/css/wlgap.android.css" rel="stylesheet">
-        <script type="text/javascript">
+        <script>
 
 		// Define WL namespace.
 
@@ -48,6 +51,7 @@
 		<script src="wlclient/js/wlclient.js"></script>
 		<script src="wlclient/js/wlfragments.js"></script>
 		<script src="wlclient/js/encryptedcache.js"></script>
+		<script src="wlclient/js/jsonstore/jsonstore.js"></script>
 		<script src="wlclient/js/checksum.js"></script>
 		<script src="wlclient/js/challengeHandlers/antiXSRFChallengeHandler.js"></script>
 		<script src="wlclient/js/challengeHandlers/authenticityChallengeHandler.js"></script>
@@ -56,45 +60,32 @@
 		<script src="wlclient/js/challengeHandlers/remoteDisableChallengeHandler.js"></script>
 		<script src="wlclient/js/wlgap.android.js"></script>
     </head>
-    <body id="content">
+    <body id="content" ng-controller="AppCtrl">
         <!-- style="display: none" -->	
-        <div class="navbar navbar-fixed-bottom navbar-inverse">
+        <section class="navbar navbar-fixed-top" id="navigation" ng-controller="MenuCtrl">
 			
-            <div class="navbar-inner">
+            <div class="btn-group navbar-inner container">
 				
-                <div class="container">
-					
-                    <div class="nav-collapse collapse">
-	                   
-                        <ul class="nav">
-	                     
-                            <li class="dropdown">
-	                       
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{'V&iacute;ce'|_}} <b class="caret"></b></a>
-	                       
-                                <ul class="dropdown-menu">
-	                         
-                                    <li ng-repeat="item in moreItems">
-                                        <a href="#{{item.url}}">{{item.name}}</a>
-                                    </li>
-	                       
-                                </ul>
-	                     
-                            </li>
-	                     
-                            <li class="active">
-                                <a href="#">{{'Exit'|_}}</a>
-                            </li>
-	                   
-                        </ul>
-                	
-                    </div>
-				
-                </div>
+                <a class="btn btn-large back" href="#"><i class="icon-medium icon-unshare"></i></a>
+				<a class="btn btn-large home" href="#/home"><i class="icon-medium icon-home"></i> <span class="title">{{'myRetail'|_}}</span></a>
+				<a class="btn btn-large messages" href="#/messages"><i class="icon-medium icon-globe"></i></a>
+				<a class="btn btn-large menu" href="#/menu"><i class="icon-medium icon-justify"></i></a>
 			
             </div>
+        </section>
+
+        <div class="pull-down">
+			
+            <a class="work" href="#"><i class="indicator-click icon-refresh icon-large"></i></a>
+			<i class="indicator icon-down-arrow icon-large"></i>
+			<i class="indicator-working icon-roundabout icon-large"></i>
+			<span class="pulled-label">{{'Uvolněn&iacute;m aktualizovat'|_}}</span>
+			<span class="pull-label">{{'Stažen&iacute;m aktualizovat'|_}}</span>
+			<span class="default-label">{{'Kliknut&iacute;m aktualizovat'|_}}</span>
+			<span class="working-label">{{'Aktualizuji'|_}}</span>
+			<button class="close stop" type="button"><i class="icon-large icon-remove-2"></i></button>
         </div>
-        <div ng-view=""></div>
+        <div class="ng-view" ng-view=""></div>
 	
 		<!-- JS Scripts -->
 		<!-- Libraries -->
@@ -102,21 +93,33 @@
 		<script src="js/libs/bootstrap.js" type="text/javascript"></script>
 		<script src="js/libs/angular.js" type="text/javascript"></script>
 		<script src="js/libs/moment.min.js" type="text/javascript"></script>
+		<script src="js/libs/underscore-min.js" type="text/javascript"></script>
+		<script src="js/libs/bootstrap.pull-down.js" type="text/javascript"></script>
+		<script src="socket.io/socket.io.js" type="text/javascript"></script>
 		<!-- Configurations -->
 		<script src="js/initOptions.js" type="text/javascript"></script>
 		<script src="js/messages.js" type="text/javascript"></script>
 		<!-- AngularJS Scripts -->
 		<script src="js/myRetail.js" type="text/javascript"></script>
 		<!-- Controllers -->
+		<script src="js/controllers/AppCtrl.js" type="text/javascript"></script>
+		<script src="js/controllers/HomeCtrl.js" type="text/javascript"></script>
 		<script src="js/controllers/MenuCtrl.js" type="text/javascript"></script>
-		<script src="js/controllers/HtmlCtrl.js" type="text/javascript"></script>
 		<script src="js/controllers/OfferListCtrl.js" type="text/javascript"></script>
+		<script src="js/controllers/PurchaseListCtrl.js" type="text/javascript"></script>
 		<script src="js/controllers/OfferCtrl.js" type="text/javascript"></script>
-		<script src="js/controllers/LoadAccountCtrl.js" type="text/javascript"></script>
-		<script src="js/controllers/QRCodeCtrl.js" type="text/javascript"></script>
+		<script src="js/controllers/MessagesCtrl.js" type="text/javascript"></script>
+		<script src="js/controllers/PurchaseCtrl.js" type="text/javascript"></script>
+		<script src="js/controllers/ProductCtrl.js" type="text/javascript"></script>
+		<script src="js/controllers/ShoppingCartListCtrl.js" type="text/javascript"></script>
 		<!-- Models -->
 		<script src="js/models/OfferModel.js" type="text/javascript"></script>
+		<script src="js/models/PurchaseModel.js" type="text/javascript"></script>
+		<script src="js/models/ProductModel.js" type="text/javascript"></script>
+		<script src="js/models/ShoppingCartModel.js" type="text/javascript"></script>
 		<script src="js/filters.js" type="text/javascript"></script>
+		<!-- Configs -->
+		<script src="js/config/config.local.js" type="text/javascript"></script>
 		<script src="js/config/config.js" type="text/javascript"></script>
 	
     </body>
