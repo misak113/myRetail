@@ -1,7 +1,5 @@
 
 
-
-
 angular.module('filters', [])
 .filter('timeLeft', function() {
   return function(input) {
@@ -27,9 +25,9 @@ angular.module('filters', [])
 	    return moment(input).format(format);
 	  };
 	})
-.filter('_', function() {
+.filter('_', function(_t) {
 	  return function(text) {
-	    return _t(text);
+	    return (text); // @todo _t from myRetail Translator
 	  };
 	})
 	

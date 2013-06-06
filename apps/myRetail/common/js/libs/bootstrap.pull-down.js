@@ -26,6 +26,15 @@
 
 			stopListen(options.pullDown);
 			listen(options.pullDown);
+			return {
+				start: self.start,
+				enable: self.enable,
+				disable: self.disable,
+				loading: function (status) {
+					self.loading(status, options.pullDown);
+				},
+				element: options.pullDown
+			};
 		};
 
 		this.enable = function () {
@@ -36,6 +45,16 @@
 		this.disable = function () {
 			this.enabled = false;
 			this.start();
+		};
+
+		this.loading = function (status, pullDown) {
+			if (status === true) {
+				pullDown.addClass('pulled');
+				scrolledAction(pullDown);
+			} else {
+				stopWorking(jQuery.Event("pullDownStopWorking"), pullDown);
+			}
+
 		};
 
 		var listen = function (pullDown) {

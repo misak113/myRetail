@@ -1,6 +1,7 @@
 .pull-down {
   background-color: #eeeeee;
   height: 60px;
+  overflow: hidden;
 }
 .pull-down .indicator-click {
   float: left;

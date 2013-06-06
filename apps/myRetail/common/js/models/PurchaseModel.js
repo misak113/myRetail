@@ -2,7 +2,7 @@
  * 
  */
 
-var PurchaseModel = function ($http) {
+var PurchaseModel = function ($http, config) {
 	
 	this.getPurchases = function (cb) {
 		$http.get(config.serverUrl+'/purchases').success(function(res) {
@@ -31,7 +31,7 @@ var PurchaseModel = function ($http) {
 	};
 };
 
-myRetail.factory('purchaseModel', function ($http) {
-	var purchaseModel = new PurchaseModel($http);
+myRetail.factory('purchaseModel', function ($http, config) {
+	var purchaseModel = new PurchaseModel($http, config);
 	return purchaseModel;
 });

@@ -1,5 +1,5 @@
 
-function PurchaseCtrl($scope, $routeParams, purchaseModel) {
+function PurchaseCtrl($scope, $routeParams, purchaseModel, _t, config) {
 	var id = $routeParams.purchaseId;
 	
 	purchaseModel.getPurchase(id, function (purchase) {

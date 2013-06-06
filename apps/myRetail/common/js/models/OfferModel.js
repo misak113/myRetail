@@ -4,7 +4,7 @@
 
 var OfferModel = function ($http, socket) {
 	
-	this.markAsUnwanted = function (offer, config) {
+	this.markAsUnwanted = function (offer) {
 		$http.get('/todo').success(function() {alert('Unwanted');}); // @todo
 	};
 	

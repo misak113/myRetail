@@ -80,10 +80,11 @@ html {
 /* Worklight container div */
 
 #content {
-  background-color: #dddddd;
+  background-color: #333939;
   margin: 0 auto 0 auto;
-  padding-top: 50px;
+  padding-top: 40px;
   height: 85%;
+  color: #eee8e8;
 }
 /* Default */
 
@@ -117,6 +118,9 @@ h3 {
 .well.soft:hover {
   background-color: #f0ebd4;
 }
+.pull-down {
+  background-color: #666c6c;
+}
 /* Navbar */
 
 .navbar .navbar-inner.btn-group {
@@ -126,6 +130,8 @@ h3 {
 .navbar .navbar-inner.btn-group .btn {
   padding-left: 0;
   padding-right: 0;
+  padding-top: 6px;
+  padding-bottom: 6px;
   border-radius: 0;
 }
 .navbar .navbar-inner.btn-group .btn.home {
@@ -144,7 +150,41 @@ h3 {
   vertical-align: bottom;
   line-height: 24px;
 }
-/* QR code */
+/* Login */
+
+#login-container .logo-container {
+  position: relative;
+  z-index: -1;
+  bottom: 0;
+  width: 200px;
+  height: 237px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#login-container .control-group {
+  text-align: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#login-container .control-group .text-input,
+#login-container .control-group .checkbox {
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 90%;
+  max-width: 200px;
+}
+#login-container .control-group .checkbox {
+  display: inline-block;
+  max-width: 160px;
+  width: 70%;
+}
+#login-container .control-group .checkbox .checkbox-input {
+  margin-left: 0;
+}
+/* Home */
 
 #home-container .qr-code-container {
   position: relative;
