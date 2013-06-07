@@ -12,6 +12,8 @@ var Offer = mongoose.model('Offer', offerSchema);
 
 Offer.getOffers = function (cb) {
 	Offer.find({}, function (e, offers) {
+		if (e) cb(e);
+
 		var offersObj = [];
 		// mark offers viewed by user
 		offers.forEach(function (offer) {
@@ -19,7 +21,7 @@ Offer.getOffers = function (cb) {
 			offerObj.viewed = true;
 			offersObj.push(offerObj);
 		});
-		offersObj[0].viewed = false;
+		if (typeof offersObj[0] !== 'undefined') offersObj[0].viewed = false; // @todo
 		cb(e, offersObj);
 	});
 };

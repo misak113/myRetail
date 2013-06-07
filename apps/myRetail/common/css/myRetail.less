@@ -57,7 +57,16 @@ h1, h2, h3 {
 }
 
 .pull-down {
+	z-index: 300;
 	background-color: #666C6C;
+	position: fixed;
+	width: 100%;
+	padding-top: 1000px;
+	top: -959px;
+
+	&.disabled {
+		position: relative;
+	}
 }
 
 
