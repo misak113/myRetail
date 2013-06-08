@@ -1,6 +1,9 @@
 
 // tento controller je spuštěn vždy, proto je využíván jako spouštěč všech must-run služeb
 function AppCtrl($scope, pullDown, $timeout, userModel, $location, messageDisp, $route, $window) {
+	var loginCtrls = ['LoginCtrl'];
+	var allowedCtrls = ['LoginCtrl'];
+
 	// funkce, která checkuje, zda je přihlášen
 	var checkAuth = function (next) {
 		var loggedIn = userModel.isLoggedIn();
@@ -8,7 +11,7 @@ function AppCtrl($scope, pullDown, $timeout, userModel, $location, messageDisp, 
 			var currentCtrl = typeof $route.current !== 'undefined' && 
 				typeof $route.current.$route !== 'undefined' ?$route.current.$route.controller.name :null;
 			
-			if (currentCtrl !== 'LoginCtrl') {
+			if (!_.contains(allowedCtrls, currentCtrl)) {
 				$location.path('/login');
 				messageDisp.flash('Byl jste automaticky odhlášen. Přihlaste se znovu.', 'warning');
 				$scope.$apply();
@@ -38,14 +41,14 @@ function AppCtrl($scope, pullDown, $timeout, userModel, $location, messageDisp, 
 		
 		var loggedIn = userModel.isLoggedIn();
 		if (loggedIn !== false) {
-			if (currentCtrl === 'LoginCtrl') {
+			if (_.contains(loginCtrls, currentCtrl)) {
 				$location.path('/home');
 			}
 		} else {
 			$location.path('/login');
-			if (previousCtrl === 'LoginCtrl') {
+			if (_.contains(allowedCtrls, previousCtrl)) {
 				messageDisp.flash('Není možné používat aplikaci, pokud nejste přihlášen.', 'warning');
-			} else if (currentCtrl !== 'LoginCtrl') {
+			} else if (!_.contains(allowedCtrls, currentCtrl)) {
 				messageDisp.flash('Byl jste automaticky odhlášen. Přihlaste se znovu.', 'warning');
 			}
 		}
