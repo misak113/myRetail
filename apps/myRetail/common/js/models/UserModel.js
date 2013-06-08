@@ -22,6 +22,11 @@ var UserModel = function (socket, $timeout) {
 		}, 2000, false);
 	};
 
+	this.logout = function (callback) {
+		timeToLogout = 0;
+		callback();
+	};
+
 	this.isLoggedIn = function (callback) {
 		var isLoggedIn = timeToLogout > 0;
 		if (typeof callback === 'function') {

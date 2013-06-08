@@ -16,6 +16,7 @@ myRetail.
 			when('/purchase-list', {templateUrl: 'templates/purchaseList.html', controller: PurchaseListCtrl}).
 			when('/purchase/:purchaseId', {templateUrl: 'templates/purchase.html', controller: PurchaseCtrl}).
 			when('/product/:productId', {templateUrl: 'templates/product.html', controller: ProductCtrl}).
+			when('/logout', {templateUrl: 'templates/home.html', controller: LogoutCtrl}).
 			otherwise({redirectTo: '/login'});
 	}]);
 
