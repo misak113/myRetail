@@ -1,7 +1,7 @@
 
 
 
-function OfferCtrl ($scope, $routeParams, offerModel) {
+function OfferCtrl ($scope, $routeParams, offerModel, $window) {
 	
 	var id = $routeParams.offerId;
 	
@@ -11,6 +11,6 @@ function OfferCtrl ($scope, $routeParams, offerModel) {
 	});
 	
 	$scope.goBack = function() {
-		window.history.back(); // @todo předělat na angular $location
+		$window.history.back(); // @todo předělat na angular $location
 	};
 };

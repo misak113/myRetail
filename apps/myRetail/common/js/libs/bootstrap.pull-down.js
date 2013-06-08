@@ -115,6 +115,7 @@
 			nowMoveEvent = ev;
 		};
 		var movingStart = function (ev) {
+			lastMoveEvent = null;
 			moving = true;
 		};
 		var movingEnd = function (ev) {
@@ -243,6 +244,8 @@
 			}
 
 			var deltaY = touch.clientY - lastTouch.clientY;
+			// ošetření o podezřele velké skoky
+			if (deltaY > 100) return 0;
 			return deltaY;
 		};
 

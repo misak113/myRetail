@@ -1,6 +1,6 @@
 
 
-function LoginCtrl ($scope, $location, userModel, loadingDisp, messageDisp, _t) {
+function LoginCtrl ($scope, $location, userModel, loadingDisp, messageDisp, $cookies) {
 	$scope.loading = false;
 
 	$scope.login = function () {
@@ -17,14 +17,18 @@ function LoginCtrl ($scope, $location, userModel, loadingDisp, messageDisp, _t) 
 			loadingDisp.loading(false);
 			if (e) {
 				if (e.code === userModel.WRONG_CREDENTIALS)
-					return messageDisp.flash(_t('Zadal jste nesprávné jméno nebo heslo. Zkontrolujte a opakujte.'), 'error');
-				return messageDisp.flash(_t('Při přihlašování nastala chyba, zkuste znovu později.'), 'error');
+					return messageDisp.flash('Zadal jste nesprávné jméno nebo heslo. Zkontrolujte a opakujte.', 'error');
+				return messageDisp.flash('Při přihlašování nastala chyba, zkuste znovu později.', 'error');
 			}
 
-			//messageDisp.flash(_t('Byl jste úspěšně přihlášen.'));
+			//messageDisp.flash('Byl jste úspěšně přihlášen.')
 			$location.path('/home');
 			$scope.$apply();
 		});
 	}
 
+	$scope.username = $cookies.username;
+	$scope.$watch('username', function () {
+		$cookies.username = $scope.username;
+	}, true);
 };

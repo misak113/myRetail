@@ -3,7 +3,7 @@
  * AngularJS setup
  * 	Routes
  */
-var myRetail = angular.module('myRetail', ['filters']);
+var myRetail = angular.module('myRetail', ['ngCookies', 'filters']);
 myRetail.
 	config(['$routeProvider', function($routeProvider) {
 		$routeProvider.
