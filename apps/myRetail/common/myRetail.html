@@ -20,7 +20,7 @@
 		
 		<section ng-controller="MenuCtrl" id="navigation" class="navbar navbar-fixed-top">
 			<div class="btn-group navbar-inner container">
-				<a href="#" class="btn btn-large back"><i class="icon-medium icon-unshare"></i></a>
+				<a href="#" ng-click="goBack()" class="btn btn-large back"><i class="icon-medium icon-unshare"></i></a>
 				<a href="#/home" class="btn btn-large home"><i class="icon-medium icon-home"></i> <span class="title">{{'myStore'|_}}</span></a>
 				<a href="#/messages" class="btn btn-large messages"><i class="icon-medium icon-globe"></i></a>
 				<a href="#/menu" class="btn btn-large menu"><i class="icon-medium icon-justify"></i></a>
@@ -45,6 +45,7 @@
 		<script type="text/javascript" src="js/libs/jquery-1.8.3.js"></script>
 		<script type="text/javascript" src="js/libs/bootstrap.js"></script>
 		<script type="text/javascript" src="js/libs/angular.js"></script>
+		<script type="text/javascript" src="js/libs/angular-cookies.js"></script>
 		<script type="text/javascript" src="js/libs/moment.min.js"></script>
 		<script type="text/javascript" src="js/libs/underscore-min.js"></script>
 		<script type="text/javascript" src="js/libs/bootstrap.pull-down.js"></script>
@@ -69,6 +70,7 @@
 		<script type="text/javascript" src="js/controllers/ProductCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/ShoppingCartListCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/LoginCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/LogoutCtrl.js"></script>
 		
 		<!-- Models -->
 		<script type="text/javascript" src="js/models/OfferModel.js"></script>
@@ -76,6 +78,7 @@
 		<script type="text/javascript" src="js/models/ProductModel.js"></script>
 		<script type="text/javascript" src="js/models/ShoppingCartModel.js"></script>
 		<script type="text/javascript" src="js/models/UserModel.js"></script>
+		<script type="text/javascript" src="js/models/LoyalityModel.js"></script>
 		<!-- Services -->
 		<script type="text/javascript" src="js/filters.js"></script>
 		<script type="text/javascript" src="js/services/LoadingDisp.js"></script>

@@ -1,13 +1,13 @@
 
-var MessageDisp = function () {
+var MessageDisp = function (_t) {
 
 	this.flash = function (text, type) {
-		alert(text);
+		alert(_t(text));
 	};
 
 };
 
-myRetail.factory('messageDisp', function () {
-	var messageDisp = new MessageDisp();
+myRetail.factory('messageDisp', function (_t) {
+	var messageDisp = new MessageDisp(_t);
 	return messageDisp;
 });

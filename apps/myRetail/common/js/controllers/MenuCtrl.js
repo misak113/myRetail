@@ -26,9 +26,9 @@ function MenuCtrl($scope) {
 	            			url: '/setting',
 	            			icon: 'cogwheel'
 	            		},{
-	            			name: 'Exit',
-	            			controller: 'GroupQRCodeCtrl',
-	            			url: '/exit',
+	            			name: 'Odhlásit',
+	            			controller: 'LogoutCtrl',
+	            			url: '/logout',
 	            			icon: 'power'
 	            		}
 	            	];
