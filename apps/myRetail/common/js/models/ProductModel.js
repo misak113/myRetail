@@ -2,7 +2,7 @@
  * 
  */
 
-var ProductModel = function ($http) {
+var ProductModel = function ($http, config) {
 	
 	this.getProduct = function (id, cb) {
         $http.get(config.serverUrl+'/product').success(function(res) {
@@ -12,7 +12,7 @@ var ProductModel = function ($http) {
 	
 };
 
-myRetail.factory('productModel', function ($http) {
-	var productModel = new ProductModel($http);
+myRetail.factory('productModel', function ($http, config) {
+	var productModel = new ProductModel($http, config);
 	return productModel;
 });

@@ -20,7 +20,7 @@
 		
 		<section ng-controller="MenuCtrl" id="navigation" class="navbar navbar-fixed-top">
 			<div class="btn-group navbar-inner container">
-				<a href="#" ng-click="goBack()" class="btn btn-large back"><i class="icon-medium icon-unshare"></i></a>
+				<a href="#" ng-click="goBack($event)" class="btn btn-large back"><i class="icon-medium icon-unshare"></i></a>
 				<a href="#/home" class="btn btn-large home"><i class="icon-medium icon-home"></i> <span class="title">{{'myStore'|_}}</span></a>
 				<a href="#/messages" class="btn btn-large messages"><i class="icon-medium icon-globe"></i></a>
 				<a href="#/menu" class="btn btn-large menu"><i class="icon-medium icon-justify"></i></a>
