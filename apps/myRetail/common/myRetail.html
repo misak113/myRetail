@@ -23,10 +23,15 @@
 				<a href="#" ng-click="goBack($event)" class="btn btn-large back"><i class="icon-medium icon-unshare"></i></a>
 				<a href="#/home" class="btn btn-large home"><i class="icon-medium icon-home"></i> <span class="title">{{'myStore'|_}}</span></a>
 				<a href="#/messages" class="btn btn-large messages"><i class="icon-medium icon-globe"></i>
-					<span class="badge badge-info count" ng-show="countNotReadMessages > 0"
-						ng-class="{'badge-success': typeMessagesInfo, 'badge-danger': typeMessagesError, 'badge-warning': typeMessagesWarning}">{{countNotReadMessages}}</span>
+					<span class="badge count" ng-show="countNotReadMessages > 0"
+						ng-class="{'badge-success': typeMessagesInfo, 'badge-important': typeMessagesError, 'badge-warning': typeMessagesWarning, 'badge-info': !typeMessagesWarning && !typeMessagesError && !typeMessagesInfo}">{{countNotReadMessages}}</span>
 				</a>
 				<a href="#/menu" class="btn btn-large menu"><i class="icon-medium icon-justify"></i></a>
+			</div>
+
+			<div ng-repeat="message in newMessages" class="alert new-message" ng-class="{'alert-error': message.isError, 'alert-info': message.isInfo, 'alert-success': message.isSuccess}">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{{message.title}}</strong> {{message.text}}
 			</div>
 		</section>
 

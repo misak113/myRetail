@@ -9,6 +9,7 @@ var NotificationModel = function (socket) {
 		{
 			oid: Math.random(),
 			title: 'Nové nabídky',
+			isNew: true,
 			viewed: false,
 			type: 'info',
 			text: 'Přišly vám nové individuální nabídky pouze pro Vás.',
@@ -16,6 +17,7 @@ var NotificationModel = function (socket) {
 		},{
 			oid: Math.random(),
 			title: 'Spojení ztraceno',
+			isNew: true,
 			viewed: false,
 			type: 'warning',
 			text: 'Během provádění operací bylo ztraceno internetové připojení.',
@@ -23,6 +25,7 @@ var NotificationModel = function (socket) {
 		},{
 			oid: Math.random(),
 			title: 'Nabídka nechtěna',
+			isNew: false,
 			viewed: true,
 			type: 'info',
 			text: 'Doporučenou nabídku jste označil jako nechtěnou. Již se Vám nebude zobrazovat.',
@@ -30,6 +33,7 @@ var NotificationModel = function (socket) {
 		},{
 			oid: Math.random(),
 			title: 'Proveden nákup',
+			isNew: false,
 			viewed: true,
 			type: 'info',
 			text: 'Provedl jste nákup v pobočce Tchibo v obchodním centru Chodov',
@@ -37,6 +41,7 @@ var NotificationModel = function (socket) {
 		},{
 			oid: Math.random(),
 			title: 'Nové nabídky',
+			isNew: false,
 			viewed: true,
 			type: 'info',
 			text: 'Přišly vám nové individuální nabídky pouze pro Vás.',
@@ -44,6 +49,7 @@ var NotificationModel = function (socket) {
 		},{
 			oid: Math.random(),
 			title: 'Neočekávaná chyba',
+			isNew: false,
 			viewed: true,
 			type: 'error',
 			text: 'Během provádění operace nastala neočekávaná chyba',
@@ -51,6 +57,7 @@ var NotificationModel = function (socket) {
 		},{
 			oid: Math.random(),
 			title: 'Interspar Stodůlky',
+			isNew: false,
 			viewed: true,
 			type: 'info',
 			text: 'Vítáme Vás na pobočce intersparu ve Stodůlkách.',
@@ -66,6 +73,14 @@ NotificationModel.prototype = _.extend(NotificationModel.prototype, {
 	},
 
 	addMessage: function (message) {
+		if (typeof this.notifications[0] !== 'undefined' 
+			&& this.notifications[0].type === message.type
+			&& this.notifications[0].title === message.title
+			&& this.notifications[0].text === message.text
+			&& this.notifications[0].viewed === message.viewed
+			&& this.notifications[0].isNew === message.isNew
+			) return;
+
 		message.oid = Math.random();
 		this.notifications.unshift(message);
 		this.trigger('change');
@@ -73,12 +88,22 @@ NotificationModel.prototype = _.extend(NotificationModel.prototype, {
 
 	getNotRead: function (callback) {
 		var self = this;
-		var countIt = function () {
-			var count = _.filter(self.notifications, function (not) { return !not.viewed; });
-			callback(count);
+		var sendIt = function () {
+			var nots = _.filter(self.notifications, function (not) { return !not.viewed; });
+			callback(nots);
 		}
-		setTimeout(countIt, 100);
-		this.on('change', countIt);
+		setTimeout(sendIt, 100);
+		this.on('change', sendIt);
+	},
+
+	getNewNotifications: function (callback) {
+		var self = this;
+		var sendIt = function () {
+			var nots = _.filter(self.notifications, function (not) { return not.isNew; });
+			callback(nots);
+		}
+		setTimeout(sendIt, 100);
+		this.on('change', sendIt);
 	},
 
 	setAsRead: function (nots) {
@@ -89,6 +114,18 @@ NotificationModel.prototype = _.extend(NotificationModel.prototype, {
 
 		_.forEach(this.notifications, function (notification) {
 			if (_.contains(notIds, notification.oid)) notification.viewed = true;
+		});
+		this.trigger('change');
+	},
+
+	setAsOld: function (nots) {
+		if (typeof nots === 'undefined') return;		
+		if (!_.isArray(nots)) nots = [nots];
+
+		var notIds = _.map(nots, function (not) { return not.oid; });
+
+		_.forEach(this.notifications, function (notification) {
+			if (_.contains(notIds, notification.oid)) notification.isNew = false;
 		});
 		this.trigger('change');
 	}

@@ -4,6 +4,7 @@ var MessageDisp = function (_t, notificationModel) {
 	this.flash = function (text, type) {
 		var message = {
 			title: _t('Zpráva aplikace'),
+			isNew: true,
 			viewed: false,
 			type: type,
 			text: _t(text),

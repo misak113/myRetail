@@ -175,6 +175,11 @@ h3 {
   vertical-align: bottom;
   line-height: 24px;
 }
+.navbar .new-message {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
 /* Login */
 
 #login-container .logo-container {
