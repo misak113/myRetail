@@ -111,6 +111,7 @@ h3 {
   height: 100%;
 }
 /* Bootstrap extension */
+
 .well {
   background-color: #656565;
 }
@@ -130,6 +131,10 @@ h3 {
 }
 .pull-down.disabled {
   position: relative;
+}
+.new {
+  background-color: #ddcccc;
+  -webkit-animation: warning 2s linear 0 infinite normal;
 }
 /* Navbar */
 
@@ -151,6 +156,16 @@ h3 {
 .navbar .navbar-inner.btn-group .btn.menu,
 .navbar .navbar-inner.btn-group .btn.back {
   width: 15%;
+}
+.navbar .navbar-inner.btn-group .btn.messages .count {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  padding-top: 1px;
 }
 .navbar .navbar-inner.btn-group .title {
   font-size: 15px;
@@ -244,10 +259,6 @@ h3 {
 #offerList-container .offer .offer-image {
   width: 100px;
   height: 100px;
-}
-#offerList-container .offer.new {
-  background-color: #ddcccc;
-  -webkit-animation: warning 2s linear 0 infinite normal;
 }
 #offerList-container .offer .close {
   position: relative;

@@ -37,7 +37,8 @@
 				loading: function (status) {
 					self.loading(status, options.pullDown);
 				},
-				element: options.pullDown
+				element: options.pullDown,
+				container: this.container
 			};
 		};
 

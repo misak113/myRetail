@@ -18,11 +18,14 @@
 	</head>
 	<body ng-controller="AppCtrl" id="content"><!-- style="display: none" -->	
 		
-		<section ng-controller="MenuCtrl" id="navigation" class="navbar navbar-fixed-top">
+		<section ng-controller="NavCtrl" id="navigation" class="navbar navbar-fixed-top">
 			<div class="btn-group navbar-inner container">
 				<a href="#" ng-click="goBack($event)" class="btn btn-large back"><i class="icon-medium icon-unshare"></i></a>
 				<a href="#/home" class="btn btn-large home"><i class="icon-medium icon-home"></i> <span class="title">{{'myStore'|_}}</span></a>
-				<a href="#/messages" class="btn btn-large messages"><i class="icon-medium icon-globe"></i></a>
+				<a href="#/messages" class="btn btn-large messages"><i class="icon-medium icon-globe"></i>
+					<span class="badge badge-info count" ng-show="countNotReadMessages > 0"
+						ng-class="{'badge-success': typeMessagesInfo, 'badge-danger': typeMessagesError, 'badge-warning': typeMessagesWarning}">{{countNotReadMessages}}</span>
+				</a>
 				<a href="#/menu" class="btn btn-large menu"><i class="icon-medium icon-justify"></i></a>
 			</div>
 		</section>
@@ -50,6 +53,8 @@
 		<script type="text/javascript" src="js/libs/underscore-min.js"></script>
 		<script type="text/javascript" src="js/libs/bootstrap.pull-down.js"></script>
 		<script type="text/javascript" src="socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="js/libs/mootools-core-1.4.5-full-nocompat.js"></script>
+		<script type="text/javascript" src="js/libs/EventEmitter.js"></script>
 		
 		<!-- Configurations -->
 		<script type="text/javascript" src="js/initOptions.js"></script>
@@ -71,6 +76,7 @@
 		<script type="text/javascript" src="js/controllers/ShoppingCartListCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/LoginCtrl.js"></script>
 		<script type="text/javascript" src="js/controllers/LogoutCtrl.js"></script>
+		<script type="text/javascript" src="js/controllers/NavCtrl.js"></script>
 		
 		<!-- Models -->
 		<script type="text/javascript" src="js/models/OfferModel.js"></script>
@@ -78,7 +84,8 @@
 		<script type="text/javascript" src="js/models/ProductModel.js"></script>
 		<script type="text/javascript" src="js/models/ShoppingCartModel.js"></script>
 		<script type="text/javascript" src="js/models/UserModel.js"></script>
-		<script type="text/javascript" src="js/models/LoyalityModel.js"></script>
+		<script type="text/javascript" src="js/models/LoyaltyModel.js"></script>
+		<script type="text/javascript" src="js/models/NotificationModel.js"></script>
 		<!-- Services -->
 		<script type="text/javascript" src="js/filters.js"></script>
 		<script type="text/javascript" src="js/services/LoadingDisp.js"></script>

@@ -1,8 +1,8 @@
 
 // tento controller je spuštěn vždy, proto je využíván jako spouštěč všech must-run služeb
-function AppCtrl($scope, pullDown, $timeout, userModel, $location, messageDisp, $route, $window) {
+function AppCtrl($scope, pullDown, $timeout, userModel, $location, messageDisp, $route, loadingDisp) {
 	var loginCtrls = ['LoginCtrl'];
-	var allowedCtrls = ['LoginCtrl', 'MenuCtrl'];
+	var allowedCtrls = ['LoginCtrl', 'MenuCtrl', 'MessagesCtrl'];
 
 	// funkce, která checkuje, zda je přihlášen
 	var checkAuth = function (next) {
@@ -57,9 +57,12 @@ function AppCtrl($scope, pullDown, $timeout, userModel, $location, messageDisp, 
  	});
 
 
-
- 	$scope.goBack = function($event) {
- 		$event.preventDefault();
-		$window.history.back(); // @todo předělat na angular $location
-	};
+	// reload
+	loadingDisp.onReload(function () {
+		// if done, hide pullDown
+		$timeout(function () { 
+			$route.reload();
+			loadingDisp.loading(false); 
+		}, 1000);
+	});
 };

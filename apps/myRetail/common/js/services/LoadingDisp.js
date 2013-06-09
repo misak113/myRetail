@@ -19,6 +19,12 @@ var LoadingDisp = function (pullDown) {
 		}
 	};
 
+	this.onReload = function (callback) {
+		pullDown.container.off('pullDown').on('pullDown', function (ev) {
+			callback();
+		});
+	};
+
 };
 
 myRetail.factory('loadingDisp', function (pullDown) {
