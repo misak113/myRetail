@@ -2,7 +2,7 @@
 function NavCtrl($scope, $window, notificationModel, $timeout) {
 
 	// message count
-	notificationModel.getNotRead(function (notRead) {
+	notificationModel.bindNotRead(function (notRead) {
 		// pokud nastane změna, rovnou se to změní realtime
 		$scope.countNotReadMessages = notRead.length;
 		$scope.typeMessagesInfo = _.all(notRead, function (n) { return n.type === 'info'; });
@@ -10,7 +10,7 @@ function NavCtrl($scope, $window, notificationModel, $timeout) {
 		$scope.typeMessagesWarning = _.all(notRead, function (n) { return n.type === 'warning'; });
 		$scope.$apply();
 	});
-	notificationModel.getNewNotifications(function (notifications) {
+	notificationModel.bindNewNotifications(function (notifications) {
 		// pokud nastane změna, rovnou se to změní realtime
 		$scope.newMessages = [];
 		_.forEach(notifications, function (not) {

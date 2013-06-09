@@ -86,7 +86,7 @@ NotificationModel.prototype = _.extend(NotificationModel.prototype, {
 		this.trigger('change');
 	},
 
-	getNotRead: function (callback) {
+	bindNotRead: function (callback) {
 		var self = this;
 		var sendIt = function () {
 			var nots = _.filter(self.notifications, function (not) { return !not.viewed; });
@@ -96,7 +96,7 @@ NotificationModel.prototype = _.extend(NotificationModel.prototype, {
 		this.on('change', sendIt);
 	},
 
-	getNewNotifications: function (callback) {
+	bindNewNotifications: function (callback) {
 		var self = this;
 		var sendIt = function () {
 			var nots = _.filter(self.notifications, function (not) { return not.isNew; });

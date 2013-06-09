@@ -254,6 +254,15 @@ h3 {
   background-color: white;
   border-color: black;
 }
+#messages-container .message.error {
+  background-color: #bd362f;
+}
+#messages-container .message.success {
+  background-color: #387038;
+}
+#messages-container .message.warning {
+  background-color: #ad6704;
+}
 /** OfferList */
 
 #offerList-container .offer {
