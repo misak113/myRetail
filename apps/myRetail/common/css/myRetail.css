@@ -1,4 +1,5 @@
 /* Reset CSS */
+
 a,
 abbr,
 address,
@@ -77,14 +78,16 @@ html {
   height: 100%;
 }
 /* Worklight container div */
+
 #content {
   background-color: #333939;
   margin: 0 auto 0 auto;
   padding-top: 40px;
   height: 85%;
-  color: #EEE8E8;
+  color: #eee8e8;
 }
 /* Default */
+
 #page {
   text-align: center;
 }
@@ -108,24 +111,26 @@ h3 {
   height: 100%;
 }
 /* Bootstrap extension */
+
 .well.soft {
-  background-color: #F0E9C9;
+  background-color: #f0e9c9;
 }
 .well.soft:hover {
-  background-color: #F0EBD4;
+  background-color: #f0ebd4;
 }
 .pull-down {
   z-index: 300;
-  background-color: #666C6C;
+  background-color: #666c6c;
   position: fixed;
   width: 100%;
   padding-top: 1000px;
-  top: -959px;
+  top: -953px;
 }
 .pull-down.disabled {
   position: relative;
 }
 /* Navbar */
+
 .navbar .navbar-inner.btn-group {
   margin: 0;
   width: 100%;
@@ -133,8 +138,8 @@ h3 {
 .navbar .navbar-inner.btn-group .btn {
   padding-left: 0;
   padding-right: 0;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-radius: 0;
 }
 .navbar .navbar-inner.btn-group .btn.home {
@@ -154,6 +159,7 @@ h3 {
   line-height: 24px;
 }
 /* Login */
+
 #login-container .logo-container {
   position: relative;
   z-index: -1;
@@ -187,6 +193,7 @@ h3 {
   margin-left: 0;
 }
 /* Home */
+
 #home-container .qr-code-container {
   position: relative;
   z-index: -1;
@@ -196,16 +203,18 @@ h3 {
   margin-right: auto;
 }
 /* Menu */
+
 #menu-container .nav li a {
-  background-color: #EEEEEE;
-  border-color: #000000;
+  background-color: #eeeeee;
+  border-color: black;
   font-size: 160%;
 }
 #menu-container .nav li a:hover {
-  background-color: #FFFFFF;
-  border-color: #000000;
+  background-color: white;
+  border-color: black;
 }
 /** OfferList */
+
 #offerList-container .offer {
   position: relative;
   padding: 8px;
@@ -235,6 +244,7 @@ h3 {
   }
 }
 /** Offer */
+
 #offer-container .offer .image-wrapper {
   text-align: center;
 }
@@ -243,6 +253,7 @@ h3 {
   max-width: 300px;
 }
 /** Categories of offers */
+
 .category-label {
   position: absolute;
   top: 0px;
@@ -260,6 +271,7 @@ h3 {
   background-image: url('../images/offers/category-label-segment.png');
 }
 /** Purchase */
+
 #purchase-container .purchase-items .purchase-item {
   margin-top: 2px;
   margin-bottom: 2px;
@@ -285,18 +297,22 @@ h3 {
   max-height: 80px;
 }
 /* Large desktop */
+
 @media (min-width: 1200px) {
   
 }
 /* Portrait tablet to landscape and desktop */
+
 @media (min-width: 768px) and (max-width: 979px) {
   
 }
 /* Landscape phone to portrait tablet */
+
 @media (max-width: 767px) {
   
 }
 /* Landscape phones and down */
+
 @media (max-width: 480px) {
   
 }
