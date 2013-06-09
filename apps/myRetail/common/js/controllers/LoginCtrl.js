@@ -21,7 +21,7 @@ function LoginCtrl ($scope, $location, userModel, loadingDisp, messageDisp, $coo
 				return messageDisp.flash('Při přihlašování nastala chyba, zkuste znovu později.', 'error');
 			}
 
-			//messageDisp.flash('Byl jste úspěšně přihlášen.')
+			messageDisp.flash('Byl jste úspěšně přihlášen.')
 			$location.path('/home');
 			$scope.$apply();
 		});

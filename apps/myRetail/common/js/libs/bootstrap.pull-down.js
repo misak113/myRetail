@@ -56,8 +56,9 @@
 
 		this.loading = function (status, pullDown) {
 			if (status === true) {
-				pullDown.addClass('pulled');
-				scrolledAction(pullDown);
+				pullDown.addClass('working');
+				stopListen(pullDown);
+				statusUpdate(pullDown);
 			} else {
 				stopWorking(jQuery.Event("pullDownStopWorking"), pullDown);
 			}
