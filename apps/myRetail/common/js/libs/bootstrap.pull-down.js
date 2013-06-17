@@ -60,7 +60,7 @@
 				stopListen(pullDown);
 				statusUpdate(pullDown);
 			} else {
-				stopWorking(jQuery.Event("pullDownStopWorking"), pullDown);
+				stopWorking($.Event("pullDownStopWorking"), pullDown);
 			}
 
 		};
@@ -225,7 +225,7 @@
 		};
 
 		var eventTriggerPullDown = function (pullDown) {
-			var ev = jQuery.Event("pullDown");
+			var ev = $.Event("pullDown");
 			ev.pullDownElement = pullDown;
 			self.container.trigger('pullDown', ev);
 		};

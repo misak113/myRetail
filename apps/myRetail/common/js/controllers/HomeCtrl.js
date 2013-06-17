@@ -1,7 +1,9 @@
+'use strict';
+// use jQuery.hammer
+
 /**
  * 
  */
-
 function HomeCtrl($scope, offerModel, loyaltyModel) {
 
 	offerModel.getOffers(function (offers) {
@@ -27,4 +29,11 @@ function HomeCtrl($scope, offerModel, loyaltyModel) {
 		});
 	});
 
+	// bind slide on QR code
+	$scope.nextQR = function ($event) {
+		alert('next QR');
+	};
+
+	// @todo předělat do dirktiv angular
+	jQuery('#qr-code-container .qr-code').hammer().on('swipeleft', $scope.nextQR);
 };

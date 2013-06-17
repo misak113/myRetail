@@ -1,4 +1,6 @@
 
+// use jQuery
+
 /**
  * AngularJS setup
  * 	Routes
@@ -28,7 +30,7 @@ myRetail.factory('socket', function (config) {
 });
 // pullDown service
 myRetail.factory('pullDown', function () {
-	return $.pullDown.start({container: $('.ng-view')});
+	return jQuery.pullDown.start({container: jQuery('.ng-view')});
 });
 
 

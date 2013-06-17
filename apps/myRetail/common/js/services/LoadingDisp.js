@@ -1,4 +1,6 @@
 
+// use jQuery
+
 var LoadingDisp = function (pullDown) {
 	var loading = false;
 	
