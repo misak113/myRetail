@@ -1,0 +1,366 @@
+
+/* Stylesheet content from css/myRetail.css in folder common */
+/* Reset CSS */
+
+a,
+abbr,
+address,
+article,
+aside,
+audio,
+b,
+blockquote,
+body,
+canvas,
+caption,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+dialog,
+div,
+dl,
+dt,
+em,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+p,
+pre,
+q,
+samp,
+section,
+small,
+span,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
+/* Worklight container div */
+
+#content {
+  background-color: #333939;
+  margin: 0 auto 0 auto;
+  padding-top: 40px;
+  height: 85%;
+  color: #eee8e8;
+}
+/* Default */
+
+#page {
+  text-align: center;
+}
+#menu .btn {
+  margin: 10px;
+  display: block;
+}
+section.container {
+  position: relative;
+  width: 97%;
+  max-width: 760px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+.ng-view {
+  height: 100%;
+}
+/* Bootstrap extension */
+
+.well {
+  background-color: #656565;
+}
+.well.soft {
+  background-color: #f0e9c9;
+}
+.well.soft:hover {
+  background-color: #f0ebd4;
+}
+.pull-down {
+  z-index: 300;
+  background-color: #666c6c;
+  position: fixed;
+  width: 100%;
+  padding-top: 1000px;
+  top: -953px;
+}
+.pull-down.disabled {
+  position: relative;
+}
+.new {
+  background-color: #ddcccc;
+  -webkit-animation: warning 2s linear 0 infinite normal;
+}
+/* Navbar */
+
+.navbar .navbar-inner.btn-group {
+  margin: 0;
+  width: 100%;
+}
+.navbar .navbar-inner.btn-group .btn {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 0;
+}
+.navbar .navbar-inner.btn-group .btn.home {
+  width: 55%;
+}
+.navbar .navbar-inner.btn-group .btn.messages,
+.navbar .navbar-inner.btn-group .btn.menu,
+.navbar .navbar-inner.btn-group .btn.back {
+  width: 15%;
+}
+.navbar .navbar-inner.btn-group .btn.messages .count {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
+.navbar .navbar-inner.btn-group .title {
+  font-size: 15px;
+  font-weight: bold;
+  display: inline-block;
+  height: 24px;
+  vertical-align: bottom;
+  line-height: 24px;
+}
+.navbar .new-message {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+/* Login */
+
+#login-container .logo-container {
+  position: relative;
+  z-index: -1;
+  bottom: 0;
+  width: 200px;
+  height: 237px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#login-container .control-group {
+  text-align: center;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#login-container .control-group .text-input,
+#login-container .control-group .checkbox {
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 90%;
+  max-width: 200px;
+}
+#login-container .control-group .checkbox {
+  display: inline-block;
+  max-width: 160px;
+  width: 70%;
+}
+#login-container .control-group .checkbox .checkbox-input {
+  margin-left: 0;
+}
+/* Home */
+
+#home-container .qr-code-container {
+  position: relative;
+  z-index: -1;
+  bottom: 0;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#home-container .loyalty .points {
+  margin: 7px;
+  text-align: center;
+}
+#home-container .loyalty .points .badge {
+  font-size: 20px;
+  line-height: 24px;
+}
+#home-container .loyalty .preview {
+  margin-bottom: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 8px;
+}
+#home-container .loyalty .scored {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  height: 12px;
+}
+/* Menu */
+
+#menu-container .nav li a {
+  background-color: #eeeeee;
+  border-color: black;
+  font-size: 160%;
+}
+#menu-container .nav li a:hover {
+  background-color: white;
+  border-color: black;
+}
+#messages-container .message.error {
+  background-color: #bd362f;
+}
+#messages-container .message.success {
+  background-color: #387038;
+}
+#messages-container .message.warning {
+  background-color: #ad6704;
+}
+/** OfferList */
+
+#offerList-container .offer {
+  position: relative;
+  padding: 8px;
+  margin: 0px 0 4px 0;
+}
+#offerList-container .offer .offer-image {
+  width: 100px;
+  height: 100px;
+}
+#offerList-container .offer .close {
+  position: relative;
+  z-index: 10;
+}
+@-webkit-keyframes warning {
+  0% {
+    background-color: #ddcccc;
+  }
+  50% {
+    background-color: inherit;
+  }
+  100% {
+    background-color: #ddcccc;
+  }
+}
+/** Offer */
+
+#offer-container .offer .image-wrapper {
+  text-align: center;
+}
+#offer-container .offer .offer-image {
+  width: 100%;
+  max-width: 300px;
+}
+/** Categories of offers */
+
+.category-label {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 90px;
+  height: 90px;
+}
+.offer.common .category-label {
+  background-image: url('../images/offers/category-label-common.png');
+}
+.offer.personal .category-label {
+  background-image: url('../images/offers/category-label-personal.png');
+}
+.offer.segment .category-label {
+  background-image: url('../images/offers/category-label-segment.png');
+}
+/** Purchase */
+
+#purchase-container .purchase-items .purchase-item {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 8px;
+}
+#purchase-container .purchase-items .purchase-item .purchase-item-image {
+  width: 57px;
+  height: 57px;
+}
+#purchase-container .purchase-items .purchase-item.total .badge {
+  font-size: 24px;
+  line-height: 28px;
+}
+#purchase-container .purchase-items .purchase-info {
+  text-align: center;
+}
+#purchase-container .purchase-items .purchase-info .badge {
+  font-size: 40px;
+  line-height: 44px;
+}
+#purchase-container .purchase-items .purchase-info .payment-type {
+  max-width: 100%;
+  max-height: 80px;
+}
+/* Large desktop */
+
+@media (min-width: 1200px) {
+  
+}
+/* Portrait tablet to landscape and desktop */
+
+@media (min-width: 768px) and (max-width: 979px) {
+  
+}
+/* Landscape phone to portrait tablet */
+
+@media (max-width: 767px) {
+  
+}
+/* Landscape phones and down */
+
+@media (max-width: 480px) {
+  
+}

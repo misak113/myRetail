@@ -1,0 +1,23 @@
+
+		<section class="container" id="login-container">
+			<div class="logo-container">
+				<img class="logo" src="images/myStore-logo-big-black.png" alt="{{'myStore app'|_}}" />
+			</div>
+
+			<form>
+			  <div class="control-group">
+			      <input class="text-input" type="text" id="inputUsername" ng-model="username" placeholder="{{'uživatelské jméno'|_}}">
+			  </div>
+			  <div class="control-group">
+			      <input class="text-input" type="password" id="inputLoginPassword" ng-model="password" placeholder="{{'heslo'|_}}">
+			  </div>
+			  <div class="control-group">
+			      <label class="checkbox">
+			        <input class="checkbox-input" type="checkbox" id="checkboxLoginRemember" ng-model="remember"> {{'neodhlašovat'|_}}
+			      </label>
+			  </div>
+			  <div class="control-group">
+			      <button type="submit" class="btn" ng-click="login()" ng-disabled="loading">Přihlásit</button>
+			  </div>
+			</form>
+		</section>

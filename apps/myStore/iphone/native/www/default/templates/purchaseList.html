@@ -1,0 +1,94 @@
+
+<section ng-controller="ShoppingCartListCtrl" class="container" id="shoppingCartList-container">
+	
+	<h2>{{'Nákupní seznamy'|_}}</h2>
+	<table class="personal table table-hover table-bordered">
+		<tr>
+			<td class="well soft">
+				<a ng-href="#/create-shopping-cart">
+					<h5><i class="icon-large icon-circle-plus"></i> {{'Vytvořit nákupní seznam'|_}}</h5>
+				</a>
+			</td>
+		</tr>
+		<tr ng-repeat="shoppingCart in shoppingCartList">
+			<td class="well">
+				<div>
+					<a ng-href="#/shopping-cart/{{shoppingCart._id}}">
+						<h4>
+							{{shoppingCart.name}}
+							<small>{{shoppingCart.date|formatDate:'D. M. YY H:mm'}}</small>
+						</h4>
+					</a>
+				</div>
+				<span class="badge badge-success">
+					{{shoppingCart.totalPrice | price:shoppingCart.currency}}
+				</span>
+				<span class="badge">
+					{{shoppingCart.originalPrice | price:shoppingCart.currency}}
+				</span>
+				<span class="badge badge-inverse">
+					{{shoppingCart.items.length}} {{'pložek'|_}}
+				</span>
+			</td>
+		</tr>
+	</table>
+
+	<!-- skupinové seznamy -->
+	<table ng-repeat="group in groups" class="group table table-hover table-bordered">
+		<tr>
+			<th class="well soft">
+				<a ng-href="#/group/{{group._id}}">
+					<h3><i class="icon-large icon-group"></i> {{group.name}}</h3>
+				</a>
+			</th>
+		</tr>
+		<tr ng-repeat="shoppingCart in group.shoppingCartList">
+			<td class="well">
+				<div>
+					<a ng-href="#/shopping-cart/{{shoppingCart._id}}">
+						<h4>
+							{{shoppingCart.name}}
+							<small>{{shoppingCart.date|formatDate:'D. M. YY H:mm'}}</small>
+						</h4>
+					</a>
+				</div>
+				<span class="badge badge-success">
+					{{shoppingCart.totalPrice | price:shoppingCart.currency}}
+				</span>
+				<span class="badge">
+					{{shoppingCart.originalPrice | price:shoppingCart.currency}}
+				</span>
+				<span class="badge badge-inverse">
+					{{shoppingCart.items.length}} {{'pložek'|_}}
+				</span>
+			</td>
+		</tr>
+	</table>
+	
+</section>
+
+<section ng-controller="PurchaseListCtrl" class="container" id="purchaseList-container">
+	
+	<h2>{{'Nákupy'|_}}</h2>
+	<table class="table table-hover table-bordered">
+		<tr ng-repeat="purchase in purchases">
+			<td class="well">
+				<div>
+					<a ng-href="#/purchase/{{purchase._id}}">
+						<h4>
+							{{purchase.branch.name}}
+							<small>{{purchase.date|formatDate:'D. M. YY H:mm'}}</small>
+						</h4>
+					</a>
+				</div>
+				<span class="badge badge-success">
+					{{purchase.totalPrice | price:purchase.currency}}
+				</span>
+				<span class="badge">
+					{{purchase.originalPrice | price:purchase.currency}}
+				</span>
+			</td>
+		</tr>
+	</table>
+	
+</section>

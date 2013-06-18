@@ -1,0 +1,219 @@
+
+.pull-down {
+	background-color: #EEEEEE;
+	height: 60px;
+	overflow: hidden;
+	
+	.indicator-click {
+		float: left;
+		margin: 14px;
+	}
+	.indicator {
+		-moz-animation: noRotate 0.5s ease 0 1 normal;
+		-moz-transform: rotate(0deg);
+		-o-animation: noRotate 0.5s ease 0 1 normal;
+		-o-transform: rotate(0deg);
+		-webkit-animation: noRotate 0.5s ease 0 1 normal;
+		-webkit-transform: rotate(0deg);
+		float: left;
+		margin: 14px;
+		display: none;
+	}
+	.indicator-working {
+		-moz-animation: rotatingLeft 1s linear 0 infinite normal;
+		-moz-transform: rotate(0deg);
+		-o-animation: rotatingLeft 1s linear 0 infinite normal;
+		-o-transform: rotate(0deg);
+		-webkit-animation: rotatingLeft 1s linear 0 infinite normal;
+		-webkit-transform: rotate(0deg);
+		float: left;
+		margin: 14px;
+		display: none;
+	}
+	.stop {
+		display: block;
+		
+		&.close {
+			float: right;
+			margin: 14px;
+		}
+		display: none;
+	}
+	.pulled-label {
+		margin: 20px;
+		float: left;
+		display: none;
+	}
+	.pull-label {
+		margin: 20px;
+		float: left;
+		display: none;
+	}
+	.default-label {
+		margin: 20px;
+		float: left;
+	}
+	.working-label {
+		display: none;
+		margin: 20px;
+		float: left;
+	}
+
+	&.turn-on {
+		margin-top: -60px;
+
+
+		.indicator-click {
+			display: none;
+		}
+		.indicator {
+			display: block;
+		}
+		.pulled-label {
+			display: none;
+		}
+		.pull-label {
+			display: block;
+		}
+		.default-label {
+			display: none;
+		}
+
+		&.pulled {
+
+			.pulled-label {
+				display: block;
+			}
+			.pull-label {
+				display: none;
+			}
+
+			.indicator {
+				-moz-animation: halfRotate 0.5s ease 0 1 normal;
+				-moz-transform: rotate(-180deg);
+				-o-animation: halfRotate 0.5s ease 0 1 normal;
+				-o-transform: rotate(-180deg);
+				-webkit-animation: halfRotate 0.5s ease 0 1 normal;
+				-webkit-transform: rotate(-180deg);
+			}
+		}
+		&.down {
+			-moz-animation: none;
+			-o-animation: none;
+			-webkit-animation: none;
+		}
+	}
+
+	&.working {
+		.indicator-working {
+			display: block;
+		}
+		.indicator-click {
+			display: none !important;
+		}
+		.indicator {
+			display: none !important;
+		}
+		.stop {
+			display: block;
+		}
+		.pulled-label {
+			display: none !important;
+		}
+		.pull-label {
+			display: none !important;
+		}
+		.default-label {
+			display: none !important;
+		}
+		.working-label {
+			display: block;
+		}
+	}
+
+}
+
+@-webkit-keyframes halfRotate {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+
+	to {
+		-webkit-transform: rotate(-180deg);
+	}
+}
+@-webkit-keyframes noRotate {
+	from {
+		-webkit-transform: rotate(-180deg);
+	}
+
+	to {
+		-webkit-transform: rotate(0deg);
+	}
+}
+@-webkit-keyframes rotatingLeft {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+
+	to {
+		-webkit-transform: rotate(-360deg);
+	}
+}
+
+
+@-moz-keyframes halfRotate {
+	from {
+		-moz-transform: rotate(0deg);
+	}
+
+	to {
+		-moz-transform: rotate(-180deg);
+	}
+}
+@-moz-keyframes noRotate {
+	from {
+		-moz-transform: rotate(-180deg);
+	}
+
+	to {
+		-moz-transform: rotate(0deg);
+	}
+}
+@-moz-keyframes rotatingLeft {
+	from {
+		-moz-transform: rotate(0deg);
+	}
+
+	to {
+		-moz-transform: rotate(-360deg);
+	}
+}
+
+@-o-keyframes halfRotate {
+	from {
+		-o-transform: rotate(0deg);
+	}
+
+	to {
+		-o-transform: rotate(-180deg);
+	}
+} 
+@-o-keyframes noRotate {
+	from {
+		-o-transform: rotate(-180deg);
+	}
+
+	to {
+		-o-transform: rotate(0deg);
+	}
+} 
+@-o-keyframes rotatingLeft {
+	from {
+		-o-transform: rotate(0deg);
+	}
+
+	to {
+		-o-transform: rotate(-360deg);
+	}
+}

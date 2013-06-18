@@ -1,0 +1,32 @@
+
+		<section class="container" id="home-container">
+			<div class="loyalty">
+				<div class="points">
+					<span class="badge badge-info">{{loyaltyPoints}} bodů</span>
+				</div>
+				<div class="progress preview">
+					<div class="bar bar-success" style="width: {{estPercent[0]}}%"></div>
+					<div class="bar bar-warning" style="width: {{estPercent[1]}}%"></div>
+					<div class="bar bar-danger" style="width: {{estPercent[2]}}%"></div>
+				</div>
+				<div class="progress progress-striped active scored">
+					<div class="bar bar-success" style="width: {{levelPercent[0]}}%"></div>
+					<div class="bar bar-warning" style="width: {{levelPercent[1]}}%"></div>
+					<div class="bar bar-danger" style="width: {{levelPercent[2]}}%"></div>
+				</div>
+			</div>
+
+			<nav class="nav" id="menu" ng-controller="HomeCtrl">
+				<a ng-href="#/offer-list" class="btn btn-large">
+					{{'Nabídka'|_}}<br />
+					<span class="badge">{{countOffers}}</span>
+					<span class="badge badge-important" ng-show="countNewOffers > 0">{{countNewOffers}}</span>
+				</a>
+			</nav>
+			
+			<div class="qr-code-container">
+				<a ng-href="#">
+					<img class="qr-code" src="images/qr_code_example.png" alt="QR code" />
+				</a>
+			</div>
+		</section>
