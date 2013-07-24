@@ -1,6 +1,7 @@
-config.php
-admin/config.php
-system/cache/*
-image/cache/*
-image/data/*
-download/*
+/config.php
+/admin/config.php
+/system/cache/*
+/image/cache/*
+/image/data/*
+/download/*
+/install
