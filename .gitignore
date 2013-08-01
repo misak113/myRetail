@@ -8,3 +8,6 @@
 /install
 /vendor/*
 /composer.lock
+/temp
+/log
+/app/config/config.local.neon

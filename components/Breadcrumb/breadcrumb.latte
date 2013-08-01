@@ -1,0 +1,6 @@
+
+<div class="breadcrumb">
+	{foreach $breadcrumbs as $breadcrumb}
+		{$breadcrumb['separator']}<a href="{$breadcrumb['href']}">{$breadcrumb['text']}</a>
+	{/foreach}
+</div>
