@@ -8,7 +8,7 @@ class ControllerModuleClubAccount extends BaseController {
 	public $customer;
 	
 	public function index() {
-		$this->template->name = $this->customer->getFirstName();
+		$this->template->status = $this->customer->getStatus();
 
 		$this->renderLayout();
 	}

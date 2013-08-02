@@ -35,11 +35,12 @@ abstract class BaseController extends Controller {
 		$this->context = $container;
 
 		// opencart services // @todo base id in OpencartExtension
-		$this->context->addService('oc_url', $registry->get('url'));
-		$this->context->addService('oc_language', $registry->get('language'));
-		$this->context->addService('oc_session', $registry->get('session'));
+		if ($registry->get('url')) $this->context->addService('oc_url', $registry->get('url'));
+		if ($registry->get('language')) $this->context->addService('oc_language', $registry->get('language'));
+		if ($registry->get('session')) $this->context->addService('oc_session', $registry->get('session'));
 		if ($registry->get('customer')) $this->context->addService('oc_customer', $registry->get('customer'));
 		if ($registry->get('config')) $this->context->addService('oc_config', $registry->get('config'));
+		if ($registry->get('db')) $this->context->addService('oc_db', $registry->get('db'));
 
 		$this->context->callInjects($this);
 		$this->preparePresenter();
