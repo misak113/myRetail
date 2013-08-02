@@ -26,9 +26,9 @@ class ControllerModuleClubAccount extends BaseController {
 	}
 
 	public function handleSave() {
-
+		unset($this->json_data['action']);
 		$this->load->model('setting/setting');
-		$this->model_setting_setting->editSetting('account', $this->json_data);
+		$this->model_setting_setting->editSetting('clubAccount', $this->json_data);
 
 		$this->sendJsonResponse(array('status' => 'ok'));
 	}

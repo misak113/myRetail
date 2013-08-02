@@ -1,4 +1,5 @@
 <?php
+namespace app;
 
 use Nette\Application\UI\Presenter;
 

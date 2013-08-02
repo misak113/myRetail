@@ -2,7 +2,7 @@
 namespace app;
 
 use Controller;
-use BasePresenter;
+use app\BasePresenter;
 use Nette\Templating\FileTemplate;
 use Nette\Latte\Engine as LatteEngine;
 use Nette\Caching\Storages\PhpFileStorage;
@@ -24,6 +24,8 @@ abstract class BaseController extends Controller {
 	protected $context;
 	/** @var app\services\Translator @inject */
 	public $translator;
+	/** @var Config @inject */
+	public $config;
 	
 	public function __construct($registry) {
 		call_user_func_array('parent::__construct', func_get_args());
@@ -36,6 +38,8 @@ abstract class BaseController extends Controller {
 		$this->context->addService('oc_url', $registry->get('url'));
 		$this->context->addService('oc_language', $registry->get('language'));
 		$this->context->addService('oc_session', $registry->get('session'));
+		if ($registry->get('customer')) $this->context->addService('oc_customer', $registry->get('customer'));
+		if ($registry->get('config')) $this->context->addService('oc_config', $registry->get('config'));
 
 		$this->context->callInjects($this);
 		$this->preparePresenter();
@@ -55,13 +59,12 @@ abstract class BaseController extends Controller {
 		$files = array(
 			$this->getViewDir().'/template/'.$this->getControllerName().'/'.$this->getActionName().'.latte',
 			$this->getViewDir().'/template/'.$this->getControllerName().'.latte',
-
 		);
 		foreach ($files as $file)
 			if (file_exists($file))
 				return $this->template->templateFile = $file;
 
-		throw new FileNotFoundException('File of template was not found: '.$files[0]);
+		throw new \Nette\FileNotFoundException('File of template was not found: '.$files[0]);
 	}
 
 	protected function getControllerName() {
@@ -72,16 +75,24 @@ abstract class BaseController extends Controller {
 		return $ctrl;
 	}
 
-	protected function getActionName() {
+	protected function getActionName() {//\Nette\Diagnostics\Dumper::dump($this);
 		return 'index'; // @todo default is index
 	}
 
 	protected function getViewDir() {
-		return __DIR__.'/../admin/view'; // @todo
+		if ($this->isAdmin()) {
+			return $this->context->parameters['wwwDir'].'/view';
+		} else {
+			return $this->context->parameters['wwwDir'].'/catalog/view'
+				.'/theme/'.$this->config->get('config_template');
+		}
+		
 	}
 	protected function getCacheDir() {
-		$parameters =  $this->context->getParameters();
-		return $parameters['tempDir'].'/cache';
+		return $this->context->parameters['tempDir'].'/cache';
+	}
+	protected function isAdmin() {
+		return (bool) strstr($this->context->parameters['wwwDir'], '/admin');
 	}
 
 	protected function renderLayout($layoutName = 'default') {
