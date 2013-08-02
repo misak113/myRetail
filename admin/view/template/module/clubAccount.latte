@@ -2,3 +2,63 @@
 
 {control breadcrumb}
 {control errors}
+
+<script type="text/javascript">
+	var modules = {!json_encode($modules)};
+	var layouts = {!json_encode($layouts)};
+</script>
+
+<div ng-app ng-controller="ClubAccount" class="box">
+		<div class="heading">
+      		<h1><img src="view/image/module.png" alt="{_'module'}" /> {_heading_title}</h1>
+      		<div class="buttons"><a ng-click="save($event)" href="#" class="button">{_'Uložit'}</a><a ng-click="storno($event)" href="#" class="button">{_'Zrušit'}</a></div>
+    	</div>
+	    <table id="module" class="list">
+          <thead>
+            <tr>
+              <td class="left">{_'Šablona:'}</td>
+              <td class="left">{_'Pozice:'}</td>
+              <td class="left">{_'Stav:'}</td>
+              <td class="right">{_'Pořadí:'}</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody id="module-row0">
+            <tr ng-repeat="module in modules">
+              <td class="left">
+              	<select ng-model="module.layout_id">
+                    <option ng-repeat="layout in layouts" value="{{ layout.layout_id }}" 
+                    	ng-selected="{{ layout.layout_id == module.layout_id }}">{{ layout.name }}</option> <!-- @todo doesnt show selected -->
+                </select>
+              </td>
+              <td class="left">
+              	<select ng-model="module.position">
+                	<option value="content_top" ng-selected="{{ module.position == content_top }}">{_'Tělo nahoře'}</option>
+                	<option value="content_bottom" ng-selected="{{ module.position == content_bottom }}">{_'Tělo dole'}</option>
+                	<option value="column_left" ng-selected="{{ module.position == column_left }}">{_'Levý sloupec'}</option>
+                	<option value="column_right" ng-selected="{{ module.position == column_right }}">{_'Pravý sloupec'}</option>
+                </select>
+              </td>
+              <td class="left">
+              	<select ng-model="module.status">
+              		<option value="1" ng-selected="{{ module.status == 1 }}">{_'Povoleno'}</option>
+              		<option value="0" ng-selected="{{ module.status == 0 }}">{_'Zakázano'}</option>
+              	</select>
+              </td>
+              <td class="right">
+              	<input type="text" ng-model="module.sort_order" size="3" />
+              </td>
+              <td class="left">
+              	<a ng-click="removeModule(module)" class="button">{_'Odebrat'}</a>
+              </td>
+            </tr>
+          </tbody>
+	      <tfoot>
+	       	<tr>
+	       		<td colspan="4"></td>
+	       		<td class="left"><a ng-click="addModule()" class="button">{_'Přidat modul'}</a></td>
+	       	</tr>
+	      </tfoot>
+        </table>
+
+</div>

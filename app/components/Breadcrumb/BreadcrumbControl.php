@@ -32,7 +32,7 @@ class BreadcrumbControl extends Control {
 		
    		$breadcrumbs[] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('module/account', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('module/clubAccount', 'token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
    		$template->breadcrumbs = $breadcrumbs;

@@ -18,8 +18,9 @@ $configurator->setTempDirectory(__DIR__ . '/../temp');
 $configurator->createRobotLoader()
 	->addDirectory(__DIR__)
 	->addDirectory(__DIR__ . '/../vendor')
-	->addDirectory(__DIR__ . '/../components')
 	->addDirectory(__DIR__ . '/../system/library')
+	->addDirectory(__DIR__ . '/../admin/model/module')
+	->addDirectory(__DIR__ . '/../catalog/model/module')
 	->register();
 
 // Create Dependency Injection container from config.neon file

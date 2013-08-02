@@ -2,20 +2,28 @@
 namespace app;
 
 use Controller;
+use BasePresenter;
 use Nette\Templating\FileTemplate;
 use Nette\Latte\Engine as LatteEngine;
 use Nette\Caching\Storages\PhpFileStorage;
 use ReflectionClass;
 use Nette\DI\Container;
+use Nette\Application\UI\Presenter;
+use Nette\Application\UI\Control;
+use app\services\Translator;
 
 abstract class BaseController extends Controller {
 
 	/** @var FileTemplate */
 	protected $template;
-	/** @var array */
+	/** @var Presenter */
+	protected $presenter;
+	/** @var Control[] */
 	protected $controls = array();
-	/** @var Container @inject */
+	/** @var Container @_inject */
 	protected $context;
+	/** @var app\services\Translator @inject */
+	public $translator;
 	
 	public function __construct($registry) {
 		call_user_func_array('parent::__construct', func_get_args());
@@ -29,13 +37,20 @@ abstract class BaseController extends Controller {
 		$this->context->addService('oc_language', $registry->get('language'));
 		$this->context->addService('oc_session', $registry->get('session'));
 
+		$this->context->callInjects($this);
+		$this->preparePresenter();
 		$this->prepareTemplate();
 	}
 
+	protected function preparePresenter() {
+		$this->presenter = new BasePresenter;//$this->context->createInstance('BasePresenter');
+		$this->context->callInjects($this->presenter);
+	}
 	protected function prepareTemplate() {
 		$this->template = new FileTemplate();
 		$this->template->setCacheStorage(new PhpFileStorage($this->getCacheDir()));
 		$this->template->registerFilter(new LatteEngine);
+		$this->template->setTranslator($this->translator);
 		$this->template->_control = $this;
 		$files = array(
 			$this->getViewDir().'/template/'.$this->getControllerName().'/'.$this->getActionName().'.latte',
@@ -91,12 +106,18 @@ abstract class BaseController extends Controller {
 		$className = ucfirst($name).'Control';
 
 		$ctrl = $this->context->createInstance($className, $args);
-		$presenter = $this->context->createInstance('BasePresenter');
-		$this->context->callInjects($presenter);
-		$ctrl->setParent($presenter);
+		$ctrl->setParent($this->presenter);
 		$this->context->callInjects($ctrl);
 
 		$this->controls[$name] = $ctrl;
 		return $ctrl;
+	}
+
+	protected function t($message, $count = null) {
+		return $this->translator->translate($message, $count);
+	}
+
+	protected function sendJsonResponse($data) {
+		echo json_encode($data);
 	}
 }
