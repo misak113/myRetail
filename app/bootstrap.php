@@ -53,4 +53,8 @@ $configurator->onCompile = function ($configurator, $compiler) {
 
 $container = $configurator->createContainer();
 
+// @todo this is shit... to config
+$connectionPanel = $container->getService('connectionPanel');
+Nette\Diagnostics\Debugger::getBar()->addPanel($connectionPanel);
+
 return $container;

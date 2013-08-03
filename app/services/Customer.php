@@ -38,6 +38,7 @@ class Customer extends BaseService {
 		$statuses = array();
 		foreach ($status_query->rows as $row) {
 			$id = $row['customer_status_id'];
+			$statuses[$id]['customer_status_id'] = $id;
 			$statuses[$id]['name'] = $row['name'];
 			$statuses[$id]['level'] = $row['level'];
 			// vše je ze začátku validní
@@ -47,7 +48,7 @@ class Customer extends BaseService {
 
 			// conditions
 			$cond_id = $row['customer_status_condition_id'];
-			$statuses[$id]['conditions'][$con_id] = array(
+			$statuses[$id]['conditions'][$cond_id] = array(
 				'type' => $row['type'],
 				'condition' => $row['condition'],
 			);
@@ -63,7 +64,7 @@ class Customer extends BaseService {
 						$sql = str_replace('%DB_PREFIX%', DB_PREFIX, $sql);
 						$sql = str_replace('%CUSTOMERCLUB_DB_PREFIX%', CUSTOMERCLUB_DB_PREFIX, $sql);
 						$condition_query = $this->db->query($sql);
-							$status['valid'] &= $condition_query->row['valid'];
+						$status['valid'] &= $condition_query->row['valid'];
 						break;
 					default:
 						throw new NotImplementedException('Condition type '.$condition['type'].' of customer status is not implemented yet.');
@@ -74,8 +75,11 @@ class Customer extends BaseService {
 
 		// the lowest status
 		$higherStatus = array(
+			'customer_status_id' => null,
 			'name' => 'nothing',
 			'level' => 0,
+			'valid' => 1,
+			'conditions' => array(),
 		);
 		// find higher status validity
 		foreach ($statuses as $id => &$status) {

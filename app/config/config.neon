@@ -2,3 +2,5 @@
 services:
 	translator: app\services\Translator
 	customer: app\services\Customer
+
+	connectionPanel: app\services\ConnectionPanel
