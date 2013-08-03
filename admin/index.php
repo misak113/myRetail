@@ -33,8 +33,9 @@ $registry->set('load', $loader);
 $config = new Config();
 $registry->set('config', $config);
 
-// Database
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+// Database @todo my code
+$db = new app\services\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$db->setConnectionPanel($connectionPanel);
 $registry->set('db', $db);
 		
 // Settings

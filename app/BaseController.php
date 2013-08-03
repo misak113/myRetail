@@ -26,6 +26,8 @@ abstract class BaseController extends Controller {
 	public $translator;
 	/** @var Config @inject */
 	public $config;
+	/** @var Nette\Security\User @inject */
+	public $user;
 	
 	public function __construct($registry) {
 		call_user_func_array('parent::__construct', func_get_args());

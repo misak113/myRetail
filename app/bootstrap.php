@@ -42,7 +42,11 @@ class OpencartExtension extends Nette\DI\CompilerExtension {
 		$sessionDef = new Nette\DI\ServiceDefinition;
 		$containerBuilder->addDefinition('oc_config', $sessionDef->setClass('Config', array()));
 		$sessionDef = new Nette\DI\ServiceDefinition;
-		$containerBuilder->addDefinition('oc_db', $sessionDef->setClass('Db', array('', '', '', '', '')));
+		$containerBuilder->addDefinition('oc_db', $sessionDef->setClass('DB', array('', '', '', '', '')));
+
+		// @overide by our User
+		$user = $containerBuilder->getDefinition('user')
+			->setClass('app\services\User');
 	}
 }
 

@@ -12,7 +12,7 @@ class Customer extends BaseService {
 
 	/** @var Customer @inject */
 	public $customer;
-	/** @var Db @inject */
+	/** @var DB @inject */
 	public $db;
 	/** @var  Nette\Caching\Cache */
 	public $cache;

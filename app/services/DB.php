@@ -3,10 +3,6 @@ namespace app\services;
 
 use DB as OpencartDB;
 
-class Profiler {
-
-}
-
 class DB extends OpencartDB {
 
 	/** @var ConnectionPanel */
