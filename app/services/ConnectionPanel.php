@@ -111,6 +111,7 @@ class ConnectionPanel extends Nette\Object implements Nette\Diagnostics\IBarPane
 			/** @var \Zend_Db_Adapter_Pdo_Abstract $connection
 			 * @var Zend_Db_Statement_Pdo $stmt */
 			list($sql, $time, $rows, $cols, $connection, $source, $stmt, $queryType) = $query;
+			$params = array();
 			if ($stmt instanceof \Zend_Db_Statement && $queryType == 32) {
 				$stmt->execute();
 				$data = DiagnosticsHelpers::clickableDump($stmt->fetchAll(), true);

@@ -36,6 +36,11 @@ abstract class BaseController extends Controller {
 		global $container;
 		$this->context = $container;
 
+		// enable nette debugger
+		//\Nette\Diagnostics\Debugger::enable(false); // @todo is overwriten by opencart
+		set_exception_handler(array('\Nette\Diagnostics\Debugger', '_exceptionHandler'));
+		set_error_handler(array('\Nette\Diagnostics\Debugger', '_errorHandler'));
+
 		// opencart services // @todo base id in OpencartExtension
 		if ($registry->get('url')) $this->context->addService('oc_url', $registry->get('url'));
 		if ($registry->get('language')) $this->context->addService('oc_language', $registry->get('language'));

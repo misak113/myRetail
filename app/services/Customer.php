@@ -57,10 +57,11 @@ class Customer extends BaseService {
 		// controll status validity
 		foreach ($statuses as $id => &$status) {
 			foreach ($status['conditions'] as $cond_id => $condition) {
+				$customer_id = $this->getId();
 				switch ($condition['type']) {
 					case self::SQL_WHERE:
 						$sql = $condition['condition'];
-						$sql = str_replace(':customer_id', $this->getId(), $sql);
+						$sql = str_replace(':customer_id', $customer_id ?$customer_id :0, $sql);
 						$sql = str_replace('%DB_PREFIX%', DB_PREFIX, $sql);
 						$sql = str_replace('%CUSTOMERCLUB_DB_PREFIX%', CUSTOMERCLUB_DB_PREFIX, $sql);
 						$condition_query = $this->db->query($sql);
